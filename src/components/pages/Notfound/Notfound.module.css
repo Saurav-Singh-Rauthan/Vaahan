@@ -1,0 +1,20 @@
+.container {
+  text-align: center;
+}
+
+.container p {
+  margin-bottom: 2rem;
+}
+
+.container a:visited,
+.container a {
+  text-decoration: none;
+  color: #75c9b7;
+  padding: 16px;
+  transition: all 0.3s ease-out;
+}
+
+.container a:hover {
+  border-bottom: 2px solid #75c9b7;
+  background: black;
+}
