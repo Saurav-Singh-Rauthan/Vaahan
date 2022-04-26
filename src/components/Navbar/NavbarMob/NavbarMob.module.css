@@ -9,7 +9,7 @@
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background-color: black;
+  background-color: #16123f;
   left: 0;
   top: 0;
   transition: all 0.5s ease-out;
@@ -27,11 +27,10 @@
 }
 
 .logo {
-  font-family: "Indie Flower", cursive;
   font-size: 2rem;
 }
 
-.logoSec{
+.logoSec {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,29 +38,31 @@
 
 .links {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 100%;
   align-items: center;
   padding: 1rem 1rem;
-  margin-top: 1rem;
+  margin-top: 6rem;
 }
 
-.linksVert{
+.linksVert {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100%;
+  height: 50%;
   align-items: center;
   padding: 1rem;
+  margin-top: 25%;
 }
 
 .link {
-  margin: 0 12px;
+  margin: 8px 12px;
   cursor: pointer;
   transition: all 0.2s ease-in;
   text-decoration: none;
   color: white;
   height: 100%;
+  justify-self: center;
   display: flex;
   align-items: center;
 }
@@ -69,11 +70,22 @@
 .link:hover,
 .link:active,
 .active {
-  color: rgb(127, 127, 236);
-  border-bottom: 5px solid rgb(127, 127, 236);
+  color: #75c9b7;
+  border-bottom: 4px solid #75c9b7;
 }
 
-/* Medium devices (tablets, 768px and up) */
+@media (max-width: 500px) {
+  .linksVert {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50%;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 50%;
+  }
+}
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;

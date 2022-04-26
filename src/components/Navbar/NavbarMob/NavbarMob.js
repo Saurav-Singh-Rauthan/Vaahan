@@ -4,9 +4,8 @@ import { NavLink } from "react-router-dom";
 import Styles from "./NavbarMob.module.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import HelpIcon from "@mui/icons-material/Help";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const NavbarMob = (props) => {
   const [drawerState, setdrawerState] = useState(Styles.close);
@@ -25,40 +24,32 @@ const NavbarMob = (props) => {
         className={({ isActive }) =>
           isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
         }
-        to="/wishlist"
-      >
-        <FavoriteIcon />
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-        }
-        to="/cart"
-      >
-        <ShoppingCartIcon />
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-        }
         to="/account"
       >
         <AccountCircleIcon />
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
+        }
+        to="/help"
+      >
+        <HelpIcon />
       </NavLink>
     </React.Fragment>
   );
 
   // if (!props.isAuthenticated) {
-    links = (
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-        }
-        to="/auth"
-      >
-        Login / Register
-      </NavLink>
-    );
+  // links = (
+  //   <NavLink
+  //     className={({ isActive }) =>
+  //       isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
+  //     }
+  //     to="/auth"
+  //   >
+  //     Login / Register
+  //   </NavLink>
+  // );
   // }
 
   return (
@@ -71,10 +62,9 @@ const NavbarMob = (props) => {
         className={[Styles.NavModal, drawerState].join(" ")}
       >
         <div className={Styles.logoSec}>
-          <div></div>
           <div className={Styles.logo}>
             <NavLink style={{ color: "white", textDecoration: "none" }} to="/">
-              CLOTHED
+              Vaahan
             </NavLink>
           </div>
           <CloseIcon onClick={closeDrawerHandler} />
@@ -96,44 +86,22 @@ const NavbarMob = (props) => {
             className={({ isActive }) =>
               isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
             }
-            to="/shorts"
+            to="/dashboard"
           >
-            SHORTS
+            DASHBOARD
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
             }
-            to="/shirts"
+            to="/fuel-prices"
           >
-            SHIRTS
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-            }
-            to="/jeans"
-          >
-            JEANS
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-            }
-            to="/shoes"
-          >
-            SHOES
+            FUEL PRICES
           </NavLink>
         </div>
       </div>
     </React.Fragment>
   );
-};
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    isAuthenticated: state.auth.token !== null,
-  };
 };
 
 export default NavbarMob;
