@@ -18,3 +18,29 @@
   border-bottom: 2px solid #75c9b7;
   background: black;
 }
+
+.img {
+  margin-bottom: 2rem;
+  height: 500px;
+  padding: 1rem;
+}
+
+@media (max-width: 576px) {
+  .img {
+    height: 200px;
+  }
+
+  .home {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 577px) and ( max-width: 768px) {
+  .img {
+    height: 300px;
+  }
+
+  .home {
+    font-size: 1.5rem;
+  }
+}
