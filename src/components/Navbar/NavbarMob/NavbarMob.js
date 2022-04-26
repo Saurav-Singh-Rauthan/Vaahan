@@ -53,7 +53,7 @@ const NavbarMob = (props) => {
   // }
 
   return (
-    <React.Fragment>
+    <div className={Styles.container}>
       <div className={Styles.hamburger}>
         <MenuIcon onClick={openDrawerHandler} />
       </div>
@@ -100,7 +100,7 @@ const NavbarMob = (props) => {
           </NavLink>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
