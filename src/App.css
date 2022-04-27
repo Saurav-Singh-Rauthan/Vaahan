@@ -25,9 +25,18 @@ body::-webkit-scrollbar-thumb {
   background-color: #75c9b7;     
 }
 
+.MuiSpeedDial-fab {
+  background-color: #75c9b7 !important;
+}
+
 @media (max-width: 768px) {
   .content {
     margin-top: 60px;
     padding: 1rem;
   }
+
+  .App {
+    grid-template-rows: calc(100% - 60px) 60px;
+  }
+  
 }

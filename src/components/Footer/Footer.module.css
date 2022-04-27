@@ -23,3 +23,9 @@
   border-bottom: 1px solid #75c9b7;
   background: black;
 }
+
+@media (max-width: 768px) {
+  .container {
+    height: 60px;
+  }
+}
