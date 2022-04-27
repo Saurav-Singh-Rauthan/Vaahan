@@ -28,5 +28,6 @@ body::-webkit-scrollbar-thumb {
 @media (max-width: 768px) {
   .content {
     margin-top: 60px;
+    padding: 1rem;
   }
 }

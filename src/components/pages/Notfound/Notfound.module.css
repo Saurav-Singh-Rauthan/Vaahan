@@ -1,5 +1,10 @@
 .container {
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .container p {
@@ -12,6 +17,7 @@
   color: #75c9b7;
   padding: 16px;
   transition: all 0.3s ease-out;
+  width: 20%;
 }
 
 .container a:hover {
@@ -21,7 +27,7 @@
 
 .img {
   margin-bottom: 2rem;
-  height: 500px;
+  height: 450px;
   padding: 1rem;
 }
 
@@ -33,14 +39,24 @@
   .home {
     font-size: 1rem;
   }
+
+  .container a:visited,
+  .container a {
+    width: 40%;
+  }
 }
 
-@media (min-width: 577px) and ( max-width: 768px) {
+@media (min-width: 577px) and (max-width: 768px) {
   .img {
     height: 300px;
   }
 
   .home {
     font-size: 1.5rem;
+  }
+
+  .container a:visited,
+  .container a {
+    width: 40%;
   }
 }
