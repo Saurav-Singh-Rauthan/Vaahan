@@ -12,6 +12,7 @@
   padding: 2rem;
 }
 
+/* custom scroll bar */
 body::-webkit-scrollbar {
   width: 12px; 
 }
@@ -25,6 +26,7 @@ body::-webkit-scrollbar-thumb {
   background-color: #75c9b7;     
 }
 
+/* speed dial config */
 .MuiSpeedDial-fab {
   background-color: #75c9b7 !important;
 }

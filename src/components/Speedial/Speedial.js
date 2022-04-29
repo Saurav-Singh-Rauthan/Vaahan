@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SpeedDial from "@mui/material/SpeedDial";
@@ -15,6 +15,15 @@ const actions = [
 
 const Speedial = (props) => {
   let navigate = useNavigate();
+  const [open, setopen] = useState(false);
+
+  const actionHandler = (link) => {
+    setopen(false);
+    navigate(link);
+  };
+
+  const handleOpen = () => setopen(true);
+  const handleClose = () => setopen(false);
 
   return (
     <SpeedDial
@@ -26,13 +35,16 @@ const Speedial = (props) => {
         zIndex: 98,
       }}
       icon={<SpeedDialIcon />}
+      open={open}
+      onClose={handleClose}
+      onOpen={handleOpen}
     >
       {actions.map((action) => (
         <SpeedDialAction
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}
-          onClick={() => navigate(action.link)}
+          onClick={() => actionHandler(action.link)}
         />
       ))}
     </SpeedDial>
