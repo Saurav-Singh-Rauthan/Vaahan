@@ -15,7 +15,7 @@ const Fuelprice = (props) => {
           <CountUp
             start={0}
             end={props.price.petrol}
-            duration={1.5}
+            duration={1.3}
             decimals={2}
             decimal="."
             className={Styles.priceVal}
@@ -27,7 +27,7 @@ const Fuelprice = (props) => {
           <CountUp
             start={0}
             end={props.price.diesel}
-            duration={1.5}
+            duration={1}
             decimals={2}
             decimal="."
             className={Styles.priceVal}

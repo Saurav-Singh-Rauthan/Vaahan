@@ -1,0 +1,31 @@
+.login {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.container a:active,
+.container a:visited,
+.container a {
+  color: #75c9b7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container a:hover {
+  border-bottom: 2px solid #75c9b7;
+}
+
+.container h1 {
+  text-align: center;
+  width: 60%;
+  padding: 1rem;
+  border-bottom: 2px solid black;
+  margin: 3rem auto;
+}
+
+@media (max-width: 768px) {
+  .container h1 {
+    width: 75%;
+  }
+}

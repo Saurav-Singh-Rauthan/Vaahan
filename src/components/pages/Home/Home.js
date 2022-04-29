@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Styles from "./Home.module.css";
 import Accordian from "../../Accordion/Accordion";
@@ -59,6 +60,11 @@ const Home = (props) => {
   return (
     <div className={Styles.container}>
       <Fuelprice price={fuelPrice} state={"Maharashtra"} district={"Pune"} />
+      <p className={Styles.login}>
+        Want to configure for your district & city?{" "}
+        <Link to="/auth">Sign Up / Sign In</Link>
+      </p>
+      <h1>About Vaahan</h1>
       <Accordian data={accordianData} />
     </div>
   );
