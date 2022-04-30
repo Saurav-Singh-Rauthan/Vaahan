@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-import Styles from "./Fuelprices";
+import Styles from "./Fuelprices.module.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Fuelprice from "../../Fuelprice/Fuelprice";
 
 const Fuelprices = (props) => {
+  const districtSelector = useRef();
+
   const [location, setlocation] = useState({ state: null, district: null });
   const [selectedlocation, setselectedlocation] = useState({
     state: null,
@@ -59,10 +61,15 @@ const Fuelprices = (props) => {
 
   const setLocationHandler = (event, type) => {
     if (type === "State") {
+      setfuelPrice({
+        petrol: null,
+        diesel: null,
+      });
       setselectedlocation((prevState) => {
         return {
           ...prevState,
           state: event.target.innerText,
+          district: [],
         };
       });
     } else {
@@ -72,6 +79,7 @@ const Fuelprices = (props) => {
           district: event.target.innerText,
         };
       });
+      fetchPriceHandler();
     }
   };
 
@@ -102,29 +110,33 @@ const Fuelprices = (props) => {
       });
   };
 
+  console.log(selectedlocation);
+
   return (
-    <div>
-      fuel prices here
-      <Autocomplete
-        disablePortal
-        options={location.state !== null ? location.state : []}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="State" />}
-        onChange={(event) => setLocationHandler(event, "State")}
-      />
-      {selectedlocation.state && location.district?.length > 0 ? (
+    <div className={Styles.container}>
+      <p>Select required State and District</p>
+      <div className={Styles.optionsContainer}>
         <Autocomplete
           disablePortal
-          options={location.district !== null ? location.district : []}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="District" />}
-          onChange={(event) => setLocationHandler(event, "District")}
+          options={location.state !== null ? location.state : []}
+          sx={{ width: "100%", maxWidth: "300px" }}
+          renderInput={(params) => <TextField {...params} label="State" />}
+          onChange={(event) => setLocationHandler(event, "State")}
         />
-      ) : (
-        <p>District not available</p>
-      )}
-      <button onClick={fetchPriceHandler}>Fetch Price</button>
-      {selectedlocation.district && selectedlocation.state ? (
+        {selectedlocation.state && location.district?.length > 0 ? (
+          <Autocomplete
+            ref={districtSelector}
+            disablePortal
+            options={location.district !== null ? location.district : []}
+            sx={{ width: "100%", maxWidth: "300px" }}
+            renderInput={(params) => <TextField {...params} label="District" />}
+            onChange={(event) => setLocationHandler(event, "District")}
+          />
+        ) : location.district?.length < 1 ? (
+          <p>Districts not available! Please choose another state</p>
+        ) : null}
+      </div>
+      {selectedlocation.district?.length > 0 && selectedlocation.state ? (
         <Fuelprice
           price={fuelPrice}
           state={selectedlocation.state}

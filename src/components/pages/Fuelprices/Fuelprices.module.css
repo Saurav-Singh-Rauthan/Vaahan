@@ -1,0 +1,25 @@
+.container p {
+  text-align: center;
+  margin: 2rem auto;
+  font-size: 18px;
+}
+
+.optionsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  margin: 1rem auto 3rem auto;
+}
+
+@media (max-width: 768px) {
+  .optionsContainer {
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+
+  .container p {
+    text-align: center;
+    margin: 3rem auto;
+  }
+}
