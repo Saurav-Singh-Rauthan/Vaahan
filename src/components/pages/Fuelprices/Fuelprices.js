@@ -110,8 +110,6 @@ const Fuelprices = (props) => {
       });
   };
 
-  console.log(selectedlocation);
-
   return (
     <div className={Styles.container}>
       <p>Select required State and District</p>
@@ -138,7 +136,7 @@ const Fuelprices = (props) => {
       </div>
       {selectedlocation.district?.length > 0 && selectedlocation.state ? (
         <Fuelprice
-          price={fuelPrice}
+          price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
           state={selectedlocation.state}
           district={selectedlocation.district}
         />

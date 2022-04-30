@@ -59,7 +59,11 @@ const Home = (props) => {
 
   return (
     <div className={Styles.container}>
-      <Fuelprice price={fuelPrice} state={"Maharashtra"} district={"Pune"} />
+      <Fuelprice
+        price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
+        state="Maharashtra"
+        district="Pune"
+      />
       <p className={Styles.login}>
         Want to configure for your district & city?{" "}
         <Link to="/auth">Sign Up / Sign In</Link>
