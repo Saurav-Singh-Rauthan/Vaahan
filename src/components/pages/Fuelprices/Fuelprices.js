@@ -60,11 +60,11 @@ const Fuelprices = (props) => {
   }, [selectedlocation.state]);
 
   const setLocationHandler = (event, type) => {
+    setfuelPrice({
+      petrol: null,
+      diesel: null,
+    });
     if (type === "State") {
-      setfuelPrice({
-        petrol: null,
-        diesel: null,
-      });
       setselectedlocation((prevState) => {
         return {
           ...prevState,

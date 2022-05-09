@@ -65,7 +65,7 @@ const Home = (props) => {
         district="Pune"
       />
       <p className={Styles.login}>
-        Want to configure for your district & city?{" "}
+        Want to configure for your district & state?{" "}
         <Link to="/auth">Sign Up / Sign In</Link>
       </p>
       <h1>About Vaahan</h1>

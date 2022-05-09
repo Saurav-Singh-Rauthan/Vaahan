@@ -20,7 +20,11 @@ const Accordian = (props) => {
           <Accordion
             expanded={accOpen === item.id}
             onClick={() => changeOpenedHandler(item.id)}
-            sx={{ color: "#75c9b7", background: "#16123f", width: "90%" }}
+            sx={
+              window.innerWidth > 768
+                ? { color: "#75c9b7", background: "#16123f", width: "60%" }
+                : { color: "#75c9b7", background: "#16123f", width: "90%" }
+            }
             key={item.id}
           >
             <AccordionSummary
