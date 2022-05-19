@@ -41,18 +41,18 @@ const Home = (props) => {
 
   let accordianData = [
     {
-      title: "accordian1",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea beatae reprehenderit dolore dignissimos soluta, vitae vero, repellendus animi nihil consequatur nisi aliquam libero dolor minima illum quasi fuga, dolores repudiandae!",
+      title: "What is Vaahan? 🤔",
+      desc: "A website for storing details related to your vehicle's mileage and performance just by entering your fuelling details. Get monthly details like : amount spent on fuelling, average mileage after every refill, compare mileage with similar vehicles",
       id: 1,
     },
     {
-      title: "accordian2",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea beatae reprehenderit dolore dignissimos soluta, vitae vero, repellendus animi nihil consequatur nisi aliquam libero dolor minima illum quasi fuga, dolores repudiandae!",
+      title: "How to use this website? 👀",
+      desc: "Go to the help section of the website (❔) to know about how to operate the site",
       id: 2,
     },
     {
-      title: "accordian3",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea beatae reprehenderit dolore dignissimos soluta, vitae vero, repellendus animi nihil consequatur nisi aliquam libero dolor minima illum quasi fuga, dolores repudiandae!",
+      title: "Is my shared data safe? 😥",
+      desc: "Yes!😄 the data that you'll provide is safe.",
       id: 3,
     },
   ];
