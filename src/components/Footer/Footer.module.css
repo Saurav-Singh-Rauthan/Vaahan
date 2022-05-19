@@ -27,5 +27,8 @@
 @media (max-width: 768px) {
   .container {
     height: 60px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
   }
 }

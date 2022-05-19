@@ -15,6 +15,15 @@ const Footer = (props) => {
           Saurav Singh Rauthan
         </a>
       </div>
+      <div>
+        <a
+          className={Styles.link}
+          href="https://github.com/Saurav-Singh-Rauthan/Vaahan"
+          target={"_"}
+        >
+          Want to contribute?
+        </a>
+      </div>
     </div>
   );
 };
