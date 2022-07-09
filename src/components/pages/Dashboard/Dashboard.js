@@ -6,6 +6,16 @@ import Countuptab from "../../DashboardUI/CountupTab/Countuptab";
 const Dashboard = (props) => {
   return (
     <React.Fragment>
+      <div className={Styles.VehInfo}>
+        <p>
+          Greetings! {"   "}
+          <span style={{ color: "#75c9b7" }}>Saurav Singh Rauthan</span>{" "}
+        </p>
+        <div>
+          Vehicle : <span style={{ color: "#75c9b7" }}>Activa 4g</span>
+        </div>
+      </div>
+
       <div>
         <div className={Styles.MonthStats}>Monthly Stats</div>
         <div className={Styles.monthlydetails}>
@@ -32,7 +42,15 @@ const Dashboard = (props) => {
         </div>
       </div>
 
-      <div style={{marginBottom: "2rem"}}>
+      <div>
+        <div className={Styles.MonthStats}>Previous Performance</div>
+        <div className={Styles.mileageCompPrev}>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: "2rem" }}>
         <div className={Styles.MonthStats}>Last Month</div>
         <div className={Styles.monthlydetails}>
           <Countuptab type="money" />

@@ -13,15 +13,33 @@
   width: fit-content;
 }
 
-.mileageComp {
+.mileageComp,
+.mileageCompPrev {
   margin: 2rem 0;
   display: grid;
   grid-template-columns: 65% 30%;
   justify-content: space-between;
 }
 
-.mileageComp div {
+.mileageCompPrev {
+  grid-template-columns: 30% 65%;
+}
+
+.mileageComp div ,
+.mileageCompPrev div{
   height: 300px;
   border: 1px solid #ccc;
   box-shadow: 5px 5px 20px 5px #ccc;
+}
+
+.VehInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+  margin: 0.5rem 0 3rem 0;
+  font-weight: 600;
+}
+
+.VehInfo p {
+  margin: 0;
 }
