@@ -1,6 +1,6 @@
 .monthlydetails {
   display: grid;
-  grid-template-columns: repeat(3,30%);
+  grid-template-columns: repeat(3, 30%);
   justify-content: space-between;
 }
 
@@ -23,4 +23,5 @@
 .mileageComp div {
   height: 300px;
   border: 1px solid #ccc;
+  box-shadow: 5px 5px 20px 5px #ccc;
 }

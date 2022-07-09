@@ -6,6 +6,7 @@
   border-radius: 8px;
   align-items: center;
   column-gap: 0.5rem;
+  box-shadow: 5px 5px 20px 5px #ccc;
 }
 
 .value {

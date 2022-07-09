@@ -15,9 +15,12 @@ const Dashboard = (props) => {
         </div>
       </div>
 
-      <div className={Styles.mileageComp}>
-        <div></div>
-        <div></div>
+      <div>
+        <div className={Styles.MonthStats}>Relative Performance</div>
+        <div className={Styles.mileageComp}>
+          <div></div>
+          <div></div>
+        </div>
       </div>
 
       <div>
@@ -29,7 +32,7 @@ const Dashboard = (props) => {
         </div>
       </div>
 
-      <div>
+      <div style={{marginBottom: "2rem"}}>
         <div className={Styles.MonthStats}>Last Month</div>
         <div className={Styles.monthlydetails}>
           <Countuptab type="money" />
