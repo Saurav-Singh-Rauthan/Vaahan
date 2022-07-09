@@ -1,0 +1,26 @@
+.monthlydetails {
+  display: grid;
+  grid-template-columns: repeat(3,30%);
+  justify-content: space-between;
+}
+
+.MonthStats {
+  font-size: 24px;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  font-weight: bold;
+  border-bottom: 4px solid #75c9b7;
+  width: fit-content;
+}
+
+.mileageComp {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 65% 30%;
+  justify-content: space-between;
+}
+
+.mileageComp div {
+  height: 300px;
+  border: 1px solid #ccc;
+}
