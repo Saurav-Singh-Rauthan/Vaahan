@@ -2,6 +2,7 @@ import React from "react";
 
 import Styles from "./Dashboard.module.css";
 import Countuptab from "../../DashboardUI/CountupTab/Countuptab";
+import MileageChart from "../../DashboardUI/MileageChart/MileageChart";
 
 const Dashboard = (props) => {
   return (
@@ -28,7 +29,9 @@ const Dashboard = (props) => {
       <div>
         <div className={Styles.MonthStats}>Relative Performance</div>
         <div className={Styles.mileageComp}>
-          <div></div>
+          <div>
+            <MileageChart />
+          </div>
           <div></div>
         </div>
       </div>
