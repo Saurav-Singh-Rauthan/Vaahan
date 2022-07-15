@@ -1,4 +1,8 @@
 import React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import Styles from "./Dashboard.module.css";
 import Countuptab from "../../DashboardUI/CountupTab/Countuptab";
@@ -15,7 +19,24 @@ const Dashboard = (props) => {
           <span style={{ color: "#75c9b7" }}>Saurav Singh Rauthan</span>{" "}
         </p>
         <div>
-          Vehicle : <span style={{ color: "#75c9b7" }}>Activa 4g</span>
+          <FormControl fullWidth variant="filled">
+            <InputLabel id="demo-simple-select-label" sx={{ color: "#75c9b7" }}>
+              Selected Vehicle
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              // value={age}
+              label="Age"
+              // onChange={handleChange}
+              sx={{ color: "#75c9b7", minWidth: "300px" }}
+              defaultValue={"Activa 4g"}
+            >
+              <MenuItem value={"Activa 4g"}>Activa 4g</MenuItem>
+              <MenuItem value={"TVS Victor GL"}>TVS Victor GL</MenuItem>
+              <MenuItem value={"R15 v4"}>R15 v4</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
 
