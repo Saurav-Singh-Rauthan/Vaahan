@@ -3,6 +3,7 @@ import React from "react";
 import Styles from "./Dashboard.module.css";
 import Countuptab from "../../DashboardUI/CountupTab/Countuptab";
 import MileageChart from "../../DashboardUI/MileageChart/MileageChart";
+import VehCondition from "../../DashboardUI/VehCondition/VehCondition";
 
 const Dashboard = (props) => {
   return (
@@ -29,10 +30,12 @@ const Dashboard = (props) => {
       <div>
         <div className={Styles.MonthStats}>Relative Performance</div>
         <div className={Styles.mileageComp}>
-          <div>
+          <div className={Styles.mileageCompDiv}>
             <MileageChart />
           </div>
-          <div></div>
+          <div className={Styles.mileageCompDiv}>
+            <VehCondition />
+          </div>
         </div>
       </div>
 
@@ -48,8 +51,8 @@ const Dashboard = (props) => {
       <div>
         <div className={Styles.MonthStats}>Previous Performance</div>
         <div className={Styles.mileageCompPrev}>
-          <div></div>
-          <div></div>
+          <div className={Styles.mileageCompPrevDiv}></div>
+          <div className={Styles.mileageCompPrevDiv}></div>
         </div>
       </div>
 
