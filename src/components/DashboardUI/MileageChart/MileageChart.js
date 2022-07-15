@@ -369,10 +369,10 @@ const MileageChart = (props) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis minTickGap={30}/>
+          <XAxis minTickGap={30} />
           <YAxis />
           <Tooltip />
-          <Legend />
+          <Legend verticalAlign="top" align="right" height={48} />
           <Line
             type="monotone"
             dataKey="mileage"
