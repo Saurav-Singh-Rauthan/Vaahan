@@ -21,3 +21,17 @@
   color: rgb(160, 158, 158);
   font-weight: 700;
 }
+
+@media (min-width: 577px) and (max-width: 920px) {
+  .value {
+    font-size: 24px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .container p {
+   font-size: 14px;
+  }
+}

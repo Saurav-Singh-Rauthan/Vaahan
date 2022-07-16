@@ -25,8 +25,8 @@
   grid-template-columns: 30% 65%;
 }
 
-.mileageCompDiv ,
-.mileageCompPrevDiv{
+.mileageCompDiv,
+.mileageCompPrevDiv {
   border-radius: 8px;
   height: 300px;
   border: 1px solid #ccc;
@@ -47,4 +47,20 @@
 
 .selectInp::after {
   border-bottom: 1px solid #75c9b7 !important;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 577px) and (max-width: 920px) {
+  .monthlydetails {
+    grid-template-columns: repeat(2, 45%);
+    row-gap: 2rem;
+  }
+
+  .mileageComp,
+  .mileageCompPrev {
+    grid-template-columns: 99%;
+    row-gap: 2rem;
+  }
 }
