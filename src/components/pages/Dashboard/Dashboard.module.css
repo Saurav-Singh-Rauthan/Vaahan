@@ -49,7 +49,32 @@
   border-bottom: 1px solid #75c9b7 !important;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
+  .monthlydetails {
+    grid-template-columns: repeat(1, 99%);
+    row-gap: 2rem;
+  }
+
+  .mileageComp,
+  .mileageCompPrev {
+    grid-template-columns: 99%;
+    row-gap: 2rem;
+  }
+
+  .VehInfo {
+    display: block;
+    margin: 1rem auto;
+  }
+
+  .VehInfo p {
+    margin-bottom: 2rem;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .MonthStats {
+    margin: 1.5rem 0 2rem 0;
+  }
 }
 
 @media (min-width: 577px) and (max-width: 920px) {

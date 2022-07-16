@@ -22,7 +22,7 @@
   font-weight: 700;
 }
 
-@media (min-width: 577px) and (max-width: 920px) {
+@media (max-width: 920px) {
   .value {
     font-size: 24px;
   }

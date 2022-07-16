@@ -18,11 +18,11 @@ const Dashboard = (props) => {
           Greetings! {"   "}
           <span style={{ color: "#75c9b7" }}>Saurav Singh Rauthan</span>{" "}
         </p>
-        <div>
+        <div style={{ margin: "auto", width: "fit-content" }}>
           <FormControl fullWidth variant="filled">
             <InputLabel
               id="demo-simple-select-label"
-              sx={{ color: "#75c9b7 !important" }}
+              sx={{ color: "#75c9b7 !important" , maxWidth: "80%"}}
             >
               Selected Vehicle
             </InputLabel>
@@ -35,7 +35,8 @@ const Dashboard = (props) => {
               // onChange={handleChange}
               sx={{
                 color: "#75c9b7 !important",
-                minWidth: "300px",
+                minWidth: "250px",
+                maxWidth: "80%",
               }}
               defaultValue={"Activa 4g"}
             >

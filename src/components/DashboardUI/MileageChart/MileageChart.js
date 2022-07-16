@@ -18,338 +18,338 @@ const MileageChart = (props) => {
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
 
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
     {
       name: "Page A",
       uv: 4000,
-      mileage: 2400.41,
+      mileage: 24,
       amt: 2400,
     },
     {
       name: "Page B",
       uv: 3000,
-      mileage: 1398,
+      mileage: 13,
       amt: 2210,
     },
     {
       name: "Page C",
       uv: 2000,
-      mileage: 9800,
+      mileage: 98,
       amt: 2290,
     },
     {
       name: "Page D",
       uv: 2780,
-      mileage: 3908,
+      mileage: 39,
       amt: 2000,
     },
     {
       name: "Page E",
       uv: 1890,
-      mileage: 4800,
+      mileage: 48,
       amt: 2181,
     },
     {
       name: "Page F",
       uv: 2390,
-      mileage: 3800,
+      mileage: 38,
       amt: 2500,
     },
     {
       name: "Page G",
       uv: 3490,
-      mileage: 4300,
+      mileage: 43,
       amt: 2100,
     },
   ];
@@ -358,8 +358,8 @@ const MileageChart = (props) => {
     <div className={Styles.container}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          width={500}
-          height={300}
+          width={"auto"}
+          height={"auto"}
           data={data}
           margin={{
             top: 5,
@@ -367,6 +367,7 @@ const MileageChart = (props) => {
             left: 20,
             bottom: 5,
           }}
+          // layout={"vertical"}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis minTickGap={30} />
@@ -381,7 +382,7 @@ const MileageChart = (props) => {
           />
           <ReferenceDot
             x="25"
-            y={4500}
+            y={45}
             r={5}
             isFront="true"
             label={{ value: "Your Mileage", angle: 0, position: "top" }}
