@@ -18,11 +18,11 @@ const Dashboard = (props) => {
           Greetings! {"   "}
           <span style={{ color: "#75c9b7" }}>Saurav Singh Rauthan</span>{" "}
         </p>
-        <div style={{ margin: "auto", width: "fit-content" }}>
+        <div className={Styles.selectCont}>
           <FormControl fullWidth variant="filled">
             <InputLabel
               id="demo-simple-select-label"
-              sx={{ color: "#75c9b7 !important" , maxWidth: "80%"}}
+              sx={{ color: "#75c9b7 !important", maxWidth: "80%" }}
             >
               Selected Vehicle
             </InputLabel>
