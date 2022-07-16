@@ -44,3 +44,7 @@
 .VehInfo p {
   margin: 0;
 }
+
+.selectInp::after {
+  border-bottom: 1px solid #75c9b7 !important;
+}

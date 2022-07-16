@@ -20,16 +20,23 @@ const Dashboard = (props) => {
         </p>
         <div>
           <FormControl fullWidth variant="filled">
-            <InputLabel id="demo-simple-select-label" sx={{ color: "#75c9b7" }}>
+            <InputLabel
+              id="demo-simple-select-label"
+              sx={{ color: "#75c9b7 !important" }}
+            >
               Selected Vehicle
             </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              className={Styles.selectInp}
               // value={age}
               label="Age"
               // onChange={handleChange}
-              sx={{ color: "#75c9b7", minWidth: "300px" }}
+              sx={{
+                color: "#75c9b7 !important",
+                minWidth: "300px",
+              }}
               defaultValue={"Activa 4g"}
             >
               <MenuItem value={"Activa 4g"}>Activa 4g</MenuItem>

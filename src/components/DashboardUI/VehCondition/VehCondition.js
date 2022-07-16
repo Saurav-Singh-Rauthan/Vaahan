@@ -17,7 +17,6 @@ const VehCondition = (props) => {
   }
 
   const loadComplete = () => {
-    console.log("loaded");
     setloadState(1);
   };
 
