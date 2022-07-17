@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.reDiv {
+  border: 2px solid #ccc;
+  padding: 1rem;
+  text-align: center;
+}
+
+.dataDiv {
+  padding: 1rem;
+}

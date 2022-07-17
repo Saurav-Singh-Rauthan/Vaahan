@@ -11,6 +11,8 @@ import VehCondition from "../../DashboardUI/VehCondition/VehCondition";
 import RadarMileage from "../../DashboardUI/RadarMileage/RadarMileage";
 
 const Dashboard = (props) => {
+  const vehicles = ["Activa 4g", "TVS Victor GL", "R15 v4"];
+
   return (
     <React.Fragment>
       <div className={Styles.VehInfo}>
@@ -40,9 +42,9 @@ const Dashboard = (props) => {
               }}
               defaultValue={"Activa 4g"}
             >
-              <MenuItem value={"Activa 4g"}>Activa 4g</MenuItem>
-              <MenuItem value={"TVS Victor GL"}>TVS Victor GL</MenuItem>
-              <MenuItem value={"R15 v4"}>R15 v4</MenuItem>
+              {vehicles.map((vehName) => {
+                return <MenuItem value={vehName}>{vehName}</MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>

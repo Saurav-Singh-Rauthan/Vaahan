@@ -63,6 +63,14 @@ const navbarDesk = (props) => {
           className={({ isActive }) =>
             isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
           }
+          to="/add-record"
+        >
+          ADD RECORD
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
+          }
           to="/fuel-prices"
         >
           FUEL PRICES
