@@ -9,12 +9,14 @@ import Countuptab from "../../DashboardUI/CountupTab/Countuptab";
 import MileageChart from "../../DashboardUI/MileageChart/MileageChart";
 import VehCondition from "../../DashboardUI/VehCondition/VehCondition";
 import RadarMileage from "../../DashboardUI/RadarMileage/RadarMileage";
+import Cover from '../../Cover/Cover';
 
 const Dashboard = (props) => {
   const vehicles = ["Activa 4g", "TVS Victor GL", "R15 v4"];
 
   return (
     <React.Fragment>
+      <Cover showCover={true} />
       <div className={Styles.VehInfo}>
         <p>
           Greetings! {"   "}

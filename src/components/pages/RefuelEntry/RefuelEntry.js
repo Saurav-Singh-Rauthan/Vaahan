@@ -8,6 +8,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
 import Styles from "./RefuelEntry.module.css";
+import Cover from "../../Cover/Cover";
 import "./customTab.css";
 
 const RefuelEntry = (props) => {
@@ -21,6 +22,13 @@ const RefuelEntry = (props) => {
   const [addNewVeh, setaddNewVeh] = useState(null);
 
   const handleChange = (event, newValue) => {
+    if (newValue == 2) {
+      setrecord({
+        vehicle: null,
+        odometerReading: null,
+        fuelAdded: null,
+      });
+    }
     setValue(newValue);
   };
 
@@ -144,66 +152,72 @@ const RefuelEntry = (props) => {
   );
 
   return (
-    <div className={Styles.container}>
-      <div className={Styles.dataDiv}>
-        <TabContext value={value}>
-          <Box
-            sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-            }}
-            className={Styles.tabContainer}
-          >
-            <TabList onChange={handleChange} centered={true}>
-              <Tab label="Add Record" value="1" />
-              <Tab label="Add Vehicle" value="2" />
-            </TabList>
-          </Box>
-          <TabPanel value="1">{addRecord}</TabPanel>
-          <TabPanel value="2">{addVehicle}</TabPanel>
-        </TabContext>
-      </div>
-      <div className={Styles.reDiv} style={{display : value == 1 ? "block" : "none"}}>
-        <div className={Styles.summTitle}>Summary</div>
-        {record.vehicle !== null &&
-        record.fuelAdded !== null &&
-        record.odometerReading !== null ? (
-          <div className={Styles.summCont}>
-            <div className={Styles.summDetails}>
-              <p>{record.odometerReading} KM</p>
-              <span>Odometer Reading</span>
-            </div>
-            <div className={Styles.summDetails}>
-              <p>{record.fuelAdded} Litres</p>
-              <span>Fuel Filled</span>
-            </div>
-            <p className={Styles.summVehType}>{record.vehicle}</p>
-          </div>
-        ) : (
-          <p
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-              height: "50%",
-            }}
-          >
-            Add details to view summary....
-          </p>
-        )}
-        <button
-          disabled={
-            record.vehicle !== null &&
-            record.fuelAdded !== null &&
-            record.odometerReading !== null
-              ? false
-              : true
-          }
+    <React.Fragment>
+      <Cover showCover={true} />
+      <div className={Styles.container}>
+        <div className={Styles.dataDiv}>
+          <TabContext value={value}>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+              }}
+              className={Styles.tabContainer}
+            >
+              <TabList onChange={handleChange} centered={true}>
+                <Tab label="Add Record" value="1" />
+                <Tab label="Add Vehicle" value="2" />
+              </TabList>
+            </Box>
+            <TabPanel value="1">{addRecord}</TabPanel>
+            <TabPanel value="2">{addVehicle}</TabPanel>
+          </TabContext>
+        </div>
+        <div
+          className={Styles.reDiv}
+          style={{ display: value == 1 ? "block" : "none" }}
         >
-          Submit
-        </button>
+          <div className={Styles.summTitle}>Summary</div>
+          {record.vehicle !== null &&
+          record.fuelAdded !== null &&
+          record.odometerReading !== null ? (
+            <div className={Styles.summCont}>
+              <div className={Styles.summDetails}>
+                <p>{record.odometerReading} KM</p>
+                <span>Odometer Reading</span>
+              </div>
+              <div className={Styles.summDetails}>
+                <p>{record.fuelAdded} Litres</p>
+                <span>Fuel Filled</span>
+              </div>
+              <p className={Styles.summVehType}>{record.vehicle}</p>
+            </div>
+          ) : (
+            <p
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+                height: "50%",
+              }}
+            >
+              Add details to view summary....
+            </p>
+          )}
+          <button
+            disabled={
+              record.vehicle !== null &&
+              record.fuelAdded !== null &&
+              record.odometerReading !== null
+                ? false
+                : true
+            }
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
