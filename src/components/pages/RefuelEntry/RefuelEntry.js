@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -66,8 +66,12 @@ const RefuelEntry = (props) => {
               <div className={Styles.addRecLastRec}>
                 <p>Last Refuel Details</p>
                 <div className={Styles.details}>
-                  <p>Odometer Reading : <strong>12000 km</strong></p>
-                  <p>Fuel Filled: <strong>2 Litre</strong></p>
+                  <p>
+                    Odometer Reading : <strong>12000 km</strong>
+                  </p>
+                  <p>
+                    Fuel Filled: <strong>2 Litre</strong>
+                  </p>
                 </div>
               </div>
             </div>
@@ -75,7 +79,20 @@ const RefuelEntry = (props) => {
           <TabPanel value="2">Add Vehicle</TabPanel>
         </TabContext>
       </div>
-      <div className={Styles.reDiv}>Summary</div>
+      <div className={Styles.reDiv}>
+        <div className={Styles.summTitle}>Summary</div>
+        <div className={Styles.summCont}>
+          <div className={Styles.summDetails}>
+            <p>12000 KM</p>
+            <span>Odometer Reading</span>
+          </div>
+          <div className={Styles.summDetails}>
+            <p>2 Litres</p>
+            <span>Fuel Filled</span>
+          </div>
+        </div>
+        <button>Submit</button>
+      </div>
     </div>
   );
 };

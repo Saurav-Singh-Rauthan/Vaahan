@@ -9,6 +9,8 @@
   padding: 1rem;
   text-align: center;
   margin: 3rem 0rem;
+  max-height: 300px;
+  position: relative;
 }
 
 .dataDiv {
@@ -22,7 +24,7 @@
 
 .addRecordCont {
   display: grid;
-  grid-template-columns:55% 40%;
+  grid-template-columns: 55% 40%;
   column-gap: 1rem;
   align-items: center;
 }
@@ -32,7 +34,6 @@
   border-radius: 8px;
   padding: 1rem 2rem;
   text-align: center;
-  
 }
 
 .addRecLastRec p {
@@ -43,7 +44,7 @@
   border-bottom: 2px solid #75c9b7;
 }
 
-.details p{
+.details p {
   color: #75c9b7;
   font-size: 1rem;
   text-align: left;
@@ -68,4 +69,59 @@
 .options {
   margin: 0 auto !important;
   width: 80%;
+}
+
+.summCont {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  column-gap: 1rem;
+  justify-content: center;
+  align-content: center;
+  height: 60%;
+  margin-bottom: 1rem;
+}
+
+.summDetails {
+  text-align: left;
+  margin: 0 auto;
+}
+
+.summDetails p {
+  font-size: 28px;
+  margin: 0;
+}
+
+.summDetails span {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.reDiv button {
+  color: #75c9b7;
+  background-color: #16123f;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  width: 60%;
+  transition: all 0.5s ease-out;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.reDiv button:hover {
+  color: #16123f;
+  background-color: #75c9b7;
+}
+
+.summTitle {
+  font-size: 28px;
+  padding: 1rem;
+  border-bottom: 2px solid #75c9b7;
+  font-weight: bolder;
+  color: #16123f;
+  width: fit-content;
+  margin: 0 auto;
 }
