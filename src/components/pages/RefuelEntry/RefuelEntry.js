@@ -60,6 +60,7 @@ const RefuelEntry = (props) => {
                   label="Fuel Filled"
                   placeholder="Fuel filled (Litres)"
                   variant="outlined"
+                  sx={{borderColor:"red !important"}}
                   className={Styles.options}
                 />
               </div>

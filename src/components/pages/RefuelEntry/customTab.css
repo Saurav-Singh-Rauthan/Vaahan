@@ -6,3 +6,12 @@
 .MuiTabs-indicator {
   background-color: #75c9b7 !important;
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #75c9b7 !important;
+}
+
+.MuiInputLabel-root {
+  color: #16123f !important;
+  font-weight: bolder !important;
+}
