@@ -9,7 +9,6 @@ import TabPanel from "@mui/lab/TabPanel";
 
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
-import "./customTab.css";
 
 const RefuelEntry = (props) => {
   const vehicles = ["Activa 4g", "TVS Victor GL", "R15 v4"];

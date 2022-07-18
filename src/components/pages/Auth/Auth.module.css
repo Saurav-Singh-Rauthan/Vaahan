@@ -1,0 +1,31 @@
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  width: 40%;
+  margin: 2rem auto;
+}
+
+.authContainer button {
+  padding: 1rem;
+  background: #16123f;
+  color: #75c9b7;
+  font-size: 1rem;
+  font-weight: bolder;
+  transition: all 0.3s ease-out;
+  border: none;
+}
+
+.authContainer button:hover {
+  background-color: #75c9b7;
+  color: #16123f;
+  border-bottom: 2px solid #16123f;
+  cursor: pointer;
+}
+
+.authContainer button:disabled {
+  cursor: not-allowed;
+  color: white;
+  background-color: #ccc;
+  border: none;
+}

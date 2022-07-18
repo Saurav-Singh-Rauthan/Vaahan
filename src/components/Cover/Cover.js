@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import Styles from "./Cover.module.css";
 
@@ -10,7 +10,7 @@ const Cover = (props) => {
       style={{ display: props.showCover === true ? "block" : "none" }}
     >
       <div className={Styles.remCov}>
-        <Link to="auth">Sign In / Sign Up</Link>
+        <NavLink to="/auth">Sign In / Sign Up</NavLink>
         <p>to use the feature </p>
       </div>
     </div>

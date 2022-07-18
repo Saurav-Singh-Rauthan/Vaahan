@@ -8,7 +8,10 @@ import Home from "./components/pages/Home/Home";
 import Fuelprices from './components/pages/Fuelprices/Fuelprices';
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import RefuelEntry from './components/pages/RefuelEntry/RefuelEntry';
+import Auth from './components/pages/Auth/Auth';
 import Notfound from "./components/pages/Notfound/Notfound";
+
+import "./customMuiStyles.css";
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
             <Route path="/fuel-prices" element={<Fuelprices />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/add-record" element={<RefuelEntry />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Notfound />} />
           </Routes>

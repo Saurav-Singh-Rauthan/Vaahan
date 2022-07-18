@@ -32,7 +32,7 @@ const Speedial = (props) => {
         position: "fixed",
         bottom: 70,
         right: 32,
-        zIndex: 98,
+        zIndex: 102,
       }}
       icon={<SpeedDialIcon />}
       open={open}
