@@ -9,7 +9,7 @@
   padding: 1rem;
   text-align: center;
   margin: 3rem 0rem;
-  height: 300px;
+  min-height: 300px;
   position: relative;
 }
 
@@ -75,10 +75,11 @@
   display: grid;
   grid-template-columns: 48% 48%;
   column-gap: 1rem;
+  row-gap: 1rem;
   justify-content: center;
   align-content: center;
   height: 60%;
-  margin-bottom: 1rem;
+  margin: 1rem 0.5rem;
 }
 
 .summDetails {
@@ -103,7 +104,7 @@
   font-weight: bolder;
   color: #16123f;
   width: fit-content;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
 }
 
 .reDiv button,
@@ -152,6 +153,20 @@
   overflow-wrap: anywhere;
 }
 
+.summVehType {
+  grid-column: span 2;
+  color: #16123f;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 450px) {
+  .summCont {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     display: flex;
@@ -161,17 +176,11 @@
   .reDiv {
     margin: 1rem auto 4rem auto;
     width: 95%;
-    height: 250px;
+    min-height: 250px;
   }
 
   .summCont {
-    display: grid;
-    grid-template-columns: 48% 48%;
-    column-gap: 1rem;
-    justify-content: center;
-    align-content: center;
-    height: 60%;
-    margin-bottom: 1rem;
+    margin: 2rem 0;
   }
 
   .summDetails {
