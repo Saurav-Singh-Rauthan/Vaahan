@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import HomeIcon from '@mui/icons-material/Home';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const actions = [
+  { icon: <HomeIcon />, name: "Home", link: "/" },
+  { icon: <DashboardIcon />, name: "Dashboard", link: "/dashboard" },
   { icon: <SpeedDialIcon />, name: "Add Record", link: "/add-record" },
-  { icon: <AccountCircleIcon />, name: "User", link: "/account" },
   { icon: <LocalGasStationIcon />, name: "Prices", link: "/fuel-prices" },
 ];
 
