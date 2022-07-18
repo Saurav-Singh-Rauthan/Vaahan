@@ -30,8 +30,34 @@
 .addRecLastRec {
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  
 }
+
+.addRecLastRec p {
+  font-size: 18px;
+  color: #16123f;
+  font-weight: bold;
+  padding: 1rem;
+  border-bottom: 2px solid #75c9b7;
+}
+
+.details p{
+  color: #75c9b7;
+  font-size: 1rem;
+  text-align: left;
+  border: none;
+  padding: 0;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.details strong {
+  color: #16123f;
+  text-align: right;
+}
+
 .optionsCont {
   display: flex;
   flex-direction: column;

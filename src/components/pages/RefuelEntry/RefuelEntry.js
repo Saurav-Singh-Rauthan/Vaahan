@@ -65,9 +65,9 @@ const RefuelEntry = (props) => {
               </div>
               <div className={Styles.addRecLastRec}>
                 <p>Last Refuel Details</p>
-                <div>
-                  <p>Odometer Reading : 12000 Km</p>
-                  <p>Fuel Filled: 2 Litre</p>
+                <div className={Styles.details}>
+                  <p>Odometer Reading : <strong>12000 km</strong></p>
+                  <p>Fuel Filled: <strong>2 Litre</strong></p>
                 </div>
               </div>
             </div>
