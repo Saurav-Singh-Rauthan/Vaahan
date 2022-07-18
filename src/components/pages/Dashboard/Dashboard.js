@@ -43,7 +43,7 @@ const Dashboard = (props) => {
               defaultValue={"Activa 4g"}
             >
               {vehicles.map((vehName) => {
-                return <MenuItem value={vehName}>{vehName}</MenuItem>;
+                return <MenuItem value={vehName} key={vehName}>{vehName}</MenuItem>;
               })}
             </Select>
           </FormControl>

@@ -12,7 +12,7 @@ import "./customTab.css";
 
 const RefuelEntry = (props) => {
   const vehicles = ["Activa 4g", "TVS Victor GL", "R15 v4"];
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -43,7 +43,11 @@ const RefuelEntry = (props) => {
                   options={vehicles}
                   className={Styles.options}
                   renderInput={(params) => (
-                    <TextField {...params} label="Select vehicle" />
+                    <TextField
+                      {...params}
+                      label="Select vehicle"
+                      helperText="Vehicle for which record is added"
+                    />
                   )}
                 />
 
@@ -51,16 +55,16 @@ const RefuelEntry = (props) => {
                   id="outlined-basic"
                   label="Odometer Reading"
                   variant="outlined"
-                  placeholder="Odometer reading after refuel (Kms)"
+                  helperText="Odometer reading after refuel (Kms)"
                   className={Styles.options}
                 />
 
                 <TextField
                   id="outlined-basic"
                   label="Fuel Filled"
-                  placeholder="Fuel filled (Litres)"
+                  helperText="Fuel filled (Litres)"
                   variant="outlined"
-                  sx={{borderColor:"red !important"}}
+                  sx={{ borderColor: "red !important" }}
                   className={Styles.options}
                 />
               </div>
