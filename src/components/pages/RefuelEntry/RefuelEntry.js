@@ -18,6 +18,18 @@ const RefuelEntry = (props) => {
     setValue(newValue);
   };
 
+  const [addNewVeh, setaddNewVeh] = useState(null);
+
+  const newVehIpHandler = (event, value, reason) => {
+    if (reason === "clear" || event.target.value.length === 0) {
+      setaddNewVeh(null);
+    } else if (reason === "selectOption") {
+      setaddNewVeh(event.target.outerText);
+    } else {
+      setaddNewVeh(event.target.value)
+    }
+  };
+
   return (
     <div className={Styles.container}>
       <div className={Styles.dataDiv}>
@@ -75,13 +87,48 @@ const RefuelEntry = (props) => {
                     Odometer Reading : <strong>12000 km</strong>
                   </p>
                   <p>
-                    Fuel Filled: <strong>2 Litre</strong>
+                    Fuel Filled: <strong>2.01 Litre</strong>
                   </p>
                 </div>
               </div>
             </div>
           </TabPanel>
-          <TabPanel value="2">Add Vehicle</TabPanel>
+          <TabPanel value="2">
+            <div
+              style={{ position: "relative", margin: "1rem" }}
+            >
+              <div className={Styles.optionsCont}>
+                <Autocomplete
+                  onChange={(event, value, reason) =>
+                    newVehIpHandler(event, value, reason)
+                  }
+                  freeSolo={true}
+                  disablePortal
+                  id="combo-box-demo"
+                  options={vehicles}
+                  className={Styles.options}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      onChange={(event) => newVehIpHandler(event)}
+                      label="Select vehicle"
+                      helperText="Select new vehicle to be added"
+                    />
+                  )}
+                />
+              </div>
+              <div className={Styles.vehAddSumm}>
+                Vehicle to be added is : {addNewVeh}
+              </div>
+              <button
+                className={Styles.addVehBtn}
+                disabled={addNewVeh === null}
+                onClick={() => alert("hello world")}
+              >
+                Add Vehicle
+              </button>
+            </div>
+          </TabPanel>
         </TabContext>
       </div>
       <div className={Styles.reDiv}>
@@ -92,7 +139,7 @@ const RefuelEntry = (props) => {
             <span>Odometer Reading</span>
           </div>
           <div className={Styles.summDetails}>
-            <p>2 Litres</p>
+            <p>2.01 Litres</p>
             <span>Fuel Filled</span>
           </div>
         </div>
