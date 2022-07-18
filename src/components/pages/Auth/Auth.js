@@ -144,7 +144,7 @@ const Auth = (props) => {
   return (
     <div className={Styles.container}>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box className={Styles.tabCont} sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} centered>
             <Tab label="Sign In" value="1" />
             <Tab label="Sign Up" value="2" />

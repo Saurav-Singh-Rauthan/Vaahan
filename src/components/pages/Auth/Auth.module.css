@@ -6,6 +6,15 @@
   margin: 2rem auto;
 }
 
+.tabCont {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.tabCont button {
+  margin: 0 1rem;
+}
+
 .authContainer button {
   padding: 1rem;
   background: #16123f;
@@ -28,4 +37,24 @@
   color: white;
   background-color: #ccc;
   border: none;
+}
+
+@media (max-width: 460px) {
+  .authContainer {
+    width: 90%;
+  }
+  
+  .tabCont {
+    width: 90%;
+  }
+}
+
+@media (min-width: 461px) and (max-width: 920px) {
+  .authContainer {
+    width: 70%;
+  }
+  
+  .tabCont {
+    width: 70%;
+  }
 }
