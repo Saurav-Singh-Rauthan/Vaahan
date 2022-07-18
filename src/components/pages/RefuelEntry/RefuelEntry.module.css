@@ -1,14 +1,45 @@
 .container {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 65% 30%;
+  column-gap: 1rem;
 }
 
 .reDiv {
   border: 2px solid #ccc;
   padding: 1rem;
   text-align: center;
+  margin: 3rem 0rem;
 }
 
 .dataDiv {
   padding: 1rem;
+}
+
+.tabContainer {
+  width: 60%;
+  margin: 0 auto 1rem auto;
+}
+
+.addRecordCont {
+  display: grid;
+  grid-template-columns:55% 40%;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.addRecLastRec {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.optionsCont {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  row-gap: 2rem;
+}
+
+.options {
+  margin: 0 auto !important;
+  width: 80%;
 }
