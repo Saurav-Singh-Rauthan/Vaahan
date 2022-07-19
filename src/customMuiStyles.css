@@ -16,7 +16,11 @@
   font-weight: bolder !important;
 }
 
-@media (min-width: 200px) and (max-width: 1100px){
+.Mui-error .MuiOutlinedInput-notchedOutline {
+  border-color: red !important;
+}
+
+@media (min-width: 200px) and (max-width: 1100px) {
   .MuiTabPanel-root {
     padding: 0.5rem !important;
   }

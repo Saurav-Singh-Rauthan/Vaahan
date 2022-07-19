@@ -39,12 +39,40 @@
   border: none;
 }
 
+.switchButton {
+  margin: 0 0.5rem;
+  padding: 0;
+  font-size: 1rem;
+  color: #75c9b7;
+  border: none;
+  font-weight: bold;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.switchButton:hover {
+  border-bottom: 1px solid #16123f;
+}
+
+.changeCont {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto 2rem auto;
+}
+
 @media (max-width: 460px) {
   .authContainer {
     width: 90%;
   }
-  
+
   .tabCont {
+    width: 90%;
+  }
+
+  .changeCont {
     width: 90%;
   }
 }
@@ -53,8 +81,12 @@
   .authContainer {
     width: 70%;
   }
-  
+
   .tabCont {
+    width: 70%;
+  }
+
+  .changeCont {
     width: 70%;
   }
 }
