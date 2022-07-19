@@ -65,7 +65,7 @@ const isRequired = (value) => {
   return value[0].trim().length !== 0;
 };
 
-export const Validate = (value = "", type = "") => {
+const Validate = (value = "", type = "") => {
   let result = {
     isValid: true,
     errorMsg: true,
@@ -149,3 +149,5 @@ export const Validate = (value = "", type = "") => {
 
   return result;
 };
+
+export default Validate;

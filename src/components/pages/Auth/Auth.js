@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TextField from "@mui/material/TextField";
 
-import { Validate } from "../../Validator/Validator";
+import Validate from "../../Validator/Validator";
 
 import Styles from "./Auth.module.css";
 
