@@ -152,7 +152,7 @@ const RefuelEntry = (props) => {
 
   return (
     <React.Fragment>
-      <Cover showCover={true} />
+      <Cover />
       <div className={Styles.container}>
         <div className={Styles.dataDiv}>
           <TabContext value={value}>
