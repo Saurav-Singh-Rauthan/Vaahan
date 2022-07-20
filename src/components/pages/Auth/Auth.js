@@ -54,6 +54,12 @@ const Auth = (props) => {
     });
   }, [props.error]);
 
+  useEffect(() => {
+    if (props.redirect !== null) {
+      navigate(props.redirect);
+    }
+  }, [props.redirect]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setuserSignInCred({
@@ -203,7 +209,7 @@ const Auth = (props) => {
             : true
         }
       >
-        {props.loading === true ? null : "SIGN UP"}
+        {props.loading === true ? null : "SIGN IN"}
         <Box
           sx={{
             display: props.loading === true ? "flex" : "none",
@@ -393,6 +399,7 @@ const mapStateToProps = (state, ownProps) => {
     error: state.auth.error,
     errorMsg: state.auth.errorMsg,
     loading: state.auth.loading,
+    redirect: state.auth.redirect,
   };
 };
 

@@ -94,6 +94,7 @@ export const login = (email, password, type) => {
           err.code === "ERR_NETWORK"
             ? "Network Error!"
             : errorMsgGen(err.response.data.error.message.split(":")[0].trim());
+        console.log(err.code);
         console.log(err.response.data.error.message.split(":")[0].trim());
 
         dispatch(auth_failed(true, errorMessage));

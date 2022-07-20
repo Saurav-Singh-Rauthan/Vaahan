@@ -7,6 +7,7 @@ const InitialState = {
   id: null,
   error: null,
   errorMsg: null,
+  redirect: null,
 };
 
 const authReducer = (state = InitialState, action) => {
@@ -29,6 +30,7 @@ const authReducer = (state = InitialState, action) => {
         email: null,
         token: null,
         id: null,
+        redirect: null,
         error: action.err,
         errorMsg: action.errorMsg,
       };
@@ -38,6 +40,7 @@ const authReducer = (state = InitialState, action) => {
         error: null,
         errorMsg: null,
         loading: null,
+        redirect: "/",
       };
     default:
       return state;
