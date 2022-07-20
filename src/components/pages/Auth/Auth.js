@@ -39,6 +39,11 @@ const Auth = (props) => {
     confPasswordTouched: false,
   });
 
+  const [authErr, setauthErr] = useState({
+    err: null,
+    errMsg: null,
+  });
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setuserSignInCred({
@@ -60,6 +65,10 @@ const Auth = (props) => {
       emailTouched: false,
       passwordTouched: false,
       confPasswordTouched: false,
+    });
+    setauthErr({
+      err: null,
+      errMsg: null,
     });
   };
 
@@ -124,6 +133,39 @@ const Auth = (props) => {
     }
   };
 
+  const errorMsgGen = (error) => {
+    let errorMsg = "";
+
+    switch (error) {
+      case "EMAIL_NOT_FOUND":
+        errorMsg =
+          "There is no user record corresponding to this identifier. The user may have been deleted.";
+        break;
+      case "INVALID_PASSWORD":
+        errorMsg =
+          "The password is invalid or the user does not have a password.";
+        break;
+      case "USER_DISABLED":
+        errorMsg = "The user account has been disabled by an administrator.";
+        break;
+      case "EMAIL_EXISTS":
+        errorMsg = "The email address is already in use by another account.";
+        break;
+      case "OPERATION_NOT_ALLOWED":
+        errorMsg = "Password sign-in is disabled for this project.";
+        break;
+      case "TOO_MANY_ATTEMPTS_TRY_LATER":
+        console.log("2may");
+        errorMsg =
+          "We have blocked all requests from this device due to unusual activity. Try again later.";
+        break;
+      default:
+        errorMsg = "Something just happend idk wut";
+    }
+
+    return errorMsg;
+  };
+
   const signInHandler = () => {
     axios
       .post(
@@ -141,6 +183,14 @@ const Auth = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        const errorMessage = errorMsgGen(
+          err.response.data.error.message.split(":")[0].trim()
+        );
+        console.log(err.response.data.error.message.split(":")[0].trim());
+        setauthErr({
+          err: true,
+          errMsg: errorMessage,
+        });
       });
   };
 
@@ -161,6 +211,13 @@ const Auth = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        const errorMessage = errorMsgGen(
+          err.response.data.error.message.split(":")[0].trim()
+        );
+        setauthErr({
+          err: true,
+          errMsg: errorMessage,
+        });
       });
   };
 
@@ -204,6 +261,13 @@ const Auth = (props) => {
         }
         onChange={(event) => inputChangeHandler(event, "signInPass")}
       />
+
+      <p
+        style={{ display: authErr.err === null ? "none" : "block" }}
+        className={Styles.authErr}
+      >
+        {authErr.errMsg}
+      </p>
       <button
         onClick={signInHandler}
         disabled={
@@ -309,6 +373,12 @@ const Auth = (props) => {
         }
         onBlur={() => touchHandler("signUp|confpass")}
       />
+      <p
+        style={{ display: authErr.err === null ? "none" : "block" }}
+        className={Styles.authErr}
+      >
+        {authErr.errMsg}
+      </p>
       <button
         onClick={signUpHandler}
         disabled={

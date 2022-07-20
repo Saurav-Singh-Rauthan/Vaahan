@@ -63,6 +63,13 @@
   margin: 0 auto 2rem auto;
 }
 
+.authErr {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1rem;
+}
+
 @media (max-width: 460px) {
   .authContainer {
     width: 90%;
