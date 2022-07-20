@@ -17,6 +17,7 @@
 
 .authContainer button {
   padding: 1rem;
+  line-height: 36px;
   background: #16123f;
   color: #75c9b7;
   font-size: 1rem;

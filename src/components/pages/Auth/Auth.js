@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../../Store/actions/index";
 
 import Validate from "../../Validator/Validator";
 import Styles from "./Auth.module.css";
@@ -14,7 +17,7 @@ import Styles from "./Auth.module.css";
 const Auth = (props) => {
   let navigate = useNavigate();
 
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
   const [userSignInCred, setuserSignInCred] = useState({
     email: null,
     password: null,
@@ -43,6 +46,13 @@ const Auth = (props) => {
     err: null,
     errMsg: null,
   });
+
+  useEffect(() => {
+    setauthErr({
+      err: props.error,
+      errMsg: props.errorMsg,
+    });
+  }, [props.error]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -133,94 +143,6 @@ const Auth = (props) => {
     }
   };
 
-  const errorMsgGen = (error) => {
-    let errorMsg = "";
-
-    switch (error) {
-      case "EMAIL_NOT_FOUND":
-        errorMsg =
-          "There is no user record corresponding to this identifier. The user may have been deleted.";
-        break;
-      case "INVALID_PASSWORD":
-        errorMsg =
-          "The password is invalid or the user does not have a password.";
-        break;
-      case "USER_DISABLED":
-        errorMsg = "The user account has been disabled by an administrator.";
-        break;
-      case "EMAIL_EXISTS":
-        errorMsg = "The email address is already in use by another account.";
-        break;
-      case "OPERATION_NOT_ALLOWED":
-        errorMsg = "Password sign-in is disabled for this project.";
-        break;
-      case "TOO_MANY_ATTEMPTS_TRY_LATER":
-        console.log("2may");
-        errorMsg =
-          "We have blocked all requests from this device due to unusual activity. Try again later.";
-        break;
-      default:
-        errorMsg = "Something just happend idk wut";
-    }
-
-    return errorMsg;
-  };
-
-  const signInHandler = () => {
-    axios
-      .post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`,
-        {
-          email: userSignInCred.email,
-          password: userSignInCred.password,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((err) => {
-        console.log(err);
-        const errorMessage = errorMsgGen(
-          err.response.data.error.message.split(":")[0].trim()
-        );
-        console.log(err.response.data.error.message.split(":")[0].trim());
-        setauthErr({
-          err: true,
-          errMsg: errorMessage,
-        });
-      });
-  };
-
-  const signUpHandler = () => {
-    axios
-      .post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`,
-        {
-          email: userSignUpCred.email,
-          password: userSignUpCred.password,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-      })
-      .catch((err) => {
-        console.log(err);
-        const errorMessage = errorMsgGen(
-          err.response.data.error.message.split(":")[0].trim()
-        );
-        setauthErr({
-          err: true,
-          errMsg: errorMessage,
-        });
-      });
-  };
-
   const signInDiv = (
     <div className={Styles.authContainer}>
       <TextField
@@ -269,7 +191,9 @@ const Auth = (props) => {
         {authErr.errMsg}
       </p>
       <button
-        onClick={signInHandler}
+        onClick={() =>
+          props.login(userSignInCred.email, userSignInCred.password, "signin")
+        }
         disabled={
           userSignInCred.email !== null &&
           userSignInCred.password !== null &&
@@ -279,7 +203,16 @@ const Auth = (props) => {
             : true
         }
       >
-        SIGN IN
+        {props.loading === true ? null : "SIGN UP"}
+        <Box
+          sx={{
+            display: props.loading === true ? "flex" : "none",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={36} sx={{ color: "#ffe26a" }} />
+        </Box>
       </button>
     </div>
   );
@@ -380,7 +313,9 @@ const Auth = (props) => {
         {authErr.errMsg}
       </p>
       <button
-        onClick={signUpHandler}
+        onClick={() =>
+          props.login(userSignUpCred.email, userSignUpCred.password, "signup")
+        }
         disabled={
           userSignUpCred.email !== null &&
           userSignUpCred.name !== null &&
@@ -399,7 +334,15 @@ const Auth = (props) => {
             : true
         }
       >
-        SIGN UP
+        {props.loading === true ? null : "SIGN UP"}
+        <Box
+          sx={{
+            display: props.loading === true ? "flex" : "none",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress size={36} sx={{ color: "#ffe26a" }} />
+        </Box>
       </button>
     </div>
   );
@@ -444,4 +387,21 @@ const Auth = (props) => {
   );
 };
 
-export default Auth;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    token: state.auth.token,
+    error: state.auth.error,
+    errorMsg: state.auth.errorMsg,
+    loading: state.auth.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    login: (email, password, type) => {
+      dispatch(actions.login(email, password, type));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
