@@ -1,1 +1,1 @@
-export {login} from "./auth"
+export {login, logout, auto_login} from "./auth"

@@ -42,6 +42,17 @@ const authReducer = (state = InitialState, action) => {
         loading: null,
         redirect: "/",
       };
+    case actionType.AUTH_LOGOUT:
+      return {
+        token: null,
+        email: null,
+        loading: null,
+        id: null,
+        error: null,
+        errorMsg: null,
+        redirect: null,
+      };
+      break;
     default:
       return state;
   }

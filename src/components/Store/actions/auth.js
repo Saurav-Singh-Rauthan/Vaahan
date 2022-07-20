@@ -86,7 +86,10 @@ export const login = (email, password, type) => {
         localStorage.setItem("id", res.data.localId);
         localStorage.setItem("token", res.data.idToken);
         localStorage.setItem("email", res.data.email);
-        localStorage.setItem("expiresIn", res.data.expiresIn);
+        localStorage.setItem(
+          "expiresIn",
+          new Date(new Date().getTime() + res.data.expiresIn * 1000)
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -99,5 +102,34 @@ export const login = (email, password, type) => {
 
         dispatch(auth_failed(true, errorMessage));
       });
+  };
+};
+
+export const logout = () => {
+  localStorage.removeItem("email");
+  localStorage.removeItem("expiresIn");
+  localStorage.removeItem("token");
+  localStorage.removeItem("id");
+
+  return {
+    type: actionType.AUTH_LOGOUT,
+  };
+};
+
+export const auto_login = () => {
+  return (dispatch) => {
+    const currTime = new Date(new Date().getTime()).toString();
+    const expiryTime = localStorage.getItem("expiresIn");
+    console.log(currTime < expiryTime, currTime, expiryTime);
+
+    if (currTime <= expiryTime) {
+      const email = localStorage.getItem("mail");
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+
+      dispatch(auth(email, token, id));
+    } else {
+      dispatch(logout());
+    }
   };
 };

@@ -21,7 +21,7 @@ const RefuelEntry = (props) => {
   const [addNewVeh, setaddNewVeh] = useState(null);
 
   const handleChange = (event, newValue) => {
-    if (newValue == 2) {
+    if (newValue === "2") {
       setrecord({
         vehicle: null,
         odometerReading: null,
@@ -174,7 +174,7 @@ const RefuelEntry = (props) => {
         </div>
         <div
           className={Styles.reDiv}
-          style={{ display: value == 1 ? "block" : "none" }}
+          style={{ display: value === "1" ? "block" : "none" }}
         >
           <div className={Styles.summTitle}>Summary</div>
           {record.vehicle !== null &&

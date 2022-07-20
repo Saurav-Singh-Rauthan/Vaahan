@@ -1,5 +1,8 @@
 import "./App.css";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "./components/Store/actions/index";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -13,7 +16,11 @@ import Notfound from "./components/pages/Notfound/Notfound";
 
 import "./customMuiStyles.css";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.auto_login();
+  });
+
   return (
     <BrowserRouter>
       <Speedial />
@@ -37,4 +44,18 @@ function App() {
   );
 }
 
-export default App;
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     prop: state.prop,
+//   };
+// };
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    auto_login: () => {
+      dispatch(actions.auto_login());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
