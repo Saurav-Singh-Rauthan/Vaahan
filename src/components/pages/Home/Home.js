@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Styles from "./Home.module.css";
 import Accordian from "../../Accordion/Accordion";
@@ -64,7 +65,7 @@ const Home = (props) => {
         state="Maharashtra"
         district="Pune"
       />
-      <p className={Styles.login}>
+      <p style={{display: props.isAuthenticated ? "none" : "block"}}className={Styles.login}>
         Want to configure for your district & state?{" "}
         <Link to="/auth">Sign Up / Sign In</Link>
       </p>
@@ -74,4 +75,10 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
