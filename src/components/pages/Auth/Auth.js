@@ -5,12 +5,15 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Validate from "../../Validator/Validator";
-
 import Styles from "./Auth.module.css";
 
 const Auth = (props) => {
+  let navigate = useNavigate();
+
   const [value, setValue] = React.useState("1");
   const [userSignInCred, setuserSignInCred] = useState({
     email: null,
@@ -121,6 +124,46 @@ const Auth = (props) => {
     }
   };
 
+  const signInHandler = () => {
+    axios
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`,
+        {
+          email: userSignInCred.email,
+          password: userSignInCred.password,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const signUpHandler = () => {
+    axios
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`,
+        {
+          email: userSignUpCred.email,
+          password: userSignUpCred.password,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const signInDiv = (
     <div className={Styles.authContainer}>
       <TextField
@@ -162,6 +205,7 @@ const Auth = (props) => {
         onChange={(event) => inputChangeHandler(event, "signInPass")}
       />
       <button
+        onClick={signInHandler}
         disabled={
           userSignInCred.email !== null &&
           userSignInCred.password !== null &&
@@ -266,6 +310,7 @@ const Auth = (props) => {
         onBlur={() => touchHandler("signUp|confpass")}
       />
       <button
+        onClick={signUpHandler}
         disabled={
           userSignUpCred.email !== null &&
           userSignUpCred.name !== null &&
