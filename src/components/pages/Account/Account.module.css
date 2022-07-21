@@ -20,6 +20,10 @@
   margin: 0.5rem 0 !important;
 }
 
+.userDetails:disabled {
+  cursor: not-allowed;
+}
+
 .userVeh {
   height: 50%;
   width: 100%;
@@ -40,6 +44,8 @@
   font-size: 1rem;
   border: none;
   margin: 1rem 0;
+  color: #16123f;
+  font-weight: 600;
 }
 
 .btnCont {
@@ -47,7 +53,8 @@
   justify-content: right;
 }
 
-.btnCont button {
+.btnCont button,
+.save {
   padding: 1rem;
   border: none;
   margin: 0 1rem;
@@ -55,6 +62,10 @@
   background: rgba(0, 128, 0, 0.468);
   color: white;
   cursor: pointer;
+}
+
+.save {
+  background: rgba(0, 0, 255, 0.625) !important;
 }
 
 .btnCont button:nth-of-type(2) {
@@ -68,6 +79,10 @@
 
 .btnCont button:hover:nth-of-type(2) {
   background: rgb(136, 2, 2);
+}
+
+.save:hover {
+  background: rgb(2, 2, 110) !important;
 }
 
 @media (max-width: 756px) {

@@ -13,11 +13,28 @@ const Account = (props) => {
     openDialog: null,
   });
 
+  const [editState, setEditState] = useState({
+    edit: false,
+    username: null,
+    city: null,
+    state: null,
+  });
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
     }
   });
+
+  const editDetailsHandler = (type) => {
+    setEditState({
+      ...editState,
+      edit: !editState.edit,
+    });
+    if (type === "save") {
+      // send details
+    }
+  };
 
   return (
     <React.Fragment>
@@ -29,7 +46,12 @@ const Account = (props) => {
       />
       <div>
         <div className={Styles.btnCont}>
-          <button>EDIT DETAILS</button>
+          <button
+            onClick={() => editDetailsHandler(editState.edit ? "save" : "edit")}
+            className={editState.edit ? Styles.save : null}
+          >
+            {editState.edit ? "SAVE DETAILS" : "EDIT DETAILS"}
+          </button>
           <button onClick={dialogOptions?.openDialog}>LOGOUT</button>
         </div>
         <div className={Styles.container}>
@@ -42,12 +64,14 @@ const Account = (props) => {
                 variant="outlined"
                 helperText="Your display name"
                 className={Styles.userDetails}
+                disabled={!editState.edit ? true : false}
               />
               <TextField
                 id="outlined-basic"
                 label="Email"
                 variant="outlined"
                 helperText="Registered mail ID"
+                disabled
                 className={Styles.userDetails}
               />
               <TextField
@@ -56,6 +80,7 @@ const Account = (props) => {
                 variant="outlined"
                 helperText="Your preffered city for fuel price info"
                 className={Styles.userDetails}
+                disabled={!editState.edit ? true : false}
               />
               <TextField
                 id="outlined-basic"
@@ -63,6 +88,7 @@ const Account = (props) => {
                 variant="outlined"
                 helperText="Your preffered state for fuel price info"
                 className={Styles.userDetails}
+                disabled={!editState.edit ? true : false}
               />
             </div>
           </div>
