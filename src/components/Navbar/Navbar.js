@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 import NavbarDesk from "./NavbarDesk/NavbarDesk";
-import NavbarMob from './NavbarMob/NavbarMob';
+import NavbarMob from "./NavbarMob/NavbarMob";
 
 import Styles from "./Navbar.module.css";
 
@@ -14,10 +15,16 @@ const navbar = (props) => {
           Vaahan
         </NavLink>
       </div>
-      <NavbarDesk />
-      <NavbarMob/>
+      <NavbarDesk isAuthenticated={props.isAuthenticated} />
+      <NavbarMob isAuthenticated={props.isAuthenticated} />
     </div>
   );
 };
 
-export default navbar;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(navbar);

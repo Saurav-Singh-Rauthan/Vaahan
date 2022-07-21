@@ -118,10 +118,9 @@ export const logout = () => {
 
 export const auto_login = () => {
   return (dispatch) => {
-    const currTime = new Date(new Date().getTime()).toString();
-    const expiryTime = localStorage.getItem("expiresIn");
-    console.log(currTime < expiryTime, currTime, expiryTime);
-
+    const currTime = new Date(new Date().getTime());
+    const expiryTime = new Date(localStorage.getItem("expiresIn"));
+    
     if (currTime <= expiryTime) {
       const email = localStorage.getItem("mail");
       const token = localStorage.getItem("token");

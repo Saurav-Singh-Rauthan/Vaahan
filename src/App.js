@@ -12,6 +12,7 @@ import Fuelprices from "./components/pages/Fuelprices/Fuelprices";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import RefuelEntry from "./components/pages/RefuelEntry/RefuelEntry";
 import Auth from "./components/pages/Auth/Auth";
+import Account from './components/pages/Account/Account';
 import Notfound from "./components/pages/Notfound/Notfound";
 
 import "./customMuiStyles.css";
@@ -33,6 +34,7 @@ function App(props) {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/add-record" element={<RefuelEntry />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Notfound />} />
           </Routes>

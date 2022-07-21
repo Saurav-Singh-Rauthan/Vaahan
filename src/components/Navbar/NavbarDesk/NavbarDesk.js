@@ -27,18 +27,18 @@ const navbarDesk = (props) => {
     </React.Fragment>
   );
 
-  // if (!props.isAuthenticated) {
-  // links = (
-  //   <NavLink
-  //     className={({ isActive }) =>
-  //       isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
-  //     }
-  //     to="/auth"
-  //   >
-  //     Login / Register
-  //   </NavLink>
-  // );
-  // }
+  if (!props.isAuthenticated) {
+  links = (
+    <NavLink
+      className={({ isActive }) =>
+        isActive ? [Styles.active, Styles.link].join(" ") : Styles.link
+      }
+      to="/auth"
+    >
+      Login / Register
+    </NavLink>
+  );
+  }
 
   return (
     <React.Fragment>
