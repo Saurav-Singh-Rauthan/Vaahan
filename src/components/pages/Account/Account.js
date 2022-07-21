@@ -1,29 +1,49 @@
-import React from 'react'
-import {connect} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 
 import Styles from "./Account.module.css";
-import * as action from '../../Store/actions/index';
+import * as action from "../../Store/actions/index";
+import Dialog from "../../Dialog/Dialog";
 
 const Account = (props) => {
-  return(
-    <div>
-      <button onClick={props.logout}>Logout</button>
+  let navigate = useNavigate();
+  const [dialogOptions, setdialogOptions] = useState({
+    openDialog: null,
+  });
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+    console.log("hi");
+  });
+
+  return (
+    <div className={Styles.container}>
+      <Dialog
+        setMethods={setdialogOptions}
+        title={"Logout"}
+        desc={"Are you sure you want to logout?"}
+        onTrue={props.logout}
+      />
+      <button onClick={dialogOptions?.openDialog}>Logout</button>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    prop: state.prop
-  }
-}
+    isAuthenticated: state.auth.token !== null,
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logout: () => {
-      dispatch(action.logout())
-    }
-  }
-}
+      dispatch(action.logout());
+    },
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Account)
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

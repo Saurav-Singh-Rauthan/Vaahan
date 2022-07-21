@@ -1,0 +1,13 @@
+.btn {
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #75c9b7;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #16123f;
+}
