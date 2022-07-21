@@ -43,8 +43,8 @@ const Dialogcomp = (props) => {
         TransitionComponent={Transition}
       >
         <DialogTitle id="responsive-dialog-title">{props?.title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText sx={{ padding: "1rem 2rem 0.5rem 2rem" }}>
+        <DialogContent sx={{paddingBottom: "0"}}>
+          <DialogContentText sx={{ padding: "1rem" }}>
             {props?.desc}
           </DialogContentText>
         </DialogContent>

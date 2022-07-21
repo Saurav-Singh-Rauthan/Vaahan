@@ -1,13 +1,22 @@
 .btn {
   padding: 1rem;
+  margin: 0.5rem;
   background-color: transparent;
   border: none;
   font-weight: bold;
   cursor: pointer;
   color: #75c9b7;
+  transition: all 0.3s ease-out;
 }
 
 .btn:hover,
 .btn:focus {
   background: #16123f;
+}
+
+@media (max-width: 756px){
+  .btn {
+    padding: 0.5rem;
+    margin: auto 0.5rem;
+  }
 }
