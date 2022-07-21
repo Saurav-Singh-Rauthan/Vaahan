@@ -15,6 +15,11 @@
   width: fit-content;
 }
 
+.userDetails {
+  width: 80% !important;
+  margin: 0.5rem 0 !important;
+}
+
 .userVeh {
   height: 50%;
   width: 100%;
@@ -22,7 +27,7 @@
   padding: 1rem;
   border-radius: 8px;
   overflow-y: scroll;
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
   scrollbar-width: none;
   word-wrap: break-word;
 }
@@ -63,4 +68,22 @@
 
 .btnCont button:hover:nth-of-type(2) {
   background: rgb(136, 2, 2);
+}
+
+@media (max-width: 756px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+
+  .userDetails {
+    display: flex !important;
+    width: 95% !important;
+    margin: 1rem auto !important;
+  }
+
+  .userVeh {
+    height: auto;
+  }
 }

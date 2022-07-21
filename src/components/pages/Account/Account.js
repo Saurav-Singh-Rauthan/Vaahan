@@ -35,34 +35,34 @@ const Account = (props) => {
         <div className={Styles.container}>
           <div>
             <p className={Styles.heading}>User Details :</p>
-            <div className={Styles.userDetails}>
+            <div>
               <TextField
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
-                sx={{ width: "80%", margin: "0.5rem 0" }}
                 helperText="Your display name"
+                className={Styles.userDetails}
               />
               <TextField
                 id="outlined-basic"
                 label="Email"
                 variant="outlined"
                 helperText="Registered mail ID"
-                sx={{ width: "80%", margin: "0.5rem 0" }}
+                className={Styles.userDetails}
               />
               <TextField
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
-                sx={{ width: "80%", margin: "0.5rem 0" }}
                 helperText="Your preffered city for fuel price info"
+                className={Styles.userDetails}
               />
               <TextField
                 id="outlined-basic"
                 label="State"
                 variant="outlined"
-                sx={{ width: "80%", margin: "0.5rem 0" }}
                 helperText="Your preffered state for fuel price info"
+                className={Styles.userDetails}
               />
             </div>
           </div>
