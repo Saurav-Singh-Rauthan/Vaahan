@@ -2,7 +2,7 @@ const regExObj = {
   mail: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
   alnum: /^[a-z0-9]+$/i,
   string: /^[a-zA-Z\s]*$/,
-  number: /^[0-9]*$/,
+  number: /^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$/,
 };
 
 const errorMessages = {
@@ -15,6 +15,8 @@ const errorMessages = {
   notAlnum: "Value entered is not alphanumeric",
   notminVal: "Number entered is smaller than minimum value",
   notmaxVal: "Number entered is bigger than maximum value",
+  notless: "Value is not less than the compared value",
+  notmore: "Value is not more than the compared value",
 };
 
 const minVal = (value, param = 1) => {
@@ -63,6 +65,14 @@ const isEqual = (value) => {
 
 const isRequired = (value) => {
   return value[0].trim().length !== 0;
+};
+
+const isLessThan = (value) => {
+  return value[0].trim() < value[1].trim();
+};
+
+const isMoreThan = (value) => {
+  return value[0].trim() > value[1].trim();
 };
 
 const Validate = (value = "", type = "") => {
@@ -132,6 +142,14 @@ const Validate = (value = "", type = "") => {
       case "isRequired":
         validity = validity && isRequired(value);
         errors.push(isRequired(value) ? "" : errorMessages.required);
+        break;
+      case "isLessThan":
+        validity = validity && isLessThan(value);
+        errors.push(isLessThan(value) ? "" : errorMessages.notless);
+        break;
+      case "isMoreThan":
+        validity = validity && isMoreThan(value);
+        errors.push(isMoreThan(value) ? "" : errorMessages.notmore);
         break;
       default:
         validity = false;

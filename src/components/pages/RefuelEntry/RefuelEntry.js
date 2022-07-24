@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
 import * as actions from "../../Store/actions/index";
+import Validate from "../../Validator/Validator";
 
 const RefuelEntry = (props) => {
   const vehicles = [];
@@ -22,6 +23,11 @@ const RefuelEntry = (props) => {
     fuelAdded: null,
   });
   const [addNewVeh, setaddNewVeh] = useState(null);
+  const [selectedVeh, setselectedVeh] = useState(null);
+  const [touchState, settouchState] = useState({
+    odo: false,
+    fuel: false,
+  });
 
   useEffect(() => {
     props.fetch_userDetails();
@@ -33,6 +39,10 @@ const RefuelEntry = (props) => {
         vehicle: null,
         odometerReading: null,
         fuelAdded: null,
+      });
+      settouchState({
+        odo: false,
+        fuel: false,
       });
     }
     setValue(newValue);
@@ -62,10 +72,32 @@ const RefuelEntry = (props) => {
       if (reason === "clear" || event.target.value.length === 0) {
         recordToBeAdded.vehicle = null;
         setrecord(recordToBeAdded);
+        setselectedVeh(null);
       } else if (reason === "selectOption") {
         recordToBeAdded.vehicle = event.target.outerText;
+        const vehSelected =
+          props.userVehicles[
+            Object.keys(props.userVehicles).filter(
+              (veh) => props.userVehicles[veh].name === event.target.outerText
+            )
+          ];
+        setselectedVeh(vehSelected);
         setrecord(recordToBeAdded);
       }
+    }
+  };
+
+  const touchHandler = (type) => {
+    if (type === "odo") {
+      settouchState({
+        ...touchState,
+        odo: true,
+      });
+    } else {
+      settouchState({
+        ...touchState,
+        fuel: true,
+      });
     }
   };
 
@@ -136,7 +168,27 @@ const RefuelEntry = (props) => {
           id="outlined-basic"
           label="Odometer Reading"
           variant="outlined"
-          helperText="Odometer reading after refuel (Kms)"
+          onBlur={() => touchHandler("odo")}
+          placeholder="Should be more than last odometer reading"
+          error={
+            Validate(
+              `${record.odometerReading}|${selectedVeh?.last_odometer}`,
+              "isMoreThan|isNumberOnly|isRequired"
+            ).isValid === false && touchState.odo === true
+              ? true
+              : false
+          }
+          helperText={
+            Validate(
+              `${record.odometerReading}|${selectedVeh?.last_odometer}`,
+              "isMoreThan|isNumberOnly|isRequired"
+            ).isValid === false && touchState.odo === true
+              ? Validate(
+                  `${record.odometerReading}|${selectedVeh?.last_odometer}`,
+                  "isMoreThan|isNumberOnly|isRequired"
+                ).errorMsg
+              : "Odometer reading after refuel (Kms)"
+          }
           className={Styles.options}
           onChange={(event) => newRecordHandler(event, null, null, "odo")}
         />
@@ -144,9 +196,20 @@ const RefuelEntry = (props) => {
         <TextField
           id="outlined-basic"
           label="Fuel Filled"
-          helperText="Fuel filled (Litres)"
+          onBlur={() => touchHandler("fuel")}
+          error={
+            Validate(record.fuelAdded, "isNumberOnly|isRequired").isValid ===
+              false && touchState.fuel === true
+              ? true
+              : false
+          }
+          helperText={
+            Validate(record.fuelAdded, "isNumberOnly|isRequired").isValid ===
+              false && touchState.fuel === true
+              ? Validate(record.fuelAdded, "isNumberOnly|isRequired").errorMsg
+              : "Fuel filled (Litres)"
+          }
           variant="outlined"
-          sx={{ borderColor: "red !important" }}
           className={Styles.options}
           onChange={(event) => newRecordHandler(event, null, null, "fuel")}
         />
@@ -155,10 +218,10 @@ const RefuelEntry = (props) => {
         <p>Last Refuel Details</p>
         <div className={Styles.details}>
           <p>
-            Odometer Reading : <strong>12000 km</strong>
+            Odometer Reading : <strong>{selectedVeh?.last_odometer}</strong>
           </p>
           <p>
-            Fuel Filled: <strong>2.01 Litre</strong>
+            Fuel Filled: <strong>{selectedVeh?.last_fuel} Litre(s)</strong>
           </p>
         </div>
       </div>
@@ -242,7 +305,7 @@ const RefuelEntry = (props) => {
                 <span>Odometer Reading</span>
               </div>
               <div className={Styles.summDetails}>
-                <p>{record.fuelAdded} Litres</p>
+                <p>{parseFloat(record.fuelAdded).toFixed(2)} Litres</p>
                 <span>Fuel Filled</span>
               </div>
               <p className={Styles.summVehType}>{record.vehicle}</p>
@@ -263,6 +326,11 @@ const RefuelEntry = (props) => {
             disabled={
               record.vehicle !== null &&
               record.fuelAdded !== null &&
+              Validate(record.fuelAdded, "isNumberOnly|isRequired").isValid &&
+              Validate(
+                `${record.odometerReading}|${selectedVeh?.last_odometer}`,
+                "isMoreThan|isNumberOnly|isRequired"
+              ).isValid &&
               record.odometerReading !== null
                 ? false
                 : true
