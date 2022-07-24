@@ -68,11 +68,11 @@ const isRequired = (value) => {
 };
 
 const isLessThan = (value) => {
-  return value[0].trim() < value[1].trim();
+  return parseFloat(value[0].trim()) < parseFloat(value[1].trim());
 };
 
 const isMoreThan = (value) => {
-  return value[0].trim() > value[1].trim();
+  return parseFloat(value[0].trim()) > parseFloat(value[1].trim());
 };
 
 const Validate = (value = "", type = "") => {

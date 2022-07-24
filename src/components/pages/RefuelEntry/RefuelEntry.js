@@ -8,6 +8,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import axios from "axios";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
@@ -15,23 +16,26 @@ import * as actions from "../../Store/actions/index";
 import Validate from "../../Validator/Validator";
 
 const RefuelEntry = (props) => {
+  const navigate = useNavigate()
   const vehicles = [];
   const [value, setValue] = useState("1");
   const [record, setrecord] = useState({
     vehicle: null,
     odometerReading: null,
     fuelAdded: null,
+    fuelCost: null,
   });
   const [addNewVeh, setaddNewVeh] = useState(null);
   const [selectedVeh, setselectedVeh] = useState(null);
   const [touchState, settouchState] = useState({
     odo: false,
     fuel: false,
+    cost: false,
   });
 
   useEffect(() => {
     props.fetch_userDetails();
-  }, [value]);
+  }, [value, record]);
 
   const handleChange = (event, newValue) => {
     if (newValue === "2") {
@@ -39,10 +43,12 @@ const RefuelEntry = (props) => {
         vehicle: null,
         odometerReading: null,
         fuelAdded: null,
+        fuelCost: null,
       });
       settouchState({
         odo: false,
         fuel: false,
+        cost: false,
       });
     }
     setValue(newValue);
@@ -68,6 +74,10 @@ const RefuelEntry = (props) => {
       recordToBeAdded.fuelAdded =
         event.target.value.length === 0 ? null : event.target.value;
       setrecord(recordToBeAdded);
+    } else if (type === "cost") {
+      recordToBeAdded.fuelCost =
+        event.target.value.length === 0 ? null : event.target.value;
+      setrecord(recordToBeAdded);
     } else if (type === "veh") {
       if (reason === "clear" || event.target.value.length === 0) {
         recordToBeAdded.vehicle = null;
@@ -81,6 +91,9 @@ const RefuelEntry = (props) => {
               (veh) => props.userVehicles[veh].name === event.target.outerText
             )
           ];
+        vehSelected.code = Object.keys(props.userVehicles).filter(
+          (veh) => props.userVehicles[veh].name === event.target.outerText
+        )[0];
         setselectedVeh(vehSelected);
         setrecord(recordToBeAdded);
       }
@@ -93,10 +106,15 @@ const RefuelEntry = (props) => {
         ...touchState,
         odo: true,
       });
-    } else {
+    } else if (type === "fuel") {
       settouchState({
         ...touchState,
         fuel: true,
+      });
+    } else {
+      settouchState({
+        ...touchState,
+        cost: true,
       });
     }
   };
@@ -113,6 +131,11 @@ const RefuelEntry = (props) => {
       monthly_spending: 0,
       monthly_distanceTravelled: 0,
       avg_mileage: 0,
+      prev_month: {
+        avg: 0,
+        spendings: 0,
+        distance: 0,
+      },
     };
 
     axios
@@ -137,6 +160,69 @@ const RefuelEntry = (props) => {
         }
         setTimeout(() => {
           setValue("1");
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addRecordHandler = () => {
+    let mileage = 0,
+      average_mileage = 0,
+      num = 0,
+      mileage_list = [0];
+    // if (selectedVeh.last_odometer !== 0) {
+    mileage =
+      Math.abs(record.odometerReading - selectedVeh.last_odometer) /
+      selectedVeh.last_fuel;
+    mileage_list = [...selectedVeh.mileage?.mileage_list];
+    if (mileage_list.length >= 50) {
+      mileage_list[(selectedVeh.mileage.last_entry + 1) % 50] = mileage;
+    } else {
+      if (selectedVeh.mileage.mileage_list[0] === 0) {
+        mileage_list[0] = record.odometerReading / record.fuelAdded;
+      } else {
+        mileage_list.push(mileage);
+      }
+    }
+    average_mileage =
+      mileage_list.reduce((prev, curr) => {
+        num++;
+        return prev + curr;
+      }, average_mileage) / num;
+    // }
+
+    const new_record = {
+      mileage: {
+        last_entry: (selectedVeh.mileage.last_entry + 1) % 50,
+        mileage_list: mileage_list,
+      },
+      average_mileage,
+      last_fuel: record.fuelAdded,
+      last_odometer: record.odometerReading,
+      monthly_distanceTravelled:
+        selectedVeh.monthly_distanceTravelled +
+        Math.abs(selectedVeh.last_odometer - record.odometerReading),
+      monthly_spending:
+        parseFloat(selectedVeh.monthly_spending) + parseFloat(record.fuelCost),
+      name: selectedVeh.name,
+      prev_month: selectedVeh.prev_month,
+    };
+
+    axios
+      .put(
+        `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${
+          props.userId
+        }/vehicles/${selectedVeh.code}.json?auth=${localStorage.getItem(
+          "token"
+        )}`,
+        new_record
+      )
+      .then((res) => {
+        console.log(res, "record added");
+        setTimeout(() => {
+          navigate("/");
         }, 1000);
       })
       .catch((err) => {
@@ -212,6 +298,27 @@ const RefuelEntry = (props) => {
           variant="outlined"
           className={Styles.options}
           onChange={(event) => newRecordHandler(event, null, null, "fuel")}
+        />
+
+        <TextField
+          id="outlined-basic"
+          label="Fuel Cost"
+          variant="outlined"
+          onBlur={() => touchHandler("fuel")}
+          error={
+            Validate(record.fuelCost, "isNumberOnly|isRequired").isValid ===
+              false && touchState.fuelCost === true
+              ? true
+              : false
+          }
+          helperText={
+            Validate(record.fuelCost, "isNumberOnly|isRequired").isValid ===
+              false && touchState.fuelCost === true
+              ? Validate(record.fuelCost, "isNumberOnly|isRequired").errorMsg
+              : "Cost of Fuel Filled (₹)"
+          }
+          className={Styles.options}
+          onChange={(event) => newRecordHandler(event, null, null, "cost")}
         />
       </div>
       <div className={Styles.addRecLastRec}>
@@ -323,6 +430,7 @@ const RefuelEntry = (props) => {
             </p>
           )}
           <button
+            onClick={addRecordHandler}
             disabled={
               record.vehicle !== null &&
               record.fuelAdded !== null &&
@@ -331,6 +439,7 @@ const RefuelEntry = (props) => {
                 `${record.odometerReading}|${selectedVeh?.last_odometer}`,
                 "isMoreThan|isNumberOnly|isRequired"
               ).isValid &&
+              Validate(record.fuelCost, "isNumberOnly|isRequired").isValid &&
               record.odometerReading !== null
                 ? false
                 : true
