@@ -40,7 +40,7 @@ const Countuptab = (props) => {
           <CountUp
             start={0}
             duration={1}
-            end={500}
+            end={props.value}
             prefix={pref}
             suffix={suff}
           />

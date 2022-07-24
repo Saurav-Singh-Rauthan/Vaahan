@@ -178,7 +178,7 @@ const RefuelEntry = (props) => {
       selectedVeh.last_fuel;
     mileage_list = [...selectedVeh.mileage?.mileage_list];
     if (mileage_list.length >= 50) {
-      mileage_list[(selectedVeh.mileage.last_entry + 1) % 50] = mileage;
+      mileage_list[(selectedVeh.mileage.last_entry + 1) % 50  ] = mileage;
     } else {
       if (selectedVeh.mileage.mileage_list[0] === 0) {
         mileage_list[0] = record.odometerReading / record.fuelAdded;
