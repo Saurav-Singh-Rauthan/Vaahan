@@ -18,7 +18,7 @@ const userReducer = (state = initialState, action) => {
         state: action.state,
         district: action.district,
         id: action.id,
-        vehicles: action.vehicled,
+        vehicles: action.vehicles,
         error: null,
       };
     case actionTypes.USER_FAILED:

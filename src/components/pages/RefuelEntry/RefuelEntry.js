@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -11,9 +11,10 @@ import { connect } from "react-redux";
 
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
+import * as actions from "../../Store/actions/index";
 
 const RefuelEntry = (props) => {
-  const vehicles = ["Activa 4g", "TVS Victor GL", "R15 v4"];
+  const vehicles = [];
   const [value, setValue] = useState("1");
   const [record, setrecord] = useState({
     vehicle: null,
@@ -21,6 +22,10 @@ const RefuelEntry = (props) => {
     fuelAdded: null,
   });
   const [addNewVeh, setaddNewVeh] = useState(null);
+
+  useEffect(() => {
+    props.fetch_userDetails();
+  }, [value]);
 
   const handleChange = (event, newValue) => {
     if (newValue === "2") {
@@ -98,6 +103,9 @@ const RefuelEntry = (props) => {
         } else {
           alert("vehicle already exists!!!");
         }
+        setTimeout(() => {
+          setValue("1");
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -192,6 +200,12 @@ const RefuelEntry = (props) => {
     </div>
   );
 
+  if (props.userVehicles) {
+    Object.keys(props.userVehicles).map((veh) => {
+      vehicles.push(props.userVehicles[veh]?.name);
+    });
+  }
+
   return (
     <React.Fragment>
       <Cover />
@@ -266,7 +280,16 @@ const mapStateToProps = (state, ownProps) => {
   return {
     userId: state.user.id,
     token: state.auth.token,
+    userVehicles: state.user.vehicles,
   };
 };
 
-export default connect(mapStateToProps)(RefuelEntry);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetch_userDetails: () => {
+      dispatch(actions.fetchUserDetails());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RefuelEntry);
