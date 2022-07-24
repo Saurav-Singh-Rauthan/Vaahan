@@ -59,6 +59,12 @@ const Fuelprices = (props) => {
     }
   }, [selectedlocation.state]);
 
+  useEffect(() => {
+    if (selectedlocation.district?.length > 0 && selectedlocation.state) {
+      fetchPriceHandler(selectedlocation.state, selectedlocation.district);
+    }
+  }, [selectedlocation.state, selectedlocation.district]);
+
   const setLocationHandler = (event, type) => {
     setfuelPrice({
       petrol: null,
@@ -73,20 +79,17 @@ const Fuelprices = (props) => {
         };
       });
     } else {
-      setselectedlocation((prevState) => {
-        return {
-          ...prevState,
-          district: event.target.innerText,
-        };
+      setselectedlocation({
+        ...selectedlocation,
+        district: event.target.outerText,
       });
-      fetchPriceHandler();
     }
   };
 
-  const fetchPriceHandler = () => {
+  const fetchPriceHandler = (state, district) => {
     axios
       .get(
-        `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${selectedlocation.state}&district=${selectedlocation.district}&fuel=petrol`
+        `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${state}&district=${district}&fuel=petrol`
       )
       .then((res) => {
         setfuelPrice((prevState) => {
@@ -94,7 +97,7 @@ const Fuelprices = (props) => {
         });
         axios
           .get(
-            `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${selectedlocation.state}&district=${selectedlocation.district}&fuel=diesel`
+            `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${state}&district=${district}&fuel=diesel`
           )
           .then((res) => {
             setfuelPrice((prevState) => {
