@@ -12,7 +12,7 @@ import Fuelprices from "./components/pages/Fuelprices/Fuelprices";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import RefuelEntry from "./components/pages/RefuelEntry/RefuelEntry";
 import Auth from "./components/pages/Auth/Auth";
-import Account from './components/pages/Account/Account';
+import Account from "./components/pages/Account/Account";
 import Notfound from "./components/pages/Notfound/Notfound";
 
 import "./customMuiStyles.css";
@@ -21,6 +21,12 @@ function App(props) {
   useEffect(() => {
     props.auto_login();
   });
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      props.fetchUserDetails();
+    }
+  }, [props.isAuthenticated]);
 
   return (
     <BrowserRouter>
@@ -46,18 +52,21 @@ function App(props) {
   );
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     prop: state.prop,
-//   };
-// };
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     auto_login: () => {
       dispatch(actions.auto_login());
     },
+    fetchUserDetails: () => {
+      dispatch(actions.fetchUserDetails());
+    },
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
