@@ -7,6 +7,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
@@ -64,7 +65,44 @@ const RefuelEntry = (props) => {
   };
 
   const addVehHandler = () => {
-  }
+    const vehData = {
+      name: addNewVeh,
+      last_odometer: 0,
+      last_fuel: 0,
+      mileage: {
+        last_entry: 0,
+        mileage_list: [0],
+      },
+      monthly_spending: 0,
+      monthly_distanceTravelled: 0,
+      avg_mileage: 0,
+    };
+
+    axios
+      .get(
+        `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
+      )
+      .then((res) => {
+        if (Object.keys(res.data).length === 0) {
+          axios
+            .post(
+              `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}/vehicles.json?auth=${props.token}`,
+              vehData
+            )
+            .then((res) => {
+              console.log(res, "veh added");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          alert("vehicle already exists!!!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const addRecord = (
     <div className={Styles.addRecordCont}>
@@ -224,4 +262,11 @@ const RefuelEntry = (props) => {
   );
 };
 
-export default RefuelEntry;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    userId: state.user.id,
+    token: state.auth.token,
+  };
+};
+
+export default connect(mapStateToProps)(RefuelEntry);
