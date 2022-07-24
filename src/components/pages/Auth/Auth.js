@@ -197,7 +197,7 @@ const Auth = (props) => {
       </p>
       <button
         onClick={() =>
-          props.login(userSignInCred.email, userSignInCred.password, "signin")
+          props.authenticate(userSignInCred.email, userSignInCred.password,null, "signin")
         }
         disabled={
           userSignInCred.email !== null &&
@@ -319,7 +319,7 @@ const Auth = (props) => {
       </p>
       <button
         onClick={() =>
-          props.login(userSignUpCred.email, userSignUpCred.password, "signup")
+          props.authenticate(userSignUpCred.email, userSignUpCred.password,userSignUpCred.username, "signup")
         }
         disabled={
           userSignUpCred.email !== null &&
@@ -404,8 +404,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    login: (email, password, type) => {
-      dispatch(actions.login(email, password, type));
+    authenticate: (email, password, username,type) => {
+      dispatch(actions.authenticate(email, password,username, type));
     },
   };
 };

@@ -183,7 +183,6 @@ const MileageChart = (props) => {
       mileage: 43,
       amt: 2100,
     },
-
     {
       name: "Page A",
       uv: 4000,

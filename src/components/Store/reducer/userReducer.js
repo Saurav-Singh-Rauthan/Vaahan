@@ -1,16 +1,38 @@
 import * as actionTypes from "../actions/actionTypes";
 
-const nameInitialState = {
+const initialState = {
+  email: null,
+  state: null,
+  district: null,
+  id: null,
+  vehicles: null,
+  error: null,
+};
 
-}
-
-const userReducer = (state = nameInitialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes:
-      return state
+    case actionTypes.USER_FETCH:
+      return {
+        ...state,
+        email: action.email,
+        state: action.state,
+        district: action.district,
+        id: action.id,
+        vehicles: action.vehicled,
+        error: null,
+      };
+    case actionTypes.USER_FAILED:
+      return {
+        email: null,
+        state: null,
+        district: null,
+        id: null,
+        vehicles: null,
+        error: true,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default userReducer;

@@ -63,7 +63,7 @@ export const auth_done = () => {
   };
 };
 
-export const login = (email, password, type) => {
+export const authenticate = (email, password, username, type) => {
   return (dispatch) => {
     dispatch(auth_start());
     let url =
@@ -90,6 +90,28 @@ export const login = (email, password, type) => {
           "expiresIn",
           new Date(new Date().getTime() + res.data.expiresIn * 1000)
         );
+
+        if (type !== "signin") {
+          let newUser = {
+            email: email,
+            username: username,
+            state: "",
+            district: "",
+            vehicles: [],
+          };
+
+          axios
+            .post(
+              `https://vaahan-1df59-default-rtdb.firebaseio.com/users.json?auth=${res.data.idToken}`,
+              newUser
+            )
+            .then((res) => {
+              console.log(res, "user created");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -120,7 +142,7 @@ export const auto_login = () => {
   return (dispatch) => {
     const currTime = new Date(new Date().getTime());
     const expiryTime = new Date(localStorage.getItem("expiresIn"));
-    
+
     if (currTime <= expiryTime) {
       const email = localStorage.getItem("mail");
       const token = localStorage.getItem("token");

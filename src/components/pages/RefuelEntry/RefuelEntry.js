@@ -6,6 +6,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import axios from "axios";
 
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
@@ -61,6 +62,9 @@ const RefuelEntry = (props) => {
       }
     }
   };
+
+  const addVehHandler = () => {
+  }
 
   const addRecord = (
     <div className={Styles.addRecordCont}>
@@ -143,7 +147,7 @@ const RefuelEntry = (props) => {
       <button
         className={Styles.addVehBtn}
         disabled={addNewVeh === null}
-        onClick={() => alert("hello world")}
+        onClick={addVehHandler}
       >
         Add Vehicle
       </button>
