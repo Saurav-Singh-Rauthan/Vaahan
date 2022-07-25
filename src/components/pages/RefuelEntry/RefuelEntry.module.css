@@ -169,7 +169,7 @@
 @media (max-width: 768px) {
   .container {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .reDiv {
@@ -207,7 +207,7 @@
 
   .addRecordCont {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     row-gap: 2rem;
   }
 
