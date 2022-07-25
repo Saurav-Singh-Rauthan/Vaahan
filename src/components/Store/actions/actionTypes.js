@@ -8,3 +8,7 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT"
 // USER
 export const USER_FETCH = "USER_FETCH"
 export const USER_FAILED = "USER_FAILED"
+
+// VEHICLE
+export const VEH_FETCH = "VEH_FETCH"
+export const VEH_FAILED = "VEH_FAILED"

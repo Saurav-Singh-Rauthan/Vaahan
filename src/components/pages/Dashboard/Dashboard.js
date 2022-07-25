@@ -20,6 +20,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     if (props.isAuthenticated) {
       props.fetch_userDetails();
+      props.fetch_veh();
     }
   }, []);
 
@@ -176,6 +177,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetch_userDetails: () => {
       dispatch(actions.fetchUserDetails());
+    },
+    fetch_veh: () => {
+      dispatch(actions.fetch_veh());
     },
   };
 };
