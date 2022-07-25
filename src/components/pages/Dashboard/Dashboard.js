@@ -15,6 +15,7 @@ import * as actions from "../../Store/actions/index";
 
 const Dashboard = (props) => {
   const [selectedVeh, setselectedVeh] = useState(null);
+  const [selectedGlobVeh, setselectedGlobVeh] = useState(null);
   let vehicles = [""];
 
   useEffect(() => {
@@ -32,8 +33,16 @@ const Dashboard = (props) => {
         )[0]
       ];
 
-    console.log(selectedVeh);
+    const selectedGlobVeh =
+      props.globalVeh[
+        Object.keys(props.globalVeh).filter(
+          (veh) => props.globalVeh[veh].name === event.target.value
+        )[0]
+      ];
+
+    console.log(selectedVeh, selectedGlobVeh);
     setselectedVeh(selectedVeh);
+    setselectedGlobVeh(selectedGlobVeh);
   };
 
   const dashboardComps = (
@@ -55,7 +64,7 @@ const Dashboard = (props) => {
         <div className={Styles.mileageComp}>
           <div className={Styles.mileageCompDiv}>
             <MileageChart
-              data={selectedVeh?.mileage.mileage_list}
+              data={selectedGlobVeh?.mileage}
               userMileage={selectedVeh?.average_mileage}
             />
           </div>
@@ -170,6 +179,7 @@ const mapStateToProps = (state, ownProps) => {
     vehicles: state.user.vehicles,
     isAuthenticated: state.auth.token !== null,
     username: state.user.username,
+    globalVeh: state.veh.vehicles,
   };
 };
 
@@ -180,7 +190,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetch_veh: () => {
       dispatch(actions.fetch_veh());
-    },
+    }
   };
 };
 

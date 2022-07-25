@@ -292,21 +292,18 @@ const RefuelEntry = (props) => {
         }&orderBy="name"&equalTo="${selectedVeh.name.trim()}"`
       )
       .then((res) => {
-        console.log(selectedVeh.name.trim(), "prevData", res);
         let prevData = { ...res.data[Object.keys(res.data)[0]] };
+        console.log(selectedVeh.name.trim(), "prevData", prevData);
         if (res.data) {
           if (prevData.mileage[0].mileage === 0) {
-            prevData.mileage[0].mileage =
-              new_record.mileage.mileage_list[
-                (new_record.mileage.last_entry - 1) % 50
-              ];
-          } else {
-            prevData.mileage.push(
-              new_record.mileage.mileage_list[
-                (new_record.mileage.last_entry - 1) % 50
-              ]
-            );
+            prevData.mileage.pop();
           }
+          prevData.mileage.push(
+            new_record.mileage.mileage_list[
+              (new_record.mileage.last_entry - 1) % 50
+            ]
+          );
+
           console.log("upd Glob", prevData);
 
           axios
