@@ -6,6 +6,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
@@ -32,6 +33,10 @@ const RefuelEntry = (props) => {
     fuel: false,
     cost: false,
   });
+  const [loading, setloading] = useState({
+    rec: false,
+    newVeh: false,
+  });
 
   useEffect(() => {
     props.fetch_userDetails();
@@ -56,6 +61,7 @@ const RefuelEntry = (props) => {
 
   const newVehIpHandler = (event, value, reason) => {
     if (reason === "clear" || event.target.value.length === 0) {
+      console.log("clear");
       setaddNewVeh(null);
     } else if (reason === "selectOption") {
       setaddNewVeh(event.target.outerText);
@@ -100,6 +106,12 @@ const RefuelEntry = (props) => {
     }
   };
 
+  const checkContentHandler = (event) => {
+    if (event.target.defaultValue.length === 0) {
+      setaddNewVeh(null);
+    }
+  };
+
   const touchHandler = (type) => {
     if (type === "odo") {
       settouchState({
@@ -120,6 +132,11 @@ const RefuelEntry = (props) => {
   };
 
   const addVehHandler = () => {
+    setloading({
+      rec: false,
+      veh: true,
+    });
+
     const vehData = {
       name: addNewVeh,
       last_odometer: 0,
@@ -170,6 +187,10 @@ const RefuelEntry = (props) => {
   };
 
   const addRecordHandler = () => {
+    setloading({
+      rec: true,
+      veh: false,
+    });
     let mileage = 0,
       average_mileage = 0,
       num = 0,
@@ -361,6 +382,7 @@ const RefuelEntry = (props) => {
             <TextField
               {...params}
               onChange={(event) => newVehIpHandler(event)}
+              onBlur={(event) => checkContentHandler(event)}
               label="Select vehicle"
               helperText="Select new vehicle to be added"
             />
@@ -375,7 +397,16 @@ const RefuelEntry = (props) => {
         disabled={addNewVeh === null}
         onClick={addVehHandler}
       >
-        Add Vehicle
+        {loading.newVeh === false ? "Add Vehicle" : null}
+        <Box
+          sx={{
+            display: loading.veh === true ? "flex" : "none",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={18} sx={{ color: "#ffe26a" }} />
+        </Box>
       </button>
     </div>
   );
@@ -455,7 +486,16 @@ const RefuelEntry = (props) => {
                 : true
             }
           >
-            Submit
+            {loading.rec === false ? "Submit" : null}
+            <Box
+              sx={{
+                display: loading.rec === true ? "flex" : "none",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress size={18} sx={{ color: "#ffe26a" }} />
+            </Box>
           </button>
         </div>
       </div>
