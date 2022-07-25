@@ -66,9 +66,16 @@ const Dashboard = (props) => {
       <div>
         <div className={Styles.MonthStats}>Last Trip</div>
         <div className={Styles.monthlydetails}>
-          <Countuptab type="money" />
-          <Countuptab type="mileage" />
-          <Countuptab type="dist" />
+          <Countuptab type="money" value={selectedVeh?.last_fuelcost} />
+          <Countuptab
+            type="mileage"
+            value={
+              selectedVeh?.mileage.mileage_list[
+                `${(selectedVeh.mileage.last_entry - 1) % 50}`
+              ].mileage
+            }
+          />
+          <Countuptab type="dist" value={selectedVeh?.last_distance} />
         </div>
       </div>
 

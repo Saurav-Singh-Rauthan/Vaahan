@@ -124,6 +124,8 @@ const RefuelEntry = (props) => {
       name: addNewVeh,
       last_odometer: 0,
       last_fuel: 0,
+      last_fuelcost: 0,
+      last_distance: 0,
       mileage: {
         last_entry: 0,
         mileage_list: [0],
@@ -205,6 +207,10 @@ const RefuelEntry = (props) => {
       average_mileage,
       last_fuel: record.fuelAdded,
       last_odometer: record.odometerReading,
+      last_fuelcost: record.fuelCost,
+      last_distance: Math.abs(
+        selectedVeh.last_odometer - record.odometerReading
+      ),
       monthly_distanceTravelled:
         selectedVeh.monthly_distanceTravelled +
         Math.abs(selectedVeh.last_odometer - record.odometerReading),
