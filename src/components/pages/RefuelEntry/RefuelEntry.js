@@ -42,9 +42,14 @@ const RefuelEntry = (props) => {
   useEffect(() => {
     if (props.isAuthenticated) {
       props.fetch_userDetails();
-      props.fetch_globalVeh();
     }
   }, [value, record]);
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      props.fetch_globalVeh();
+    }
+  }, [value]);
 
   const handleChange = (event, newValue) => {
     if (newValue === "2") {
@@ -108,7 +113,7 @@ const RefuelEntry = (props) => {
             )
           ];
         vehSelected.code = Object.keys(props.userVehicles).filter(
-          (veh) => props.userVehicles[veh].name === event.target.outerText
+          (veh) => props.userVehicles[veh]?.name === event.target.outerText
         )[0];
         setselectedVeh(vehSelected);
         setrecord(recordToBeAdded);
@@ -193,8 +198,8 @@ const RefuelEntry = (props) => {
             `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
           )
           .then((res) => {
-            console.log(res.data.length, "search veh");
-            if (res.data.length === undefined) {
+            console.log(Object.keys(res.data).length, "search veh");
+            if (!Object.keys(res.data).length) {
               let newEntry = {
                 name: addNewVeh,
                 mileage: [{ mileage: 0 }],
@@ -235,7 +240,7 @@ const RefuelEntry = (props) => {
       average_mileage = 0,
       num = 0,
       mileage_list = [0];
-    // if (selectedVeh.last_odometer !== 0) {
+
     mileage = {
       mileage:
         Math.abs(record.odometerReading - selectedVeh.last_odometer) /
@@ -258,7 +263,6 @@ const RefuelEntry = (props) => {
         num++;
         return prev + curr.mileage;
       }, average_mileage) / num;
-    // }
 
     const new_record = {
       mileage: {
@@ -277,9 +281,49 @@ const RefuelEntry = (props) => {
         Math.abs(selectedVeh.last_odometer - record.odometerReading),
       monthly_spending:
         parseFloat(selectedVeh.monthly_spending) + parseFloat(record.fuelCost),
-      name: selectedVeh.name,
+      name: selectedVeh.name.trim(),
       prev_month: selectedVeh.prev_month,
     };
+
+    axios
+      .get(
+        `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${
+          props.token
+        }&orderBy="name"&equalTo="${selectedVeh.name.trim()}"`
+      )
+      .then((res) => {
+        console.log(selectedVeh.name.trim(), "prevData", res);
+        let prevData = { ...res.data[Object.keys(res.data)[0]] };
+        if (res.data) {
+          if (prevData.mileage[0].mileage === 0) {
+            prevData.mileage[0].mileage =
+              new_record.mileage.mileage_list[
+                (new_record.mileage.last_entry - 1) % 50
+              ];
+          } else {
+            prevData.mileage.push(
+              new_record.mileage.mileage_list[
+                (new_record.mileage.last_entry - 1) % 50
+              ]
+            );
+          }
+          console.log("upd Glob", prevData);
+
+          axios
+            .put(
+              `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles/${
+                Object.keys(res.data)[0]
+              }.json?auth=${props.token}`,
+              prevData
+            )
+            .then((res) => {
+              console.log(res, prevData, "global fuel for pert Veh");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
 
     axios
       .put(
