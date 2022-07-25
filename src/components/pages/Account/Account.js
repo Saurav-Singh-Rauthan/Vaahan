@@ -103,6 +103,25 @@ const Account = (props) => {
       edit: !editState.edit,
     });
     if (type === "save") {
+      console.log("saving");
+      const updatedVal = {
+        email: editState.email,
+        state: editState.state,
+        district: editState.district,
+        username: editState.username,
+        vehicles: props.vehicles,
+      };
+      axios
+        .put(
+          `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}.json?auth=${props.token}`,
+          updatedVal
+        )
+        .then((res) => {
+          console.log(res, "details updated", updatedVal);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -140,10 +159,18 @@ const Account = (props) => {
           district: [],
         };
       });
+      setEditState({
+        ...editState,
+        state: event.target.innerText,
+      });
     } else {
       setselectedlocation({
         ...selectedlocation,
         district: event.target.outerText,
+      });
+      setEditState({
+        ...editState,
+        district: event.target.innerText,
       });
     }
   };
@@ -166,7 +193,9 @@ const Account = (props) => {
       <div>
         <div className={Styles.btnCont}>
           <button
-            onClick={() => editDetailsHandler(editState.edit ? "save" : "edit")}
+            onClick={(event) =>
+              editDetailsHandler(event, editState.edit ? "save" : "edit")
+            }
             className={editState.edit ? Styles.save : null}
           >
             {editState.edit ? "SAVE DETAILS" : "EDIT DETAILS"}
@@ -261,6 +290,8 @@ const mapStateToProps = (state, ownProps) => {
     district: state.user.district,
     state: state.user.state,
     vehicles: state.user.vehicles,
+    token: state.auth.token,
+    userId: state.user.id,
   };
 };
 

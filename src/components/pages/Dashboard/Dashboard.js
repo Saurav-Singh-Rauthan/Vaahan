@@ -22,7 +22,6 @@ const Dashboard = (props) => {
   }, []);
 
   const vehSelectHandler = (event) => {
-    console.log(event.target.value);
     const selectedVeh =
       props.vehicles[
         Object.keys(props.vehicles).filter(
