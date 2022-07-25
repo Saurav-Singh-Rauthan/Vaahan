@@ -17,6 +17,7 @@ const Dashboard = (props) => {
   const [selectedVeh, setselectedVeh] = useState(null);
   const [selectedGlobVeh, setselectedGlobVeh] = useState(null);
   let vehicles = [""];
+  const dataMin = [];
 
   useEffect(() => {
     if (props.isAuthenticated) {
