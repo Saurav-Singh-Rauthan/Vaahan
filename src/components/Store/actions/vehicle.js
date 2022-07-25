@@ -23,7 +23,8 @@ export const fetch_veh = () => {
         )}`
       )
       .then((res) => {
-        console.log(res,"global veh");
+        console.log(res, "global veh");
+        dispatch(vehicles(res.data));
       })
       .catch((err) => {
         console.log(err);

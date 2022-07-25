@@ -19,6 +19,7 @@ import Validate from "../../Validator/Validator";
 const RefuelEntry = (props) => {
   const navigate = useNavigate();
   const vehicles = [];
+  let globalVehicles = [];
   const [value, setValue] = useState("1");
   const [record, setrecord] = useState({
     vehicle: null,
@@ -41,6 +42,7 @@ const RefuelEntry = (props) => {
   useEffect(() => {
     if (props.isAuthenticated) {
       props.fetch_userDetails();
+      props.fetch_globalVeh();
     }
   }, [value, record]);
 
@@ -58,6 +60,12 @@ const RefuelEntry = (props) => {
         cost: false,
       });
     }
+
+    setloading({
+      rec: false,
+      newVeh: false,
+    });
+
     setValue(newValue);
   };
 
@@ -179,7 +187,37 @@ const RefuelEntry = (props) => {
         } else {
           alert("vehicle already exists!!!");
         }
+
+        axios
+          .get(
+            `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
+          )
+          .then((res) => {
+            console.log(res.data.length, "search veh");
+            if (res.data.length === undefined) {
+              let newEntry = {
+                name: addNewVeh,
+                mileage: [{ mileage: 0 }],
+              };
+              axios
+                .post(
+                  `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${props.token}`,
+                  newEntry
+                )
+                .then((res) => {
+                  console.log(res, "global entry added");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
         setTimeout(() => {
+          setaddNewVeh(null);
           setValue("1");
         }, 1000);
       })
@@ -378,7 +416,7 @@ const RefuelEntry = (props) => {
           freeSolo={true}
           disablePortal
           id="combo-box-demo"
-          options={vehicles}
+          options={globalVehicles}
           className={Styles.options}
           renderInput={(params) => (
             <TextField
@@ -416,6 +454,12 @@ const RefuelEntry = (props) => {
   if (props.userVehicles) {
     Object.keys(props.userVehicles).map((veh) => {
       vehicles.push(props.userVehicles[veh]?.name);
+    });
+  }
+
+  if (props.globalVeh) {
+    Object.keys(props.globalVeh).forEach((veh) => {
+      globalVehicles.push(props.globalVeh[veh].name);
     });
   }
 
@@ -511,6 +555,7 @@ const mapStateToProps = (state, ownProps) => {
     token: state.auth.token,
     userVehicles: state.user.vehicles,
     isAuthenticated: state.auth.token !== null,
+    globalVeh: state.veh.vehicles,
   };
 };
 
@@ -518,6 +563,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetch_userDetails: () => {
       dispatch(actions.fetchUserDetails());
+    },
+    fetch_globalVeh: () => {
+      dispatch(actions.fetch_veh());
     },
   };
 };
