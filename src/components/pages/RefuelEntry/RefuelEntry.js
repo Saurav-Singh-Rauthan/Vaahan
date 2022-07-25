@@ -16,7 +16,7 @@ import * as actions from "../../Store/actions/index";
 import Validate from "../../Validator/Validator";
 
 const RefuelEntry = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const vehicles = [];
   const [value, setValue] = useState("1");
   const [record, setrecord] = useState({
@@ -173,15 +173,19 @@ const RefuelEntry = (props) => {
       num = 0,
       mileage_list = [0];
     // if (selectedVeh.last_odometer !== 0) {
-    mileage =
-      Math.abs(record.odometerReading - selectedVeh.last_odometer) /
-      selectedVeh.last_fuel;
+    mileage = {
+      mileage:
+        Math.abs(record.odometerReading - selectedVeh.last_odometer) /
+        selectedVeh.last_fuel,
+    };
     mileage_list = [...selectedVeh.mileage?.mileage_list];
     if (mileage_list.length >= 50) {
-      mileage_list[(selectedVeh.mileage.last_entry + 1) % 50  ] = mileage;
+      mileage_list[(selectedVeh.mileage.last_entry + 1) % 50] = mileage;
     } else {
       if (selectedVeh.mileage.mileage_list[0] === 0) {
-        mileage_list[0] = record.odometerReading / record.fuelAdded;
+        mileage_list[0] = {
+          mileage: record.odometerReading / record.fuelAdded,
+        };
       } else {
         mileage_list.push(mileage);
       }
@@ -189,7 +193,7 @@ const RefuelEntry = (props) => {
     average_mileage =
       mileage_list.reduce((prev, curr) => {
         num++;
-        return prev + curr;
+        return prev + curr.mileage;
       }, average_mileage) / num;
     // }
 

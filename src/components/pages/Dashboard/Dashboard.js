@@ -39,9 +39,12 @@ const Dashboard = (props) => {
       <div>
         <div className={Styles.MonthStats}>Monthly Stats</div>
         <div className={Styles.monthlydetails}>
-          <Countuptab type="money" value={selectedVeh?.monthly_spending}/>
+          <Countuptab type="money" value={selectedVeh?.monthly_spending} />
           <Countuptab type="mileage" value={selectedVeh?.average_mileage} />
-          <Countuptab type="dist" value={selectedVeh?.monthly_distanceTravelled}/>
+          <Countuptab
+            type="dist"
+            value={selectedVeh?.monthly_distanceTravelled}
+          />
         </div>
       </div>
 
@@ -49,7 +52,10 @@ const Dashboard = (props) => {
         <div className={Styles.MonthStats}>Relative Performance</div>
         <div className={Styles.mileageComp}>
           <div className={Styles.mileageCompDiv}>
-            <MileageChart data={selectedVeh.mileage.mileage_list} />
+            <MileageChart
+              data={selectedVeh?.mileage.mileage_list}
+              userMileage={selectedVeh?.average_mileage}
+            />
           </div>
           <div className={Styles.mileageCompDiv}>
             <VehCondition />
@@ -70,10 +76,10 @@ const Dashboard = (props) => {
         <div className={Styles.MonthStats}>Previous Performance</div>
         <div className={Styles.mileageCompPrev}>
           <div className={Styles.mileageCompPrevDiv}>
-            <RadarMileage />
+            <RadarMileage data={selectedVeh?.mileage.mileage_list} />
           </div>
           <div className={Styles.mileageCompPrevDiv}>
-            <MileageChart />
+            <MileageChart data={selectedVeh?.mileage.mileage_list} />
           </div>
         </div>
       </div>
@@ -138,8 +144,10 @@ const Dashboard = (props) => {
       {selectedVeh !== null ? (
         dashboardComps
       ) : (
-        <p style={{ display: "flex", width: "fit-content", margin: "8rem auto"}}>
-          Choose a vehicle to continue 
+        <p
+          style={{ display: "flex", width: "fit-content", margin: "8rem auto" }}
+        >
+          Choose a vehicle to continue
         </p>
       )}
     </React.Fragment>

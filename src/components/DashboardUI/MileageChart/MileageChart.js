@@ -359,14 +359,13 @@ const MileageChart = (props) => {
         <LineChart
           width={"auto"}
           height={"auto"}
-          data={data}
+          data={props.data}
           margin={{
             top: 5,
             right: 30,
             left: 20,
             bottom: 5,
           }}
-          // layout={"vertical"}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis minTickGap={30} />
@@ -379,9 +378,10 @@ const MileageChart = (props) => {
             stroke="#75c9b7"
             activeDot={{ r: 8 }}
           />
+          {console.log()}
           <ReferenceDot
-            x="25"
-            y={45}
+            x={Math.floor(props.data?.length / 2)}
+            y={props.userMileage !== null ? props.userMileage : "-1"}
             r={5}
             isFront="true"
             label={{ value: "Your Mileage", angle: 0, position: "top" }}
