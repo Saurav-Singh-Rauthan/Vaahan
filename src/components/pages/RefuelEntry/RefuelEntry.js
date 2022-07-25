@@ -39,7 +39,9 @@ const RefuelEntry = (props) => {
   });
 
   useEffect(() => {
-    props.fetch_userDetails();
+    if (props.isAuthenticated) {
+      props.fetch_userDetails();
+    }
   }, [value, record]);
 
   const handleChange = (event, newValue) => {
@@ -508,6 +510,7 @@ const mapStateToProps = (state, ownProps) => {
     userId: state.user.id,
     token: state.auth.token,
     userVehicles: state.user.vehicles,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 

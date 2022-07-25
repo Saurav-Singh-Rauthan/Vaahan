@@ -18,7 +18,9 @@ const Dashboard = (props) => {
   let vehicles = [""];
 
   useEffect(() => {
-    props.fetch_userDetails();
+    if (props.isAuthenticated) {
+      props.fetch_userDetails();
+    }
   }, []);
 
   const vehSelectHandler = (event) => {
@@ -113,7 +115,9 @@ const Dashboard = (props) => {
       <div className={Styles.VehInfo}>
         <p>
           Greetings! {"   "}
-          <span style={{ color: "#75c9b7" }}>Saurav Singh Rauthan</span>{" "}
+          <span style={{ color: "#75c9b7" }}>
+            {props.username ? props.username : "UserXYZ"}
+          </span>{" "}
         </p>
         <div className={Styles.selectCont}>
           <FormControl fullWidth variant="filled">
@@ -163,6 +167,8 @@ const Dashboard = (props) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     vehicles: state.user.vehicles,
+    isAuthenticated: state.auth.token !== null,
+    username: state.user.username,
   };
 };
 

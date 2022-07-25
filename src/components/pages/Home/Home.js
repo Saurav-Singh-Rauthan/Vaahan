@@ -13,33 +13,36 @@ const Home = (props) => {
     diesel: null,
   });
 
+  const [location, setlocation] = useState({
+    state: props.state != null ? props.state : "Maharashtra",
+    district: props.district != null ? props.district : "Pune",
+  });
+
   useEffect(() => {
-    if (props.state && props.district) {
-      axios
-        .get(
-          `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${props.state}&district=${props.district}&fuel=petrol`
-        )
-        .then((res) => {
-          setfuelPrice((prevState) => {
-            setfuelPrice({ ...prevState, petrol: res.data });
-          });
-          axios
-            .get(
-              `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${props.state}&district=${props.district}&fuel=diesel`
-            )
-            .then((res) => {
-              setfuelPrice((prevState) => {
-                setfuelPrice({ ...prevState, diesel: res.data });
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
+    axios
+      .get(
+        `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${location.state}&district=${location.district}&fuel=petrol`
+      )
+      .then((res) => {
+        setfuelPrice((prevState) => {
+          setfuelPrice({ ...prevState, petrol: res.data });
         });
-    }
+        axios
+          .get(
+            `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${location.state}&district=${location.district}&fuel=diesel`
+          )
+          .then((res) => {
+            setfuelPrice((prevState) => {
+              setfuelPrice({ ...prevState, diesel: res.data });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   let accordianData = [
@@ -64,8 +67,8 @@ const Home = (props) => {
     <div className={Styles.container}>
       <Fuelprice
         price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
-        state={props.state}
-        district={props.district}
+        state={location.state}
+        district={location.district}
       />
       <p
         style={{ display: props.isAuthenticated ? "none" : "block" }}
