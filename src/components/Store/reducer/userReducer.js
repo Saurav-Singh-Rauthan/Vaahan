@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   email: null,
   state: null,
+  username: null,
   district: null,
   id: null,
   vehicles: null,
@@ -19,6 +20,7 @@ const userReducer = (state = initialState, action) => {
         district: action.district,
         id: action.id,
         vehicles: action.vehicles,
+        username: action.username,
         error: null,
       };
     case actionTypes.USER_FAILED:
@@ -28,6 +30,7 @@ const userReducer = (state = initialState, action) => {
         district: null,
         id: null,
         vehicles: null,
+        username: null,
         error: true,
       };
     default:

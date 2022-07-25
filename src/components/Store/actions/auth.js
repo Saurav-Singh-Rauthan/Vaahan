@@ -95,8 +95,8 @@ export const authenticate = (email, password, username, type) => {
           let newUser = {
             email: email,
             username: username,
-            state: "",
-            district: "",
+            state: "Maharashtra",
+            district: "Pune",
             vehicles: [],
           };
 

@@ -1,7 +1,7 @@
 import * as actions from "./actionTypes";
 import axios from "axios";
 
-const setdetails = (email, id, state, district, vehicles) => {
+const setdetails = (email, id, state, district, vehicles, username) => {
   return {
     type: actions.USER_FETCH,
     email,
@@ -9,6 +9,7 @@ const setdetails = (email, id, state, district, vehicles) => {
     state,
     district,
     vehicles,
+    username,
   };
 };
 
@@ -27,14 +28,15 @@ export const fetchUserDetails = () => {
         )}&orderBy="email"&equalTo="${localStorage.getItem("email")}"`
       )
       .then((res) => {
-        const key= Object.keys(res.data)[0];
+        const key = Object.keys(res.data)[0];
         dispatch(
           setdetails(
             res.data[key].email,
             key,
             res.data[key].state,
             res.data[key].district,
-            res.data[key].vehicles
+            res.data[key].vehicles,
+            res.data[key].username
           )
         );
       })
