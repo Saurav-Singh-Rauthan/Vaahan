@@ -176,10 +176,12 @@ const Account = (props) => {
   };
 
   if (props.vehicles) {
-    vehList = [];
-    Object.keys(props.vehicles).forEach((veh) =>
-      vehList.push(props.vehicles[veh].name)
+    const vehs = Object.keys(props.vehicles).map(
+      (veh) => props.vehicles[veh].name
     );
+    vehList = vehs.map((veh) => {
+      return <li>{veh}</li>;
+    });
   }
 
   return (
@@ -265,15 +267,7 @@ const Account = (props) => {
           <div>
             <p className={Styles.heading}>Vehicles : </p>
             <div className={Styles.userVeh}>
-              {typeof vehList === "object" ? (
-                <ul style={{ listStyleType: "square" }}>
-                  {vehList.map((veh) => (
-                    <li>{veh}</li>
-                  ))}
-                </ul>
-              ) : (
-                vehList
-              )}
+              <ul style={{ listStyleType: "square" }}>{vehList}</ul>
             </div>
           </div>
         </div>

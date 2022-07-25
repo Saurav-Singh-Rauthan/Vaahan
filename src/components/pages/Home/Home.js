@@ -14,30 +14,32 @@ const Home = (props) => {
   });
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api-fuelprices-india.herokuapp.com/price/state/district/?state=Maharashtra&district=Pune&fuel=petrol"
-      )
-      .then((res) => {
-        setfuelPrice((prevState) => {
-          setfuelPrice({ ...prevState, petrol: res.data });
-        });
-        axios
-          .get(
-            "https://api-fuelprices-india.herokuapp.com/price/state/district/?state=Maharashtra&district=Pune&fuel=diesel"
-          )
-          .then((res) => {
-            setfuelPrice((prevState) => {
-              setfuelPrice({ ...prevState, diesel: res.data });
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+    if (props.state && props.district) {
+      axios
+        .get(
+          `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${props.state}&district=${props.district}&fuel=petrol`
+        )
+        .then((res) => {
+          setfuelPrice((prevState) => {
+            setfuelPrice({ ...prevState, petrol: res.data });
           });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+          axios
+            .get(
+              `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${props.state}&district=${props.district}&fuel=diesel`
+            )
+            .then((res) => {
+              setfuelPrice((prevState) => {
+                setfuelPrice({ ...prevState, diesel: res.data });
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   let accordianData = [
@@ -62,10 +64,13 @@ const Home = (props) => {
     <div className={Styles.container}>
       <Fuelprice
         price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
-        state="Maharashtra"
-        district="Pune"
+        state={props.state}
+        district={props.district}
       />
-      <p style={{display: props.isAuthenticated ? "none" : "block"}}className={Styles.login}>
+      <p
+        style={{ display: props.isAuthenticated ? "none" : "block" }}
+        className={Styles.login}
+      >
         Want to configure for your district & state?{" "}
         <Link to="/auth">Sign Up / Sign In</Link>
       </p>
@@ -78,6 +83,8 @@ const Home = (props) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     isAuthenticated: state.auth.token !== null,
+    state: state.user.state,
+    district: state.user.district,
   };
 };
 
