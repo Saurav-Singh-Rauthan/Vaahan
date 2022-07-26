@@ -25,6 +25,7 @@ function App(props) {
   useEffect(() => {
     if (props.isAuthenticated) {
       props.fetchUserDetails();
+      props.fetch_veh();
     }
   }, [props.isAuthenticated]);
 
@@ -65,6 +66,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetchUserDetails: () => {
       dispatch(actions.fetchUserDetails());
+    },
+    fetch_veh: () => {
+      dispatch(actions.fetch_veh());
     },
   };
 };

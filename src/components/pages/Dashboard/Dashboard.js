@@ -70,7 +70,14 @@ const Dashboard = (props) => {
             />
           </div>
           <div className={Styles.mileageCompDiv}>
-            <VehCondition />
+            <VehCondition
+              current={selectedVeh?.average_mileage}
+              last={
+                selectedVeh?.mileage.mileage_list[
+                  selectedVeh?.mileage.last_entry - 1
+                ].mileage
+              }
+            />
           </div>
         </div>
       </div>
@@ -191,7 +198,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetch_veh: () => {
       dispatch(actions.fetch_veh());
-    }
+    },
   };
 };
 

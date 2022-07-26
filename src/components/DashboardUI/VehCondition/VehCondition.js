@@ -10,12 +10,6 @@ const VehCondition = (props) => {
   let msg = "";
   const [loadState, setloadState] = useState(0);
 
-  if (condition === "good") {
-    msg = "Vehicle is in perfect condition";
-  } else {
-    msg = "Vehicle needs maintainence!!";
-  }
-
   const loadComplete = () => {
     setloadState(1);
   };
@@ -43,6 +37,17 @@ const VehCondition = (props) => {
       }}
     />
   );
+
+  console.log(props.current, props.last);
+  if (Math.abs(props.last - props.current) >= 10) {
+    condition = "bad";
+  }
+
+  if (condition === "good") {
+    msg = "Vehicle is in perfect condition";
+  } else {
+    msg = "Vehicle needs maintainence!!";
+  }
 
   return (
     <div className={Styles.container}>
