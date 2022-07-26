@@ -37,8 +37,7 @@ const VehCondition = (props) => {
       }}
     />
   );
-
-  console.log(props.current, props.last);
+  
   if (Math.abs(props.last - props.current) >= 10) {
     condition = "bad";
   }

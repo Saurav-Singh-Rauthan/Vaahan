@@ -71,11 +71,15 @@ const Dashboard = (props) => {
           </div>
           <div className={Styles.mileageCompDiv}>
             <VehCondition
-              current={selectedVeh?.average_mileage}
+              current={selectedVeh?.mileage ? selectedVeh?.average_mileage : 0}
               last={
-                selectedVeh?.mileage.mileage_list[
-                  selectedVeh?.mileage.last_entry - 1
-                ].mileage
+                selectedVeh?.mileage
+                  ? selectedVeh.mileage?.mileage_list[
+                      selectedVeh.mileage?.last_entry > 0
+                        ? (selectedVeh.mileage?.last_entry - 1) % 50
+                        : selectedVeh.mileage?.last_entry
+                    ].mileage
+                  : 0
               }
             />
           </div>
@@ -89,9 +93,13 @@ const Dashboard = (props) => {
           <Countuptab
             type="mileage"
             value={
-              selectedVeh?.mileage.mileage_list[
-                `${(selectedVeh.mileage.last_entry - 1) % 50}`
-              ].mileage
+              selectedVeh?.average_mileage
+                ? selectedVeh?.mileage.mileage_list[
+                    selectedVeh.mileage?.last_entry > 0
+                      ? `${(selectedVeh.mileage.last_entry - 1) % 50}`
+                      : `${selectedVeh.mileage.last_entry % 50}`
+                  ].mileage
+                : 0
             }
           />
           <Countuptab type="dist" value={selectedVeh?.last_distance} />
@@ -113,9 +121,9 @@ const Dashboard = (props) => {
       <div style={{ marginBottom: "2rem" }}>
         <div className={Styles.MonthStats}>Last Month</div>
         <div className={Styles.monthlydetails}>
-          <Countuptab type="money" />
-          <Countuptab type="mileage" />
-          <Countuptab type="dist" />
+          <Countuptab type="money" value={selectedVeh?.prev_month.spendings} />
+          <Countuptab type="mileage" value={selectedVeh?.prev_month.avg} />
+          <Countuptab type="dist" value={selectedVeh?.prev_month.distance} />
         </div>
       </div>
     </React.Fragment>

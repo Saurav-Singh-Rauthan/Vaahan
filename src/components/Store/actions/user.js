@@ -46,3 +46,62 @@ export const fetchUserDetails = () => {
       });
   };
 };
+
+export const isNewMonth = (rec, userId, code) => {
+  return (dispatch) => {
+    const latestRecord = new Date(rec.last_updated).getMonth();
+    const currDate = new Date().getMonth();
+
+    console.log(latestRecord, currDate, rec);
+    if (latestRecord < currDate) {
+      console.log("next month", rec);
+      let record = {
+        name: rec.name,
+        last_odometer: rec.last_odometer,
+        last_fuel: rec.last_fuel,
+        last_fuelcost: rec.last_fuelcost,
+        last_distance: rec.last_distance,
+        last_updated: rec.last_updated,
+        mileage: {
+          last_entry: 0,
+          mileage_list: [
+            rec.mileage.mileage_list[
+              rec.mileage.last_entry > 0
+                ? rec.mileage.last_entry - 1
+                : rec.mileage.last_entry
+            ],
+          ],
+        },
+        monthly_spending: rec.last_fuelcost,
+        monthly_distanceTravelled: rec.last_distance,
+        average_mileage: rec.average_mileage,
+        prev_month: {
+          avg:
+            Math.abs(latestRecord - currDate) === 1 ? rec.average_mileage : 0,
+          spendings:
+            Math.abs(latestRecord - currDate) === 1
+              ? Math.abs(rec.monthly_spending - rec.last_fuelcost)
+              : 0,
+          distance:
+            Math.abs(latestRecord - currDate) === 1
+              ? Math.abs(rec.monthly_distanceTravelled - rec.last_distance)
+              : 0,
+        },
+      };
+
+      axios
+        .put(
+          `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${userId}/vehicles/${code}.json?auth=${localStorage.getItem(
+            "token"
+          )}`,
+          record
+        )
+        .then((res) => {
+          console.log(res, "new month updated");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+};

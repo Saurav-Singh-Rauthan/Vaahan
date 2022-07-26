@@ -158,13 +158,14 @@ const RefuelEntry = (props) => {
       last_fuel: 0,
       last_fuelcost: 0,
       last_distance: 0,
+      last_updated: 0,
       mileage: {
         last_entry: 0,
-        mileage_list: [0],
+        mileage_list: [{ mileage: 0 }],
       },
       monthly_spending: 0,
       monthly_distanceTravelled: 0,
-      avg_mileage: 0,
+      average_mileage: 0,
       prev_month: {
         avg: 0,
         spendings: 0,
@@ -236,38 +237,48 @@ const RefuelEntry = (props) => {
       rec: true,
       veh: false,
     });
+
     let mileage = 0,
       average_mileage = 0,
+      atZero = false,
       num = 0,
-      mileage_list = [0];
+      sum = 0,
+      mileage_list = [{ mileage: 0 }];
 
     mileage = {
       mileage:
         Math.abs(record.odometerReading - selectedVeh.last_odometer) /
         selectedVeh.last_fuel,
     };
+
     mileage_list = [...selectedVeh.mileage?.mileage_list];
     if (mileage_list.length >= 50) {
       mileage_list[(selectedVeh.mileage.last_entry + 1) % 50] = mileage;
     } else {
-      if (selectedVeh.mileage.mileage_list[0] === 0) {
+      if (selectedVeh.mileage.mileage_list[0].mileage === 0) {
+        atZero = true;
         mileage_list[0] = {
-          mileage: record.odometerReading / record.fuelAdded,
+          mileage:
+            Math.abs(record.odometerReading - selectedVeh.last_odometer) /
+            record.fuelAdded,
         };
       } else {
+        console.log("not zero");
         mileage_list.push(mileage);
       }
     }
-    average_mileage =
-      mileage_list.reduce((prev, curr) => {
-        num++;
-        return prev + curr.mileage;
-      }, average_mileage) / num;
+
+    average_mileage = mileage_list.reduce((prev, curr) => {
+      num++;
+      return prev + curr.mileage;
+    }, sum);
+    console.log(selectedVeh, "selectedVeh");
+    average_mileage = average_mileage / num;
 
     const new_record = {
       mileage: {
-        last_entry: (selectedVeh.mileage.last_entry + 1) % 50,
-        mileage_list: mileage_list,
+        last_entry: (atZero ? 0 : selectedVeh.mileage.last_entry + 1) % 50,
+        mileage_list,
       },
       average_mileage,
       last_fuel: record.fuelAdded,
@@ -283,6 +294,7 @@ const RefuelEntry = (props) => {
         parseFloat(selectedVeh.monthly_spending) + parseFloat(record.fuelCost),
       name: selectedVeh.name.trim(),
       prev_month: selectedVeh.prev_month,
+      last_updated: new Date().getTime(),
     };
 
     axios
@@ -293,14 +305,25 @@ const RefuelEntry = (props) => {
       )
       .then((res) => {
         let prevData = { ...res.data[Object.keys(res.data)[0]] };
-        console.log(selectedVeh.name.trim(), "prevData", prevData);
+        console.log(selectedVeh.name.trim(), "prevData", prevData, new_record);
         if (res.data) {
           if (prevData.mileage[0].mileage === 0) {
             prevData.mileage.pop();
           }
+          console.log(
+            "new glob record",
+            new_record.mileage,
+            new_record.mileage.mileage_list[
+              (new_record.mileage.last_entry > 0
+                ? new_record.mileage.last_entry - 1
+                : new_record.mileage.last_entry) % 50
+            ]
+          );
           prevData.mileage.push(
             new_record.mileage.mileage_list[
-              (new_record.mileage.last_entry - 1) % 50
+              (new_record.mileage.last_entry > 0
+                ? new_record.mileage.last_entry - 1
+                : new_record.mileage.last_entry) % 50
             ]
           );
 
@@ -333,6 +356,7 @@ const RefuelEntry = (props) => {
       )
       .then((res) => {
         console.log(res, "record added");
+        props.isNewMonth(res.data, props.userId, selectedVeh.code);
         setTimeout(() => {
           navigate("/");
         }, 1000);
@@ -607,6 +631,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetch_globalVeh: () => {
       dispatch(actions.fetch_veh());
+    },
+    isNewMonth: (rec, userId, code) => {
+      dispatch(actions.isNewMonth(rec, userId, code));
     },
   };
 };
