@@ -13,6 +13,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import Validate from "../../Validator/Validator";
 import Styles from "./Auth.module.css";
+import Alert from "../../Alert/Alert";
 
 const Auth = (props) => {
   let navigate = useNavigate();
@@ -46,6 +47,8 @@ const Auth = (props) => {
     err: null,
     errMsg: null,
   });
+
+  const [alert, setalert] = useState();
 
   useEffect(() => {
     setauthErr({
@@ -153,9 +156,7 @@ const Auth = (props) => {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        // Password reset email sent!
-        // ..
-        alert("email sent");
+        alert.open("success", "Password reset email sent!");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -388,21 +389,24 @@ const Auth = (props) => {
   );
 
   return (
-    <div className={Styles.container}>
-      <TabContext value={value}>
-        <Box
-          className={Styles.tabCont}
-          sx={{ borderBottom: 1, borderColor: "divider" }}
-        >
-          <TabList onChange={handleChange} centered>
-            <Tab label="Sign In" value="1" />
-            <Tab label="Sign Up" value="2" />
-          </TabList>
-        </Box>
-        <TabPanel value="1">{signInDiv}</TabPanel>
-        <TabPanel value="2">{signUpDiv}</TabPanel>
-      </TabContext>
-    </div>
+    <React.Fragment>
+      <Alert methods={setalert} />
+      <div className={Styles.container}>
+        <TabContext value={value}>
+          <Box
+            className={Styles.tabCont}
+            sx={{ borderBottom: 1, borderColor: "divider" }}
+          >
+            <TabList onChange={handleChange} centered>
+              <Tab label="Sign In" value="1" />
+              <Tab label="Sign Up" value="2" />
+            </TabList>
+          </Box>
+          <TabPanel value="1">{signInDiv}</TabPanel>
+          <TabPanel value="2">{signUpDiv}</TabPanel>
+        </TabContext>
+      </div>
+    </React.Fragment>
   );
 };
 
