@@ -1,5 +1,5 @@
 import * as actionType from "../actions/actionTypes";
-import axios from "axios";
+import axiosV from "../../../axiosVahan";
 
 const vehicles = (vehicles) => {
   return {
@@ -16,12 +16,8 @@ const fetch_failed = () => {
 
 export const fetch_veh = () => {
   return (dispatch) => {
-    axios
-      .get(
-        `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${localStorage.getItem(
-          "token"
-        )}`
-      )
+    axiosV
+      .get(`/vehicles.json?auth=${localStorage.getItem("token")}`)
       .then((res) => {
         console.log(res, "global veh");
         dispatch(vehicles(res.data));

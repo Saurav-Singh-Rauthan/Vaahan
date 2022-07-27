@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosV from "../../../axiosVahan";
 import * as actionType from "./actionTypes";
 
 const errorMsgGen = (error) => {
@@ -100,11 +101,8 @@ export const authenticate = (email, password, username, type) => {
             vehicles: [],
           };
 
-          axios
-            .post(
-              `https://vaahan-1df59-default-rtdb.firebaseio.com/users.json?auth=${res.data.idToken}`,
-              newUser
-            )
+          axiosV
+            .post(`/users.json?auth=${res.data.idToken}`, newUser)
             .then((res) => {
               console.log(res, "user created");
             })

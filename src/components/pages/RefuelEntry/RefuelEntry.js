@@ -7,7 +7,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import CircularProgress from "@mui/material/CircularProgress";
-import axios from "axios";
+import axiosV from "../../../axiosVahan";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 
@@ -173,15 +173,15 @@ const RefuelEntry = (props) => {
       },
     };
 
-    axios
+    axiosV
       .get(
-        `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
+        `/users/${props.userId}/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
       )
       .then((res) => {
         if (Object.keys(res.data).length === 0) {
-          axios
+          axiosV
             .post(
-              `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}/vehicles.json?auth=${props.token}`,
+              `/users/${props.userId}/vehicles.json?auth=${props.token}`,
               vehData
             )
             .then((res) => {
@@ -194,9 +194,9 @@ const RefuelEntry = (props) => {
           alert("vehicle already exists!!!");
         }
 
-        axios
+        axiosV
           .get(
-            `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
+            `/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
           )
           .then((res) => {
             console.log(Object.keys(res.data).length, "search veh");
@@ -205,11 +205,8 @@ const RefuelEntry = (props) => {
                 name: addNewVeh,
                 mileage: [{ mileage: 0 }],
               };
-              axios
-                .post(
-                  `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${props.token}`,
-                  newEntry
-                )
+              axiosV
+                .post(`/vehicles.json?auth=${props.token}`, newEntry)
                 .then((res) => {
                   console.log(res, "global entry added");
                 })
@@ -297,9 +294,9 @@ const RefuelEntry = (props) => {
       last_updated: new Date().getTime(),
     };
 
-    axios
+    axiosV
       .get(
-        `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles.json?auth=${
+        `/vehicles.json?auth=${
           props.token
         }&orderBy="name"&equalTo="${selectedVeh.name.trim()}"`
       )
@@ -329,11 +326,9 @@ const RefuelEntry = (props) => {
 
           console.log("upd Glob", prevData);
 
-          axios
+          axiosV
             .put(
-              `https://vaahan-1df59-default-rtdb.firebaseio.com/vehicles/${
-                Object.keys(res.data)[0]
-              }.json?auth=${props.token}`,
+              `/vehicles/${Object.keys(res.data)[0]}.json?auth=${props.token}`,
               prevData
             )
             .then((res) => {
@@ -345,13 +340,11 @@ const RefuelEntry = (props) => {
         }
       });
 
-    axios
+    axiosV
       .put(
-        `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${
-          props.userId
-        }/vehicles/${selectedVeh.code}.json?auth=${localStorage.getItem(
-          "token"
-        )}`,
+        `/users/${props.userId}/vehicles/${
+          selectedVeh.code
+        }.json?auth=${localStorage.getItem("token")}`,
         new_record
       )
       .then((res) => {

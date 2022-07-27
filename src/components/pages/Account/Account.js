@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import axiosV from "../../../axiosVahan";
 
 import Styles from "./Account.module.css";
 import * as action from "../../Store/actions/index";
@@ -111,11 +112,8 @@ const Account = (props) => {
         username: editState.username,
         vehicles: props.vehicles,
       };
-      axios
-        .put(
-          `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${props.userId}.json?auth=${props.token}`,
-          updatedVal
-        )
+      axiosV
+        .put(`/users/${props.userId}.json?auth=${props.token}`, updatedVal)
         .then((res) => {
           console.log(res, "details updated", updatedVal);
         })

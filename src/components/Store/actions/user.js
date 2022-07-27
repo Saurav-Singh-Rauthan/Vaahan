@@ -1,5 +1,5 @@
 import * as actions from "./actionTypes";
-import axios from "axios";
+import axiosV from "../../../axiosVahan";
 
 const setdetails = (email, id, state, district, vehicles, username) => {
   return {
@@ -21,9 +21,9 @@ const fetchFailed = () => {
 
 export const fetchUserDetails = () => {
   return (dispatch) => {
-    axios
+    axiosV
       .get(
-        `https://vaahan-1df59-default-rtdb.firebaseio.com/users.json?auth=${localStorage.getItem(
+        `/users.json?auth=${localStorage.getItem(
           "token"
         )}&orderBy="email"&equalTo="${localStorage.getItem("email")}"`
       )
@@ -89,9 +89,9 @@ export const isNewMonth = (rec, userId, code) => {
         },
       };
 
-      axios
+      axiosV
         .put(
-          `https://vaahan-1df59-default-rtdb.firebaseio.com/users/${userId}/vehicles/${code}.json?auth=${localStorage.getItem(
+          `/users/${userId}/vehicles/${code}.json?auth=${localStorage.getItem(
             "token"
           )}`,
           record
