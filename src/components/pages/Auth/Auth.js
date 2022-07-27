@@ -9,6 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../Store/actions/index";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import Validate from "../../Validator/Validator";
 import Styles from "./Auth.module.css";
@@ -148,6 +149,21 @@ const Auth = (props) => {
     }
   };
 
+  const resetPassHandler = (email) => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        // ..
+        alert("email sent");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+
   const signInDiv = (
     <div className={Styles.authContainer}>
       <TextField
@@ -188,7 +204,16 @@ const Auth = (props) => {
         }
         onChange={(event) => inputChangeHandler(event, "signInPass")}
       />
-
+      <p
+        onClick={() => resetPassHandler(userSignInCred.email)}
+        className={
+          Validate(userSignInCred.email, "isMail|isRequired").isValid
+            ? Styles.forgotPass
+            : Styles.forgotPassDisabled
+        }
+      >
+        Forgot Password
+      </p>
       <p
         style={{ display: authErr.err === null ? "none" : "block" }}
         className={Styles.authErr}
@@ -197,7 +222,12 @@ const Auth = (props) => {
       </p>
       <button
         onClick={() =>
-          props.authenticate(userSignInCred.email, userSignInCred.password,null, "signin")
+          props.authenticate(
+            userSignInCred.email,
+            userSignInCred.password,
+            null,
+            "signin"
+          )
         }
         disabled={
           userSignInCred.email !== null &&
@@ -319,7 +349,12 @@ const Auth = (props) => {
       </p>
       <button
         onClick={() =>
-          props.authenticate(userSignUpCred.email, userSignUpCred.password,userSignUpCred.username, "signup")
+          props.authenticate(
+            userSignUpCred.email,
+            userSignUpCred.password,
+            userSignUpCred.username,
+            "signup"
+          )
         }
         disabled={
           userSignUpCred.email !== null &&
@@ -366,27 +401,6 @@ const Auth = (props) => {
         </Box>
         <TabPanel value="1">{signInDiv}</TabPanel>
         <TabPanel value="2">{signUpDiv}</TabPanel>
-        {value === "1" ? (
-          <div className={Styles.changeCont}>
-            New Here?
-            <button
-              onClick={(event) => handleChange(event, "2")}
-              className={Styles.switchButton}
-            >
-              Sign Up
-            </button>
-          </div>
-        ) : (
-          <div className={Styles.changeCont}>
-            Already registered?
-            <button
-              onClick={(event) => handleChange(event, "1")}
-              className={Styles.switchButton}
-            >
-              Sign In
-            </button>
-          </div>
-        )}
       </TabContext>
     </div>
   );
@@ -404,8 +418,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    authenticate: (email, password, username,type) => {
-      dispatch(actions.authenticate(email, password,username, type));
+    authenticate: (email, password, username, type) => {
+      dispatch(actions.authenticate(email, password, username, type));
     },
   };
 };

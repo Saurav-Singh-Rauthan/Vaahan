@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./components/Store/actions/index";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -28,6 +30,21 @@ function App(props) {
       props.fetch_veh();
     }
   }, [props.isAuthenticated]);
+
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AuthDomain,
+    databaseURL: process.env.REACT_APP_BaseURL,
+    projectId: process.env.REACT_APP_ProjectID,
+    storageBucket: process.env.REACT_APP_StorageBucket,
+    messagingSenderId: process.env.REACT_APP_MessagingSenderId,
+    appId: process.env.REACT_APP_AppId,
+    measurementId: process.env.REACT_APP_MeasurementId,
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
   return (
     <BrowserRouter>

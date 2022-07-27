@@ -40,20 +40,20 @@
   border: none;
 }
 
-.switchButton {
-  margin: 0 0.5rem;
-  padding: 0;
-  font-size: 1rem;
+.forgotPass,
+.forgotPassDisabled {
   color: #75c9b7;
-  border: none;
+  margin: 0;
+  text-align: right;
+  font-size: 14px;
   font-weight: bold;
-  background: transparent;
   cursor: pointer;
-  transition: all 0.3s ease-out;
+  line-height: 1rem;
 }
 
-.switchButton:hover {
-  border-bottom: 1px solid #16123f;
+.forgotPassDisabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
 
 .changeCont {

@@ -12,8 +12,8 @@ import userReducer from "./components/Store/reducer/userReducer";
 import authReducer from "./components/Store/reducer/authReducer";
 import vehicleReducer from "./components/Store/reducer/vehicleReducer";
 
-const composeEnhancers =
-  typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+// const composeEnhancers =
+//   typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -21,10 +21,11 @@ const rootReducer = combineReducers({
   veh: vehicleReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+// const store = createStore(
+//   rootReducer,
+//   composeEnhancers(applyMiddleware(thunk))
+// );
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
