@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import Styles from "./RefuelEntry.module.css";
 import Cover from "../../Cover/Cover";
 import * as actions from "../../Store/actions/index";
+import Alert from "../../Alert/Alert";
 import Validate from "../../Validator/Validator";
 
 const RefuelEntry = (props) => {
@@ -37,6 +38,11 @@ const RefuelEntry = (props) => {
   const [loading, setloading] = useState({
     rec: false,
     newVeh: false,
+  });
+  const [alert, setalert] = useState({
+    type: null,
+    msg: null,
+    open: false,
   });
 
   useEffect(() => {
@@ -186,9 +192,19 @@ const RefuelEntry = (props) => {
             )
             .then((res) => {
               console.log(res, "veh added");
+              setalert({
+                open: true,
+                type: "success",
+                msg: "New Vehicle added",
+              });
             })
             .catch((err) => {
               console.log(err);
+              setalert({
+                open: true,
+                type: "error",
+                msg: "Couldn't add new vehicle!",
+              });
             });
         } else {
           alert("vehicle already exists!!!");
@@ -209,14 +225,29 @@ const RefuelEntry = (props) => {
                 .post(`/vehicles.json?auth=${props.token}`, newEntry)
                 .then((res) => {
                   console.log(res, "global entry added");
+                  setalert({
+                    open: true,
+                    type: "success",
+                    msg: "record added in global entry",
+                  });
                 })
                 .catch((err) => {
                   console.log(err);
+                  setalert({
+                    open: true,
+                    type: "error",
+                    msg: "Couldn't add record in global entry!",
+                  });
                 });
             }
           })
           .catch((err) => {
             console.log(err);
+            setalert({
+              open: true,
+              type: "error",
+              msg: "Couldn't fetch vehicle details!",
+            });
           });
 
         setTimeout(() => {
@@ -226,6 +257,11 @@ const RefuelEntry = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't fetch vehicle details!",
+        });
       });
   };
 
@@ -333,9 +369,19 @@ const RefuelEntry = (props) => {
             )
             .then((res) => {
               console.log(res, prevData, "global fuel for pert Veh");
+              setalert({
+                open: true,
+                type: "success",
+                msg: "Global entry added",
+              });
             })
             .catch((err) => {
               console.log(err);
+              setalert({
+                open: true,
+                type: "success",
+                msg: "Couldn't add global entry",
+              });
             });
         }
       });
@@ -349,6 +395,11 @@ const RefuelEntry = (props) => {
       )
       .then((res) => {
         console.log(res, "record added");
+        setalert({
+          open: true,
+          type: "success",
+          msg: "Record added",
+        });
         props.isNewMonth(res.data, props.userId, selectedVeh.code);
         setTimeout(() => {
           navigate("/");
@@ -356,6 +407,11 @@ const RefuelEntry = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't add record!",
+        });
       });
   };
 
@@ -524,6 +580,7 @@ const RefuelEntry = (props) => {
   return (
     <React.Fragment>
       <Cover />
+      <Alert type={alert.type} open={alert.open} msg={alert.msg} />
       <div className={Styles.container}>
         <div className={Styles.dataDiv}>
           <TabContext value={value}>

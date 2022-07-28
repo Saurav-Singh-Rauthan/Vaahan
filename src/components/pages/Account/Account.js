@@ -9,6 +9,7 @@ import * as action from "../../Store/actions/index";
 import Dialog from "../../Dialog/Dialog";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Alert from "../../../components/Alert/Alert";
 
 const Account = (props) => {
   const districtSelector = useRef();
@@ -41,6 +42,11 @@ const Account = (props) => {
     state: null,
     district: null,
   });
+  const [alert, setalert] = useState({
+    open: null,
+    type: null,
+    msg: null,
+  });
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -72,6 +78,11 @@ const Account = (props) => {
         });
       })
       .catch((err) => {
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't fetch states!",
+        });
         console.log(err);
       });
   }, []);
@@ -94,6 +105,11 @@ const Account = (props) => {
         })
         .catch((err) => {
           console.log(err);
+          setalert({
+            open: true,
+            type: "error",
+            msg: "Couldn't fetch districts!",
+          });
         });
     }
   }, [selectedlocation.state]);
@@ -104,7 +120,6 @@ const Account = (props) => {
       edit: !editState.edit,
     });
     if (type === "save") {
-      console.log("saving");
       const updatedVal = {
         email: editState.email,
         state: editState.state,
@@ -116,9 +131,19 @@ const Account = (props) => {
         .put(`/users/${props.userId}.json?auth=${props.token}`, updatedVal)
         .then((res) => {
           console.log(res, "details updated", updatedVal);
+          setalert({
+            open: true,
+            type: "success",
+            msg: "Details Updated!",
+          });
         })
         .catch((err) => {
           console.log(err);
+          setalert({
+            open: true,
+            type: "error",
+            msg: "Couldn't update details!",
+          });
         });
     }
   };
@@ -178,12 +203,13 @@ const Account = (props) => {
       (veh) => props.vehicles[veh].name
     );
     vehList = vehs.map((veh) => {
-      return <li>{veh}</li>;
+      return <li key={veh}>{veh}</li>;
     });
   }
 
   return (
     <React.Fragment>
+      <Alert open={alert.open} type={alert.type} msg={alert.msg} />
       <Dialog
         setMethods={setdialogOptions}
         title={"Logout"}
@@ -226,6 +252,9 @@ const Account = (props) => {
                 className={Styles.userDetails}
               />
               <Autocomplete
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
                 disablePortal
                 disabled={!editState.edit ? true : false}
                 value={editState.state !== null ? editState.state : ""}
@@ -242,6 +271,9 @@ const Account = (props) => {
               />
               {selectedlocation.state && location.district?.length > 0 ? (
                 <Autocomplete
+                  isOptionEqualToValue={(option, value) =>
+                    option.value === value.value
+                  }
                   ref={districtSelector}
                   className={Styles.autoComp}
                   disablePortal

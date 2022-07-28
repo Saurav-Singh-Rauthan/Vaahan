@@ -17,11 +17,23 @@ const AlertComp = (props) => {
   });
 
   useEffect(() => {
-    props.methods({
-      open: handleClick,
-      Props: setalertState,
-    });
+    if (props.methods) {
+      props.methods({
+        open: handleClick,
+        Props: setalertState,
+      });
+    }
   }, []);
+
+  useEffect(() => {
+    if (props.type && props.msg) {
+      setalertState({
+        type: props.type,
+        msg: props.msg,
+        open: props.open,
+      });
+    }
+  }, [props]);
 
   const handleClick = (type, msg) => {
     setTransition(() => TransitionUp);
@@ -38,7 +50,7 @@ const AlertComp = (props) => {
     }
 
     setalertState({
-      type: "",
+      type: "success",
       msg: "",
       open: false,
     });
@@ -46,7 +58,7 @@ const AlertComp = (props) => {
 
   return (
     <Snackbar
-      open={alertState.open}
+      open={alertState?.open}
       autoHideDuration={3000}
       onClose={handleClose}
       TransitionComponent={transition}

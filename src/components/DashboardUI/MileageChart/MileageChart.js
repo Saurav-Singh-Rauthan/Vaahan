@@ -41,7 +41,6 @@ const MileageChart = (props) => {
             stroke="#75c9b7"
             activeDot={{ r: 8 }}
           />
-          {console.log()}
           <ReferenceDot
             x={
               window.innerWidth > 768

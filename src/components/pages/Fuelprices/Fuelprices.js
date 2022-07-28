@@ -5,6 +5,7 @@ import Styles from "./Fuelprices.module.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Fuelprice from "../../Fuelprice/Fuelprice";
+import Alert from "../../Alert/Alert";
 
 const Fuelprices = (props) => {
   const districtSelector = useRef();
@@ -17,6 +18,11 @@ const Fuelprices = (props) => {
   const [fuelPrice, setfuelPrice] = useState({
     petrol: null,
     diesel: null,
+  });
+  const [alert, setalert] = useState({
+    open: false,
+    type: null,
+    msg: null,
   });
 
   useEffect(() => {
@@ -34,6 +40,11 @@ const Fuelprices = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't fetch states!",
+        });
       });
   }, []);
 
@@ -55,6 +66,11 @@ const Fuelprices = (props) => {
         })
         .catch((err) => {
           console.log(err);
+          setalert({
+            open: true,
+            type: "error",
+            msg: "Couldn't fetch districts!",
+          });
         });
     }
   }, [selectedlocation.state]);
@@ -106,45 +122,60 @@ const Fuelprices = (props) => {
           })
           .catch((err) => {
             console.log(err);
+            setalert({
+              open: true,
+              type: "error",
+              msg: "Couldn't fetch diesel prices!",
+            });
           });
       })
       .catch((err) => {
         console.log(err);
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't fetch petrol prices!",
+        });
       });
   };
 
   return (
-    <div className={Styles.container}>
-      <p>Select required State and District</p>
-      <div className={Styles.optionsContainer}>
-        <Autocomplete
-          disablePortal
-          options={location.state !== null ? location.state : []}
-          sx={{ width: "100%", maxWidth: "300px" }}
-          renderInput={(params) => <TextField {...params} label="State" />}
-          onChange={(event) => setLocationHandler(event, "State")}
-        />
-        {selectedlocation.state && location.district?.length > 0 ? (
+    <React.Fragment>
+      <Alert type={alert.type} open={alert.open} msg={alert.msg} />
+      <div className={Styles.container}>
+        <p>Select required State and District</p>
+        <div className={Styles.optionsContainer}>
           <Autocomplete
-            ref={districtSelector}
             disablePortal
-            options={location.district !== null ? location.district : []}
+            options={location.state !== null ? location.state : []}
             sx={{ width: "100%", maxWidth: "300px" }}
-            renderInput={(params) => <TextField {...params} label="District" />}
-            onChange={(event) => setLocationHandler(event, "District")}
+            renderInput={(params) => <TextField {...params} label="State" />}
+            onChange={(event) => setLocationHandler(event, "State")}
           />
-        ) : location.district?.length < 1 ? (
-          <p>Districts not available! Please choose another state</p>
+          {selectedlocation.state && location.district?.length > 0 ? (
+            <Autocomplete
+              ref={districtSelector}
+              disablePortal
+              options={location.district !== null ? location.district : []}
+              sx={{ width: "100%", maxWidth: "300px" }}
+              renderInput={(params) => (
+                <TextField {...params} label="District" />
+              )}
+              onChange={(event) => setLocationHandler(event, "District")}
+            />
+          ) : location.district?.length < 1 ? (
+            <p>Districts not available! Please choose another state</p>
+          ) : null}
+        </div>
+        {selectedlocation.district?.length > 0 && selectedlocation.state ? (
+          <Fuelprice
+            price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
+            state={selectedlocation.state}
+            district={selectedlocation.district}
+          />
         ) : null}
       </div>
-      {selectedlocation.district?.length > 0 && selectedlocation.state ? (
-        <Fuelprice
-          price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
-          state={selectedlocation.state}
-          district={selectedlocation.district}
-        />
-      ) : null}
-    </div>
+    </React.Fragment>
   );
 };
 

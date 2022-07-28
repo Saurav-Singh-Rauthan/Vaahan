@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Styles from "./Home.module.css";
 import Accordian from "../../Accordion/Accordion";
 import Fuelprice from "../../Fuelprice/Fuelprice";
+import Alert from "../../Alert/Alert";
 
 const Home = (props) => {
   const [fuelPrice, setfuelPrice] = useState({
@@ -16,6 +17,12 @@ const Home = (props) => {
   const [location, setlocation] = useState({
     state: props.state != null ? props.state : "Maharashtra",
     district: props.district != null ? props.district : "Pune",
+  });
+
+  const [alert, setalert] = useState({
+    type: null,
+    msg: null,
+    open: false,
   });
 
   useEffect(() => {
@@ -38,10 +45,20 @@ const Home = (props) => {
           })
           .catch((err) => {
             console.log(err);
+            setalert({
+              open: true,
+              type: "error",
+              msg: "Couldn't fetch diesel prices!",
+            });
           });
       })
       .catch((err) => {
         console.log(err);
+        setalert({
+          open: true,
+          type: "error",
+          msg: "Couldn't fetch petrol prices!",
+        });
       });
   }, []);
 
@@ -64,22 +81,25 @@ const Home = (props) => {
   ];
 
   return (
-    <div className={Styles.container}>
-      <Fuelprice
-        price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
-        state={location.state}
-        district={location.district}
-      />
-      <p
-        style={{ display: props.isAuthenticated ? "none" : "block" }}
-        className={Styles.login}
-      >
-        Want to configure for your district & state?{" "}
-        <Link to="/auth">Sign Up / Sign In</Link>
-      </p>
-      <h1>About Vaahan</h1>
-      <Accordian data={accordianData} />
-    </div>
+    <React.Fragment>
+      <Alert type={alert.type} open={alert.open} msg={alert.msg} />
+      <div className={Styles.container}>
+        <Fuelprice
+          price={fuelPrice?.diesel && fuelPrice?.petrol ? fuelPrice : null}
+          state={location.state}
+          district={location.district}
+        />
+        <p
+          style={{ display: props.isAuthenticated ? "none" : "block" }}
+          className={Styles.login}
+        >
+          Want to configure for your district & state?{" "}
+          <Link to="/auth">Sign Up / Sign In</Link>
+        </p>
+        <h1>About Vaahan</h1>
+        <Accordian data={accordianData} />
+      </div>
+    </React.Fragment>
   );
 };
 
