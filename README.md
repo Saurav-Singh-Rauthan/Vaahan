@@ -13,7 +13,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/Saurav-Singh-Rauthan/Vaahan">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/54982868/181566817-9418f2e9-57ea-45ae-930a-41f7bf878f9b.png" alt="Logo" width="fit-content" height="fit-content">
+
   </a>
 
 <h3 align="center">VAAHAN</h3>
@@ -143,7 +144,23 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+- Dashboard
+  - ![km_20220728_480p(4)](https://user-images.githubusercontent.com/54982868/181569354-2e95d92a-92df-4a90-a63c-11e0607147cb.gif)
+
+- Add record
+  - ![km_20220728_480p(3)](https://user-images.githubusercontent.com/54982868/181569294-55079231-68fb-428c-b548-5311b20b09e7.gif)
+  
+- Add Vehicle
+  - ![km_20220728_480p(2)](https://user-images.githubusercontent.com/54982868/181569249-0a4ebe7c-5a7a-43ee-8835-7cb0453eca70.gif)
+  
+- SpeedDial
+  - ![km_20220728_480p(1)](https://user-images.githubusercontent.com/54982868/181569180-87dc8381-7423-4046-be05-4a5d48b70d38.gif)
+
+- Fuel Price
+  - ![km_20220728_480p](https://user-images.githubusercontent.com/54982868/181569506-d2f36781-0f2f-4fff-95e1-5180de33ad65.gif)
+
+- User Account
+  - ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/54982868/181570653-3c9fded5-3d75-4882-a401-ccf0af195bf3.gif)
 
 _For more examples, please refer to the [Vaahan.netlify.app](https://vaahan.netlify.app)_
 
@@ -156,7 +173,7 @@ _For more examples, please refer to the [Vaahan.netlify.app](https://vaahan.netl
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Don't forget to give the project a star! Thanks again :D!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -191,7 +208,7 @@ Project Link: [Vaahan](https://github.com/Saurav-Singh-Rauthan/Vaahan)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [Fuel Price API](https://github.com/its-arpit/fuel_price_api_india)
+* [Fuel Price API by @its-arpit](https://github.com/its-arpit/fuel_price_api_india)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
