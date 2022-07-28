@@ -83,6 +83,10 @@
   .changeCont {
     width: 90%;
   }
+
+  .authContainer button {
+    line-height: 1rem;
+  }
 }
 
 @media (min-width: 461px) and (max-width: 920px) {

@@ -161,7 +161,7 @@ const Auth = (props) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        alert.open("error", "Password mail not sent!");
       });
   };
 
@@ -247,7 +247,10 @@ const Auth = (props) => {
             alignItems: "center",
           }}
         >
-          <CircularProgress size={36} sx={{ color: "#ffe26a" }} />
+          <CircularProgress
+            size={window.innerWidth > 756 ? 36 : 14}
+            sx={{ color: "#ffe26a" }}
+          />
         </Box>
       </button>
     </div>
@@ -382,7 +385,10 @@ const Auth = (props) => {
             justifyContent: "center",
           }}
         >
-          <CircularProgress size={36} sx={{ color: "#ffe26a" }} />
+          <CircularProgress
+            size={window.innerWidth > 756 ? 36 : 14}
+            sx={{ color: "#ffe26a" }}
+          />
         </Box>
       </button>
     </div>

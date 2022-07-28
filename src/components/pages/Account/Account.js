@@ -251,9 +251,6 @@ const Account = (props) => {
                 className={Styles.userDetails}
               />
               <Autocomplete
-                isOptionEqualToValue={(option, value) =>
-                  option.value === value.value
-                }
                 disablePortal
                 disabled={!editState.edit ? true : false}
                 value={editState.state !== null ? editState.state : ""}
@@ -270,9 +267,6 @@ const Account = (props) => {
               />
               {selectedlocation.state && location.district?.length > 0 ? (
                 <Autocomplete
-                  isOptionEqualToValue={(option, value) =>
-                    option.value === value.value
-                  }
                   ref={districtSelector}
                   className={Styles.autoComp}
                   disablePortal
