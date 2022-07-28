@@ -17,7 +17,6 @@ const Dashboard = (props) => {
   const [selectedVeh, setselectedVeh] = useState(null);
   const [selectedGlobVeh, setselectedGlobVeh] = useState(null);
   let vehicles = [""];
-  const dataMin = [];
 
   useEffect(() => {
     if (props.isAuthenticated) {
@@ -40,8 +39,7 @@ const Dashboard = (props) => {
           (veh) => props.globalVeh[veh].name === event.target.value
         )[0]
       ];
-
-    console.log(selectedVeh, selectedGlobVeh);
+      
     setselectedVeh(selectedVeh);
     setselectedGlobVeh(selectedGlobVeh);
   };

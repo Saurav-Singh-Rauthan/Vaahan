@@ -24,7 +24,6 @@ const errorMsgGen = (error) => {
       errorMsg = "Password sign-in is disabled for this project.";
       break;
     case "TOO_MANY_ATTEMPTS_TRY_LATER":
-      console.log("2may");
       errorMsg =
         "We have blocked all requests from this device due to unusual activity. Try again later.";
       break;
@@ -78,7 +77,6 @@ export const authenticate = (email, password, username, type) => {
         returnSecureToken: true,
       })
       .then((res) => {
-        console.log(res);
         dispatch(auth(res.data.email, res.data.idToken, res.data.localId));
         setTimeout(() => {
           dispatch(auth_done());
@@ -104,7 +102,7 @@ export const authenticate = (email, password, username, type) => {
           axiosV
             .post(`/users.json?auth=${res.data.idToken}`, newUser)
             .then((res) => {
-              console.log(res, "user created");
+              console.log("user created");
             })
             .catch((err) => {
               console.log(err);
@@ -117,8 +115,6 @@ export const authenticate = (email, password, username, type) => {
           err.code === "ERR_NETWORK"
             ? "Network Error!"
             : errorMsgGen(err.response.data.error.message.split(":")[0].trim());
-        console.log(err.code);
-        console.log(err.response.data.error.message.split(":")[0].trim());
 
         dispatch(auth_failed(true, errorMessage));
       });

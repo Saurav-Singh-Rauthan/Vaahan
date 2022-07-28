@@ -82,7 +82,6 @@ const RefuelEntry = (props) => {
 
   const newVehIpHandler = (event, value, reason) => {
     if (reason === "clear" || event.target.value.length === 0) {
-      console.log("clear");
       setaddNewVeh(null);
     } else if (reason === "selectOption") {
       setaddNewVeh(event.target.outerText);
@@ -191,7 +190,6 @@ const RefuelEntry = (props) => {
               vehData
             )
             .then((res) => {
-              console.log(res, "veh added");
               setalert({
                 open: true,
                 type: "success",
@@ -215,7 +213,6 @@ const RefuelEntry = (props) => {
             `/vehicles.json?auth=${props.token}&orderBy="name"&equalTo="${addNewVeh}"`
           )
           .then((res) => {
-            console.log(Object.keys(res.data).length, "search veh");
             if (!Object.keys(res.data).length) {
               let newEntry = {
                 name: addNewVeh,
@@ -224,7 +221,6 @@ const RefuelEntry = (props) => {
               axiosV
                 .post(`/vehicles.json?auth=${props.token}`, newEntry)
                 .then((res) => {
-                  console.log(res, "global entry added");
                   setalert({
                     open: true,
                     type: "success",
@@ -296,7 +292,6 @@ const RefuelEntry = (props) => {
             record.fuelAdded,
         };
       } else {
-        console.log("not zero");
         mileage_list.push(mileage);
       }
     }
@@ -305,7 +300,6 @@ const RefuelEntry = (props) => {
       num++;
       return prev + curr.mileage;
     }, sum);
-    console.log(selectedVeh, "selectedVeh");
     average_mileage = average_mileage / num;
 
     const new_record = {
@@ -338,20 +332,10 @@ const RefuelEntry = (props) => {
       )
       .then((res) => {
         let prevData = { ...res.data[Object.keys(res.data)[0]] };
-        console.log(selectedVeh.name.trim(), "prevData", prevData, new_record);
         if (res.data) {
           if (prevData.mileage[0].mileage === 0) {
             prevData.mileage.pop();
           }
-          console.log(
-            "new glob record",
-            new_record.mileage,
-            new_record.mileage.mileage_list[
-              (new_record.mileage.last_entry > 0
-                ? new_record.mileage.last_entry - 1
-                : new_record.mileage.last_entry) % 50
-            ]
-          );
           prevData.mileage.push(
             new_record.mileage.mileage_list[
               (new_record.mileage.last_entry > 0
@@ -360,15 +344,12 @@ const RefuelEntry = (props) => {
             ]
           );
 
-          console.log("upd Glob", prevData);
-
           axiosV
             .put(
               `/vehicles/${Object.keys(res.data)[0]}.json?auth=${props.token}`,
               prevData
             )
             .then((res) => {
-              console.log(res, prevData, "global fuel for pert Veh");
               setalert({
                 open: true,
                 type: "success",
@@ -394,7 +375,6 @@ const RefuelEntry = (props) => {
         new_record
       )
       .then((res) => {
-        console.log(res, "record added");
         setalert({
           open: true,
           type: "success",

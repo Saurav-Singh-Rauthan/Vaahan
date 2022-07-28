@@ -130,7 +130,6 @@ const Account = (props) => {
       axiosV
         .put(`/users/${props.userId}.json?auth=${props.token}`, updatedVal)
         .then((res) => {
-          console.log(res, "details updated", updatedVal);
           setalert({
             open: true,
             type: "success",

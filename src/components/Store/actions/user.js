@@ -52,9 +52,7 @@ export const isNewMonth = (rec, userId, code) => {
     const latestRecord = new Date(rec.last_updated).getMonth();
     const currDate = new Date().getMonth();
 
-    console.log(latestRecord, currDate, rec);
     if (latestRecord < currDate) {
-      console.log("next month", rec);
       let record = {
         name: rec.name,
         last_odometer: rec.last_odometer,
@@ -97,7 +95,7 @@ export const isNewMonth = (rec, userId, code) => {
           record
         )
         .then((res) => {
-          console.log(res, "new month updated");
+          console.log("new month updated");
         })
         .catch((err) => {
           console.log(err);

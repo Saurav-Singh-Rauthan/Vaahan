@@ -19,7 +19,6 @@ export const fetch_veh = () => {
     axiosV
       .get(`/vehicles.json?auth=${localStorage.getItem("token")}`)
       .then((res) => {
-        console.log(res, "global veh");
         dispatch(vehicles(res.data));
       })
       .catch((err) => {
