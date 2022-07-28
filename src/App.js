@@ -32,6 +32,9 @@ const Account = React.lazy(() => {
 const Home = React.lazy(() => {
   return import("./components/pages/Home/Home");
 });
+const Help = React.lazy(() => {
+  return import("./components/pages/Help/Help");
+});
 
 function App(props) {
   useEffect(() => {
@@ -63,7 +66,7 @@ function App(props) {
   return (
     <BrowserRouter>
       <Speedial />
-      <div className="App">
+      <div className="App" id="top">
         <Navbar />
 
         <div className="content">
@@ -88,6 +91,7 @@ function App(props) {
               <Route path="/add-record" element={<RefuelEntry />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/help" element={<Help />} />
               <Route path="/" element={<Home />} />
               <Route path="*" element={<Notfound />} />
             </Routes>

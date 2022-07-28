@@ -1,0 +1,112 @@
+.table {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table ul {
+  list-style: none;
+}
+
+.table li {
+  margin: 1rem 0;
+}
+
+.table a {
+  color: #75c9b7;
+  padding: 0.5rem;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+  outline: none;
+}
+
+.table a:hover {
+  background: #16123f;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1rem 0;
+  width: fit-content;
+  border-bottom: 2px solid #75c9b7;
+  color: #16123f;
+}
+
+.headingCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headingCont a {
+  font-weight: bold;
+  color: #75c9b7;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.content1,
+.content2 {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.content2 {
+  flex-direction: row-reverse;
+}
+
+.content1 img,
+.content2 img {
+  object-fit: cover;
+  width: 60%;
+}
+
+.content1 div,
+.content2 div {
+  width: 40%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: #75c9b7;
+  font-weight: 600;
+}
+
+.emphasis {
+  color: #16123f;
+  font-weight: 800;
+}
+
+.anchor {
+  margin-bottom: 4rem;
+  height: 32px;
+}
+
+@media (max-width: 756px) {
+  .anchor {
+    margin-bottom: 0;
+    height: 34px;
+  }
+}
+
+@media (max-width: 920px) {
+  .content1,
+  .content2 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  }
+
+  .content1 div,
+  .content2 div {
+    width: 100%;
+  }
+
+  .content1 img,
+  .content2 img {
+    width: 100%;
+  }
+}
