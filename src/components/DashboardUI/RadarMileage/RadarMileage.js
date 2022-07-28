@@ -79,7 +79,7 @@ const RadarMileage = (props) => {
         <RadarChart
           cx="50%"
           cy="50%"
-          outerRadius={window.innerWidth > 768 ? "90%" : "60%"}
+          outerRadius={window.innerWidth > 768 ? "80%" : "60%"}
           data={radarData}
         >
           <PolarGrid />

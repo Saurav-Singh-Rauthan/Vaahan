@@ -522,6 +522,7 @@ const RefuelEntry = (props) => {
               onChange={(event) => newVehIpHandler(event)}
               onBlur={(event) => checkContentHandler(event)}
               label="Select vehicle"
+              placeholder="Vehicle name | Model | Engine Variant"
               helperText="Select new vehicle to be added"
             />
           )}

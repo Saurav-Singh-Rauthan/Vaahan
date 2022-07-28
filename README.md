@@ -1,70 +1,226 @@
-# Getting Started with Create React App
+<div id="top"></div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a5fc05ff-75d2-4001-9b91-4ecda256e2d6/deploy-status)](https://app.netlify.com/sites/vaahan/deploys)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/Saurav-Singh-Rauthan/Vaahan">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h3 align="center">VAAHAN</h3>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  <p align="center">
+    Maintain your vehicle info | Mileage Comparison | Fuel prices
+    <br />
+    <a href="https://github.com/Saurav-Singh-Rauthan/Vaahan"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://vaahan.netlify.app/">View Site</a>
+    ·
+    <a href="https://github.com/Saurav-Singh-Rauthan/Vaahan/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Saurav-Singh-Rauthan/Vaahan/issues">Request Feature</a>
+  </p>
+</div>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-### `npm run eject`
+A website for storing details related to your vehicle's mileage and performance just by entering your fuelling details. Get monthly details like : amount spent on fuelling, average mileage after every refill, compare mileage with similar vehicles
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Built With
 
-## Learn More
+[![React][React.js]][React-url]
+[![Firebase][Firebase]][Firebase-url]
+[![Material-UI][Material-UI]][MaterialUI-url]
+[![Redux][Redux]][Redux-url]
+[![React-Router][React-Router]][ReactRouter-url]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<!-- GETTING STARTED -->
+## Getting Started
 
-### Analyzing the Bundle Size
+To get a local copy up and running follow these simple example steps.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Prerequisites
 
-### Making a Progressive Web App
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Installation
 
-### Advanced Configuration
+1. Clone the repo 📓 
+   ```sh
+   git clone https://github.com/Saurav-Singh-Rauthan/Vaahan.git
+   ```
+2. Install NPM packages ⬇ 
+   ```sh
+   npm install
+   ```
+3. Create a copy of `.env.example` as `.env.local` 🏃 
+4. Enter your Firebase detials in `.env.local` 👨‍💻 
+   
+    ```sh
+    REACT_APP_API_KEY = <"firebase api key here">
+    ```
+    ```sh
+    REACT_APP_BaseURL = <"firebase realtime db baseURL">
+    ```
+    ```sh
+    REACT_APP_AuthDomain = <"firebase sdk authdomain">
+    ```
+    ```sh
+    REACT_APP_ProjectID = <"firebase sdk project-id">
+    ```
+    ```sh
+    REACT_APP_StorageBucket = <"firebase sdk storagebucket">
+    ```
+    ```sh
+    REACT_APP_MessagingSenderId = <"firebase sdk msg sender id">
+    ```
+    ```sh
+    REACT_APP_AppId = <"firebase sdk app id">
+    ```
+    ```sh
+    REACT_APP_MeasurementId = <"firebase sdk measurement id">
+    ```
+5. start the project 🚀 
+   ```sh
+    npm start
+    ``` 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+<!-- USAGE EXAMPLES -->
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Vaahan.netlify.app](https://vaahan.netlify.app)_
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - sauravsinghrauthan@gmail.com
+
+Project Link: [Vaahan](https://github.com/Saurav-Singh-Rauthan/Vaahan)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Fuel Price API](https://github.com/its-arpit/fuel_price_api_india)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Saurav-Singh-Rauthan/Vaahan.svg?style=for-the-badge
+[contributors-url]: https://github.com/Saurav-Singh-Rauthan/Vaahan/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Saurav-Singh-Rauthan/Vaahan.svg?style=for-the-badge
+[forks-url]: https://github.com/Saurav-Singh-Rauthan/Vaahan/network/members
+[stars-shield]: https://img.shields.io/github/stars/Saurav-Singh-Rauthan/Vaahan.svg?style=for-the-badge
+[stars-url]: https://github.com/Saurav-Singh-Rauthan/Vaahan/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Saurav-Singh-Rauthan/Vaahan.svg?style=for-the-badge
+[issues-url]: https://github.com/Saurav-Singh-Rauthan/Vaahan/issues
+[license-shield]: https://img.shields.io/github/license/Saurav-Singh-Rauthan/Vaahan.svg?style=for-the-badge
+[license-url]: https://github.com/Saurav-Singh-Rauthan/Vaahan/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+[Firebase]: https://img.shields.io/badge/-firebase-20232A?logo=firebase&style=for-the-badge
+[Firebase-url]: https://firebase.google.com/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Material-UI]: https://img.shields.io/badge/-MUI-20232A?logo=MUI&style=for-the-badge
+[MaterialUI-url]: https://mui.com/
+[Redux]: https://img.shields.io/badge/-Redux-20232A?logo=Redux&style=for-the-badge
+[Redux-url]: https://redux.js.org/
+[React-router]: https://img.shields.io/badge/-React%20Router-20232A?logo=React-Router&style=for-the-badge
+[ReactRouter-url]: https://reactrouter.com/
+
+<!--Badge creator https://img.shields.io/badge/-Redux-20232A?logo=Redux&style=for-the-badge -->
