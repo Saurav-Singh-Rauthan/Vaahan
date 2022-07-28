@@ -1,23 +1,37 @@
 import "./App.css";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./components/Store/actions/index";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Speedial from "./components/Speedial/Speedial";
-import Home from "./components/pages/Home/Home";
-import Fuelprices from "./components/pages/Fuelprices/Fuelprices";
-import Dashboard from "./components/pages/Dashboard/Dashboard";
-import RefuelEntry from "./components/pages/RefuelEntry/RefuelEntry";
-import Auth from "./components/pages/Auth/Auth";
-import Account from "./components/pages/Account/Account";
 import Notfound from "./components/pages/Notfound/Notfound";
 
 import "./customMuiStyles.css";
+
+const Fuelprices = React.lazy(() => {
+  return import("./components/pages/Fuelprices/Fuelprices");
+});
+const Dashboard = React.lazy(() => {
+  return import("./components/pages/Dashboard/Dashboard");
+});
+const RefuelEntry = React.lazy(() => {
+  return import("./components/pages/RefuelEntry/RefuelEntry");
+});
+const Auth = React.lazy(() => {
+  return import("./components/pages/Auth/Auth");
+});
+const Account = React.lazy(() => {
+  return import("./components/pages/Account/Account");
+});
+const Home = React.lazy(() => {
+  return import("./components/pages/Home/Home");
+});
 
 function App(props) {
   useEffect(() => {
@@ -53,15 +67,31 @@ function App(props) {
         <Navbar />
 
         <div className="content">
-          <Routes>
-            <Route path="/fuel-prices" element={<Fuelprices />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/add-record" element={<RefuelEntry />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={<Notfound />} />
-          </Routes>
+          <React.Suspense
+            fallback={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "1rem",
+                  height: "100%",
+                }}
+              >
+                <CircularProgress sx={{ color: "#ffe26a" }} size={48} />
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/fuel-prices" element={<Fuelprices />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/add-record" element={<RefuelEntry />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/" element={<Home />} />
+              <Route path="*" element={<Notfound />} />
+            </Routes>
+          </React.Suspense>
         </div>
 
         <Footer />
