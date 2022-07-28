@@ -90,6 +90,12 @@
   background: rgb(2, 2, 110) !important;
 }
 
+@media (max-width: 500px) {
+  .btnCont {
+    justify-content: space-evenly;
+  }
+}
+
 @media (max-width: 756px) {
   .container {
     display: flex;
@@ -105,5 +111,20 @@
 
   .userVeh {
     height: auto;
+  }
+
+  .autoComp {
+    display: flex !important;
+    width: 95% !important;
+    margin: 1.5rem auto !important;
+  }
+
+  .userVeh {
+    margin: auto;
+    width: 95%;
+  }
+
+  .heading {
+    margin-bottom: 2rem;
   }
 }

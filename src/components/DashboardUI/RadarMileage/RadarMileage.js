@@ -6,6 +6,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 import Styles from "./RadarMileage.module.css";
@@ -69,13 +70,18 @@ const RadarMileage = (props) => {
   }, []);
 
   let radarData = Object.keys(data).map((range) => {
-    return { range: `${range} kmpl`, count: data[range] };
+    return { range, count: data[range] };
   });
 
   return (
     <div className={Styles.container}>
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+        <RadarChart
+          cx="50%"
+          cy="50%"
+          outerRadius={window.length > 768 ? "90%" : "60%"}
+          data={radarData}
+        >
           <PolarGrid />
           <PolarAngleAxis dataKey="range" />
           <PolarRadiusAxis />
@@ -84,7 +90,9 @@ const RadarMileage = (props) => {
             stroke="#75c9b7"
             fill="#75c9b7"
             fillOpacity={0.6}
+            name="Mileage(KmpL)"
           />
+          <Legend />
         </RadarChart>
       </ResponsiveContainer>
     </div>
