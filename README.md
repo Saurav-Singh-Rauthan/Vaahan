@@ -132,7 +132,10 @@ To get a local copy up and running follow these simple example steps.
     ```sh
     REACT_APP_MeasurementId = <"firebase sdk measurement id">
     ```
-5. start the project 🚀 
+5. set up firebase rules for realtime database
+  - ![image](https://user-images.githubusercontent.com/54982868/181607072-339dd791-2fee-49af-b8c4-7d08ba850168.png)
+
+6. start the project 🚀 
    ```sh
     npm start
     ``` 
