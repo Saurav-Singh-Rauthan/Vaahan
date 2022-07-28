@@ -46,6 +46,10 @@ const RefuelEntry = (props) => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (props.isAuthenticated) {
       props.fetch_userDetails();
     }

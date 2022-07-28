@@ -26,6 +26,10 @@ const Home = (props) => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     axios
       .get(
         `https://api-fuelprices-india.herokuapp.com/price/state/district/?state=${location.state}&district=${location.district}&fuel=petrol`

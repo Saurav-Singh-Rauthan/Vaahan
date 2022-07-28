@@ -23,6 +23,7 @@ const Dashboard = (props) => {
       props.fetch_userDetails();
       props.fetch_veh();
     }
+    window.scrollTo(0, 0);
   }, []);
 
   const vehSelectHandler = (event) => {
@@ -39,7 +40,7 @@ const Dashboard = (props) => {
           (veh) => props.globalVeh[veh].name === event.target.value
         )[0]
       ];
-      
+
     setselectedVeh(selectedVeh);
     setselectedGlobVeh(selectedGlobVeh);
   };

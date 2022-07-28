@@ -49,6 +49,10 @@ const Account = (props) => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
     }

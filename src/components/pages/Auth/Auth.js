@@ -51,6 +51,10 @@ const Auth = (props) => {
   const [alert, setalert] = useState();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setauthErr({
       err: props.error,
       errMsg: props.errorMsg,

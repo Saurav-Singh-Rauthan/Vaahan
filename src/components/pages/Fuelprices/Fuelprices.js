@@ -26,6 +26,10 @@ const Fuelprices = (props) => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     axios
       .get("https://api-fuelprices-india.herokuapp.com/states")
       .then((res) => {
