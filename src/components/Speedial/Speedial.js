@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-
-const actions = [
-  { icon: <HomeIcon />, name: "Home", link: "/" },
-  { icon: <DashboardIcon />, name: "Dashboard", link: "/dashboard" },
-  { icon: <SpeedDialIcon />, name: "Add Record", link: "/add-record" },
-  { icon: <LocalGasStationIcon />, name: "Prices", link: "/fuel-prices" },
-];
+import HomeIcon from "@mui/icons-material/Home";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Speedial = (props) => {
+  const actions = [
+    { icon: <HomeIcon />, name: "Home", link: "/" },
+    { icon: <DashboardIcon />, name: "Dashboard", link: "/dashboard" },
+    { icon: <SpeedDialIcon />, name: "Add Record", link: "/add-record" },
+    { icon: <LocalGasStationIcon />, name: "Prices", link: "/fuel-prices" },
+    {
+      icon: <AccountCircleIcon />,
+      name: "Account",
+      link: props.isAuthenticated ? "/account" : "/auth",
+    },
+  ];
+
   let navigate = useNavigate();
   const [open, setopen] = useState(false);
 
@@ -53,4 +60,10 @@ const Speedial = (props) => {
   );
 };
 
-export default Speedial;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+export default connect(mapStateToProps)(Speedial);
