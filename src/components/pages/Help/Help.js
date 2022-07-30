@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "";
+import { HashLink as Link } from "react-router-hash-link";
 
 import Styles from "./Help.module.css";
 
