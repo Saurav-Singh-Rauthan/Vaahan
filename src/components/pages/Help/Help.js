@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "";
 
 import Styles from "./Help.module.css";
 
@@ -16,22 +17,24 @@ const Help = (props) => {
         <p className={Styles.heading}>Table of contents :</p>
         <ul>
           <li>
-            <a href="#dashboard">Dashboard</a>
+            <Link to="/help#dashboard">Dashboard</Link>
           </li>
           <li>
-            <a href="#add-record">Adding Record</a>
+            <Link to="/help#add-record">Adding Record</Link>
           </li>
           <li>
-            <a href="#add-vehicle">Adding Vehicle</a>
+            <Link to="/help#add-vehicle">Adding Vehicle</Link>
           </li>
           <li>
-            <a href="#fuel-price">Checking fuel prices</a>
+            <Link to="/help#fuel-price">Checking fuel prices</Link>
           </li>
           <li>
-            <a href="#account">User account and editing user details</a>
+            <Link to="/help#account">
+              User account and editing user details
+            </Link>
           </li>
           <li>
-            <a href="#speed-dial">Speed Dial</a>
+            <Link to="#speed-dial">Speed Dial</Link>
           </li>
         </ul>
       </div>
@@ -40,16 +43,16 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>Dashboard</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="/help#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content1}>
           <img src={img4} alt="img4" />
           <div>
-            Dashboard helps to get insight of the vehicle at a glance. You check
-            the following things: Current Month information, Mileage comparison
-            with same vehicle records in global record, Radar chart for all
-            mileage records for your vehicle,Mileage chart for previous 50
-            recordings,Last Trip information, Previous month information
+            Dashboard helps to get insight of the vehicle at Link glance. You
+            check the following things: Current Month information, Mileage
+            comparison with same vehicle records in global record, Radar chart
+            for all mileage records for your vehicle,Mileage chart for previous
+            50 recordings,Last Trip information, Previous month information
           </div>
         </div>
       </div>
@@ -58,12 +61,12 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>Adding Record</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="/help#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content2}>
           <img src={img3} alt="img3" />
           <div>
-            To add new a record for your vehicle perform following steps :
+            To add new Link record for your vehicle perform following steps :
             <ul>
               <li>Select the vehicle for which record is to be added</li>
               <li>
@@ -85,12 +88,12 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>Adding Vehicle</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="/help#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content1}>
           <img src={img2} alt="img2" />
           <div>
-            To add new a record for your vehicle perform following steps :
+            To add new Link record for your vehicle perform following steps :
             <ul>
               <li>Select the input field</li>
               <li>Start typing the vehicle name</li>
@@ -116,7 +119,7 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>Checking Fuel Price</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="/help#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content2}>
           <img src={img6} alt="img6" />
@@ -142,7 +145,7 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>User Account and Editing Details</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="/help#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content1}>
           <img src={img5} alt="img5" />
@@ -174,7 +177,7 @@ const Help = (props) => {
       <div>
         <div className={Styles.headingCont}>
           <p className={Styles.heading}>Speed Dial</p>
-          <a href="#top">To Top ⬆️</a>
+          <Link to="#top">To Top ⬆️</Link>
         </div>
         <div className={Styles.content2}>
           <img src={img1} alt="img1" />
