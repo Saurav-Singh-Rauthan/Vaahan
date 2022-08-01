@@ -34,7 +34,7 @@ const Help = (props) => {
             </Link>
           </li>
           <li>
-            <Link to="#speed-dial">Speed Dial</Link>
+            <Link to="/help#speed-dial">Speed Dial</Link>
           </li>
         </ul>
       </div>

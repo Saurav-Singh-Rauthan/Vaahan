@@ -153,6 +153,12 @@ const RefuelEntry = (props) => {
         cost: true,
       });
     }
+
+    setalert({
+      open: false,
+      type: "",
+      msg: "",
+    });
   };
 
   const addVehHandler = () => {
@@ -194,6 +200,7 @@ const RefuelEntry = (props) => {
               vehData
             )
             .then((res) => {
+              console.log(res);
               setalert({
                 open: true,
                 type: "success",
@@ -209,7 +216,11 @@ const RefuelEntry = (props) => {
               });
             });
         } else {
-          alert("vehicle already exists!!!");
+          setalert({
+            open: true,
+            type: "error",
+            msg: "Vehicle already exists!",
+          });
         }
 
         axiosV
@@ -280,22 +291,30 @@ const RefuelEntry = (props) => {
 
     mileage = {
       mileage:
-        Math.abs(record.odometerReading - selectedVeh.last_odometer) /
-        selectedVeh.last_fuel,
+        selectedVeh.last_odometer !== 0
+          ? Math.abs(record.odometerReading - selectedVeh.last_odometer) /
+            selectedVeh.last_fuel
+          : 0,
     };
 
     mileage_list = [...selectedVeh.mileage?.mileage_list];
     if (mileage_list.length >= 50) {
       mileage_list[(selectedVeh.mileage.last_entry + 1) % 50] = mileage;
     } else {
-      if (selectedVeh.mileage.mileage_list[0].mileage === 0) {
+      if (
+        selectedVeh.mileage.mileage_list[0].mileage === 0 &&
+        selectedVeh.last_odometer > 0
+      ) {
         atZero = true;
         mileage_list[0] = {
           mileage:
             Math.abs(record.odometerReading - selectedVeh.last_odometer) /
             record.fuelAdded,
         };
-      } else {
+      } else if (
+        selectedVeh.mileage.mileage_list[0].mileage !== 0 &&
+        selectedVeh.last_odometer > 0
+      ) {
         mileage_list.push(mileage);
       }
     }
@@ -315,12 +334,15 @@ const RefuelEntry = (props) => {
       last_fuel: record.fuelAdded,
       last_odometer: record.odometerReading,
       last_fuelcost: record.fuelCost,
-      last_distance: Math.abs(
-        selectedVeh.last_odometer - record.odometerReading
-      ),
-      monthly_distanceTravelled:
-        selectedVeh.monthly_distanceTravelled +
+      last_distance:
+        // selectedVeh.last_odometer !== 0
         Math.abs(selectedVeh.last_odometer - record.odometerReading),
+      // : 0,
+      monthly_distanceTravelled:
+        selectedVeh.last_odometer !== 0
+          ? selectedVeh.monthly_distanceTravelled +
+            Math.abs(selectedVeh.last_odometer - record.odometerReading)
+          : 0,
       monthly_spending:
         parseFloat(selectedVeh.monthly_spending) + parseFloat(record.fuelCost),
       name: selectedVeh.name.trim(),
@@ -348,26 +370,30 @@ const RefuelEntry = (props) => {
             ]
           );
 
-          axiosV
-            .put(
-              `/vehicles/${Object.keys(res.data)[0]}.json?auth=${props.token}`,
-              prevData
-            )
-            .then((res) => {
-              setalert({
-                open: true,
-                type: "success",
-                msg: "Global entry added",
+          if (selectedVeh.last_odometer !== 0) {
+            axiosV
+              .put(
+                `/vehicles/${Object.keys(res.data)[0]}.json?auth=${
+                  props.token
+                }`,
+                prevData
+              )
+              .then((res) => {
+                setalert({
+                  open: true,
+                  type: "success",
+                  msg: "Global entry added",
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+                setalert({
+                  open: true,
+                  type: "success",
+                  msg: "Couldn't add global entry",
+                });
               });
-            })
-            .catch((err) => {
-              console.log(err);
-              setalert({
-                open: true,
-                type: "success",
-                msg: "Couldn't add global entry",
-              });
-            });
+          }
         }
       });
 
