@@ -147,6 +147,7 @@ const RefuelEntry = (props) => {
         ...touchState,
         fuel: true,
       });
+    } else if (type === "abc") {
     } else {
       settouchState({
         ...touchState,
@@ -433,6 +434,7 @@ const RefuelEntry = (props) => {
           id="combo-box-demo"
           options={vehicles}
           className={Styles.options}
+          onBlur={() => touchHandler("abc")}
           renderInput={(params) => (
             <TextField
               {...params}
