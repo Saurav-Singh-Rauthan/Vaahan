@@ -6,6 +6,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a5fc05ff-75d2-4001-9b91-4ecda256e2d6/deploy-status)](https://app.netlify.com/sites/vaahan/deploys)
+[![HitCount](https://hits.dwyl.com/Saurav-Singh-Rauthan/Vaahan.svg?style=flat-square)](http://hits.dwyl.com/Saurav-Singh-Rauthan/Vaahan)
 
 
 
